@@ -1,0 +1,51 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using TMPro;
+
+// this class holds all the player settings and is do not destroy from scene to scene
+// script saves data to playerprefs(change save system to your preference) and is recalled on restart
+namespace BNG {
+    public class LocalPlayerData : MonoBehaviour {
+
+        public static LocalPlayerData Instance {
+            get {
+                if (_instance == null) {
+                    _instance = FindObjectOfType<LocalPlayerData>();
+                    if (_instance == null) {
+                        _instance = new GameObject("LocalPlayerData").AddComponent<LocalPlayerData>();
+                    }
+                }
+                return _instance;
+            }
+        }
+        private static LocalPlayerData _instance;
+
+        // Any local player data we may want to store for later
+        public string PlayerName;
+
+        void Awake() {
+            // Setup singletone so only one object exists at a time
+            if (_instance != null && _instance != this) {
+                Destroy(this);
+                return;
+            }
+
+            LoadPlayerSettings();
+        }
+
+        void LoadPlayerSettings() {
+            if (PlayerPrefs.HasKey("PlayerName")) {
+                PlayerName = PlayerPrefs.GetString("PlayerName");
+            }
+        }
+
+        public void SetPlayerName(string playerName, bool savePrefs) {
+            PlayerName = playerName;
+
+            if(savePrefs) {
+                PlayerPrefs.SetString("PlayerName", PlayerName);
+            }
+        }
+    }
+}
