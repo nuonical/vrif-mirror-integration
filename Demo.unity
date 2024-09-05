@@ -10803,75 +10803,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1001 &726032274426629323
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 726032274960301403, guid: 3dc011182d5381f408bd988afa0e8899,
-        type: 3}
-      propertyPath: m_Name
-      value: NetworkManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 726032274960301407, guid: 3dc011182d5381f408bd988afa0e8899,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 726032274960301407, guid: 3dc011182d5381f408bd988afa0e8899,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 8.153761
-      objectReference: {fileID: 0}
-    - target: {fileID: 726032274960301407, guid: 3dc011182d5381f408bd988afa0e8899,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.6943688
-      objectReference: {fileID: 0}
-    - target: {fileID: 726032274960301407, guid: 3dc011182d5381f408bd988afa0e8899,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -2.6800551
-      objectReference: {fileID: 0}
-    - target: {fileID: 726032274960301407, guid: 3dc011182d5381f408bd988afa0e8899,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 726032274960301407, guid: 3dc011182d5381f408bd988afa0e8899,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 726032274960301407, guid: 3dc011182d5381f408bd988afa0e8899,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 726032274960301407, guid: 3dc011182d5381f408bd988afa0e8899,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 726032274960301407, guid: 3dc011182d5381f408bd988afa0e8899,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 726032274960301407, guid: 3dc011182d5381f408bd988afa0e8899,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 726032274960301407, guid: 3dc011182d5381f408bd988afa0e8899,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 3dc011182d5381f408bd988afa0e8899, type: 3}
 --- !u!114 &974304236293242435
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11321,6 +11252,75 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1001 &2484455662479622265
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 726032274960301403, guid: 3dc011182d5381f408bd988afa0e8899,
+        type: 3}
+      propertyPath: m_Name
+      value: NetworkManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 726032274960301407, guid: 3dc011182d5381f408bd988afa0e8899,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 726032274960301407, guid: 3dc011182d5381f408bd988afa0e8899,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 726032274960301407, guid: 3dc011182d5381f408bd988afa0e8899,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 726032274960301407, guid: 3dc011182d5381f408bd988afa0e8899,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 726032274960301407, guid: 3dc011182d5381f408bd988afa0e8899,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 726032274960301407, guid: 3dc011182d5381f408bd988afa0e8899,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 726032274960301407, guid: 3dc011182d5381f408bd988afa0e8899,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 726032274960301407, guid: 3dc011182d5381f408bd988afa0e8899,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 726032274960301407, guid: 3dc011182d5381f408bd988afa0e8899,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 726032274960301407, guid: 3dc011182d5381f408bd988afa0e8899,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 726032274960301407, guid: 3dc011182d5381f408bd988afa0e8899,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3dc011182d5381f408bd988afa0e8899, type: 3}
 --- !u!114 &2487962254158548008
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22726,11 +22726,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 764249339353924499, guid: 0fc190f2fab2a6744ba2dbaf631b35b8,
-        type: 3}
-      propertyPath: ParentObjectToSnapZone
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5921816763504854128, guid: 0fc190f2fab2a6744ba2dbaf631b35b8,
         type: 3}
       propertyPath: m_RootOrder
@@ -22790,11 +22785,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: XR Rig Networked
-      objectReference: {fileID: 0}
-    - target: {fileID: 6097662612627121325, guid: 0fc190f2fab2a6744ba2dbaf631b35b8,
-        type: 3}
-      propertyPath: ParentObjectToSnapZone
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0fc190f2fab2a6744ba2dbaf631b35b8, type: 3}

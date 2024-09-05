@@ -2,6 +2,8 @@ using System.Collections;
 using UnityEngine;
 using Mirror;
 using System.Collections.Generic;
+using Org.BouncyCastle.Asn1.X509;
+using System.Security.Principal;
 
 // script to handle authority switching of the grabbable so everyone can pickup items
 namespace BNG {
@@ -25,7 +27,7 @@ namespace BNG {
 
         NetworkGrabbableEvents networkGrabbableEvents;
 
-        void Start() {
+        void Awake() {
             rb = GetComponent<Rigidbody>();
 
             networkGrabbableEvents = GetComponent<NetworkGrabbableEvents>();
