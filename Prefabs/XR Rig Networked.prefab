@@ -10849,13 +10849,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 7646747471053750559}
   headTransform: {fileID: 5921816763539936826}
-  leftHandTransform: {fileID: 4939808046079386108}
-  rightHandTransform: {fileID: 4939808045181011574}
+  LeftHandTransform: {fileID: 5917841709502740402}
+  RightHandTransform: {fileID: 5918123605206407676}
   playerBody: {fileID: 8579960584394931324}
   GrabberLeft: {fileID: 1703847965976764128}
   GrabberRight: {fileID: 89460339008455444}
-  leftHandPoseBlender: {fileID: 4939808046079386106}
-  rightHandPoseBlender: {fileID: 4939808045181011534}
+  LeftHandPoseBlender: {fileID: 4939808046079386106}
+  RightHandPoseBlender: {fileID: 4939808045181011534}
 --- !u!1 &7691866605673648258
 GameObject:
   m_ObjectHideFlags: 0

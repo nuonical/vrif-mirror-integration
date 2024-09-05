@@ -1490,7 +1490,6 @@ GameObject:
   - component: {fileID: 8216736267275558262}
   - component: {fileID: 9148596257437500470}
   - component: {fileID: 8216736267275558265}
-  - component: {fileID: 8216736267275558269}
   - component: {fileID: 8216736267275558264}
   - component: {fileID: 8216736267275558267}
   - component: {fileID: 8216736267275558266}
@@ -1817,23 +1816,11 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   grabbables: []
-  ringCanvas: {fileID: 0}
-  ringHelper: {fileID: 0}
-  holdingStatus: 0
---- !u!114 &8216736267275558269
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9148596257437500617}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e71b55b78cf8fb4e80df3aeb0a2058a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  ringCanvas: {fileID: 5248622536811639053}
+  ringHelper: {fileID: 5248622536811639050}
   LeftHandPoseIndex: 1
-  RightHandPoseIndex: 0
+  RightHandPoseIndex: 1
+  holdingStatus: 0
 --- !u!114 &8216736267275558264
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1847,7 +1834,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneId: 0
-  _assetId: 0
+  _assetId: 2559676611
   serverOnly: 0
   visibility: 0
   hasSpawned: 0
@@ -2216,6 +2203,24 @@ PrefabInstance:
 --- !u!224 &5248622536811639041 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4213795611944346746, guid: 9e3b0bca4dce07c4cac56011bea1487d,
+    type: 3}
+  m_PrefabInstance: {fileID: 8263175863907816827}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5248622536811639050 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4213795611944346737, guid: 9e3b0bca4dce07c4cac56011bea1487d,
+    type: 3}
+  m_PrefabInstance: {fileID: 8263175863907816827}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6adc4fd6a6abfed4f907473a5fffa431, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!223 &5248622536811639053 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 4213795611944346742, guid: 9e3b0bca4dce07c4cac56011bea1487d,
     type: 3}
   m_PrefabInstance: {fileID: 8263175863907816827}
   m_PrefabAsset: {fileID: 0}
