@@ -10849,7 +10849,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 7646747471053750559}
   headTransform: {fileID: 5921816763539936826}
-  LeftHandTransform: {fileID: 5917841709502740402}
+  LeftHandTransform: {fileID: 316934091882881645}
   RightHandTransform: {fileID: 5918123605206407676}
   playerBody: {fileID: 8579960584394931324}
   GrabberLeft: {fileID: 1703847965976764128}

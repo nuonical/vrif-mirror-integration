@@ -1115,8 +1115,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hammer Networked (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 9148596258606635908, guid: 45d3656d13f8ecb4c8fca3979e1a55a6,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4b82e6e57b94d4647bd0ca0e48a1bb7d, type: 2}
     m_RemovedComponents:
     - {fileID: 8216736267275558269, guid: 45d3656d13f8ecb4c8fca3979e1a55a6, type: 3}
+    - {fileID: 8216736267275558266, guid: 45d3656d13f8ecb4c8fca3979e1a55a6, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 45d3656d13f8ecb4c8fca3979e1a55a6, type: 3}
 --- !u!1 &1076851005
 GameObject:
@@ -22126,7 +22132,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hammer Networked
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8216736267275558266, guid: 45d3656d13f8ecb4c8fca3979e1a55a6, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 45d3656d13f8ecb4c8fca3979e1a55a6, type: 3}
 --- !u!1 &6602929150379378731
 GameObject:
@@ -22674,12 +22681,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8320362180087007683 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 316934091882881645, guid: 0fc190f2fab2a6744ba2dbaf631b35b8,
-    type: 3}
-  m_PrefabInstance: {fileID: 8579960583951854510}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &8439771317226913641
 RectTransform:
   m_ObjectHideFlags: 0
@@ -22725,11 +22726,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 167096666187512387, guid: 0fc190f2fab2a6744ba2dbaf631b35b8,
+    - target: {fileID: 764249339353924499, guid: 0fc190f2fab2a6744ba2dbaf631b35b8,
         type: 3}
-      propertyPath: LeftHandTransform
-      value: 
-      objectReference: {fileID: 8320362180087007683}
+      propertyPath: ParentObjectToSnapZone
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5921816763504854128, guid: 0fc190f2fab2a6744ba2dbaf631b35b8,
         type: 3}
       propertyPath: m_RootOrder
@@ -22789,6 +22790,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: XR Rig Networked
+      objectReference: {fileID: 0}
+    - target: {fileID: 6097662612627121325, guid: 0fc190f2fab2a6744ba2dbaf631b35b8,
+        type: 3}
+      propertyPath: ParentObjectToSnapZone
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0fc190f2fab2a6744ba2dbaf631b35b8, type: 3}

@@ -23,8 +23,15 @@ namespace BNG {
 
         Rigidbody rb;
 
+        NetworkGrabbableEvents networkGrabbableEvents;
+
         void Start() {
             rb = GetComponent<Rigidbody>();
+
+            networkGrabbableEvents = GetComponent<NetworkGrabbableEvents>();
+            if(networkGrabbableEvents == null) {
+                networkGrabbableEvents = gameObject.AddComponent<NetworkGrabbableEvents>();
+            }
 
             grabbables.AddRange(GetComponentsInChildren<Grabbable>());
 
