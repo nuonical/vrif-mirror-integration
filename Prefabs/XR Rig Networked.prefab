@@ -1043,6 +1043,7 @@ MonoBehaviour:
   CanRemoveItem: 1
   ScaleItem: 1
   DisableColliders: 1
+  ParentObjectToSnapZone: 0
   DuplicateItemOnGrab: 0
   MaxDropTime: 0.1
   LastSnapTime: 0
@@ -2563,6 +2564,7 @@ MonoBehaviour:
   CanRemoveItem: 1
   ScaleItem: 1
   DisableColliders: 1
+  ParentObjectToSnapZone: 1
   DuplicateItemOnGrab: 0
   MaxDropTime: 0.1
   LastSnapTime: 0
@@ -4061,6 +4063,7 @@ MonoBehaviour:
   CanRemoveItem: 1
   ScaleItem: 1
   DisableColliders: 1
+  ParentObjectToSnapZone: 1
   DuplicateItemOnGrab: 0
   MaxDropTime: 0.1
   LastSnapTime: 0
@@ -6694,6 +6697,7 @@ MonoBehaviour:
   CanRemoveItem: 1
   ScaleItem: 1
   DisableColliders: 1
+  ParentObjectToSnapZone: 1
   DuplicateItemOnGrab: 0
   MaxDropTime: 0.1
   LastSnapTime: 0
@@ -9727,6 +9731,7 @@ MonoBehaviour:
   CanRemoveItem: 1
   ScaleItem: 1
   DisableColliders: 1
+  ParentObjectToSnapZone: 0
   DuplicateItemOnGrab: 0
   MaxDropTime: 0.1
   LastSnapTime: 0
