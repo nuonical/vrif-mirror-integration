@@ -43,6 +43,10 @@ namespace BNG {
             }
         }
 
+        void Update() {
+            CheckResetGrabbableVelocity();
+        }
+
         public void UpdateGrabStatus(bool oldHoldStatus, bool newHoldStatus) {
             // Disable Grabbable to ensure object can't be grabbed while someone is holding it
             if (!isOwned) {
@@ -120,6 +124,19 @@ namespace BNG {
                 rb.velocity = Vector3.zero;
                 rb.angularVelocity = Vector3.zero;
             }
+        }
+
+        // Check to see if the object is owned by the server, if it is, reset the velocity and set the holding status to false
+        void CheckResetGrabbableVelocity() {
+            if (IsOwnedByServer() && holdingStatus == true) {
+                Debug.Log(string.Format("This object {0} is owned by the server. Resetting velocity.", transform.name));
+                ResetInteractableVelocity();
+                holdingStatus = false;
+            } 
+        }
+
+        public bool IsOwnedByServer() {
+            return netIdentity != null && netIdentity.connectionToClient == null;
         }
     }
 }
