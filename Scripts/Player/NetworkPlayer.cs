@@ -123,9 +123,9 @@ namespace BNG {
                 // Set the position and rotation of the network rig player, head and hands to match that of the Hardware Rig transforms
                 networkPlayer.SetPositionAndRotation(hardwarePlayer.position, hardwarePlayer.rotation);
                 networkHead.SetPositionAndRotation(hardwareHead.position, hardwareHead.rotation);
-                networkLeftHand.SetPositionAndRotation(hardwareLeftHand.position, hardwareLeftHand.rotation);
                 networkBody.SetPositionAndRotation(hardwarePlayerBody.position, hardwarePlayerBody.rotation);
 
+                networkLeftHand.SetPositionAndRotation(hardwareLeftHand.position, hardwareLeftHand.rotation);
                 networkRightHand.SetPositionAndRotation(hardwareRightHand.position, hardwareRightHand.rotation);
             }
 
@@ -253,9 +253,11 @@ namespace BNG {
         }
 
         public void ApplyRightHandPoseIndex(bool oldBool, bool newBool) {
-            rightNetworkHandPoser.CurrentPose = HandPoses[rightPoseIndex];
-            rightNetworkHandPoser.OnPoseChanged();
-            rightNetworkPoseBlender.UpdatePose = false;
+            if(HandPoses != null && HandPoses.Count >0 && HandPoses.Count >= rightPoseIndex) {
+                rightNetworkHandPoser.CurrentPose = HandPoses[rightPoseIndex];
+                rightNetworkHandPoser.OnPoseChanged();
+                rightNetworkPoseBlender.UpdatePose = false;
+            }
         }
 
         [Command]
