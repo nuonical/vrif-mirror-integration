@@ -103,10 +103,14 @@ namespace BNG {
         }
 
         public void ReleaseNetworkHandPoseLeft(Grabbable released) {
-            networkPlayer.CmdReleaseLeftHandPose();
+            if(networkPlayer) {
+                networkPlayer.CmdReleaseLeftHandPose();
+            }
         }
         public void ReleaseNetworkHandPoseRight(Grabbable released) {
-            networkPlayer.CmdReleaseRightHandPose();
+            if(networkPlayer) {
+                networkPlayer.CmdReleaseRightHandPose();
+            }
         }
     }
 }
