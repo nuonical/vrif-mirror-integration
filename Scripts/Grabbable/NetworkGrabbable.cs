@@ -7,6 +7,7 @@ using System.Security.Principal;
 
 // script to handle authority switching of the grabbable so everyone can pickup items
 namespace BNG {
+    [RequireComponent(typeof(NetworkGrabbableEvents))]
     public class NetworkGrabbable : NetworkBehaviour {
 
         // Grabbable components
@@ -29,12 +30,7 @@ namespace BNG {
 
         void Awake() {
             rb = GetComponent<Rigidbody>();
-
             networkGrabbableEvents = GetComponent<NetworkGrabbableEvents>();
-            if(networkGrabbableEvents == null) {
-                networkGrabbableEvents = gameObject.AddComponent<NetworkGrabbableEvents>();
-            }
-
             grabbables.AddRange(GetComponentsInChildren<Grabbable>());
 
             if (GetComponentInChildren<RingHelper>() != null) {
@@ -43,8 +39,18 @@ namespace BNG {
             }
         }
 
+        private void Start()
+        {
+           // networkGrabbableEvents = GetComponent<NetworkGrabbableEvents>();
+           // if (networkGrabbableEvents == null)
+           // {
+              //  networkGrabbableEvents = gameObject.AddComponent<NetworkGrabbableEvents>();
+           // }
+        }
+
         void Update() {
             CheckResetGrabbableVelocity();
+           
         }
 
         public void UpdateGrabStatus(bool oldHoldStatus, bool newHoldStatus) {
@@ -127,16 +133,23 @@ namespace BNG {
         }
 
         // Check to see if the object is owned by the server, if it is, reset the velocity and set the holding status to false
+        [Server]
         void CheckResetGrabbableVelocity() {
-            if (IsOwnedByServer() && holdingStatus == true) {
+            if (IsOwnedByServer() == true && holdingStatus == true) {
                 Debug.Log(string.Format("This object {0} is owned by the server. Resetting velocity.", transform.name));
                 ResetInteractableVelocity();
                 holdingStatus = false;
             } 
         }
-
+        [Server]
         public bool IsOwnedByServer() {
-            return netIdentity != null && netIdentity.connectionToClient == null;
+            if(netIdentity != null && netIdentity.connectionToClient == null)
+            {
+                return true;
+            }
+
+            return false;
         }
+
     }
 }

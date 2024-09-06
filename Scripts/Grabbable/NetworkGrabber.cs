@@ -6,14 +6,17 @@ namespace BNG {
     public class NetworkGrabber : MonoBehaviour {
 
         [Header("Set the hand side of the remote grabber")]
-        [SerializeField] 
+        [SerializeField]
         ControllerHand controllerHand;
 
         [Header("Defauld Grabbable Layer is 10; Change If needed")]
-        [SerializeField] 
+        [SerializeField]
         int grabbableLayer = 10; //  grabbale layer for VRIF is 10 by default, change if needed
 
         NetworkGrabbable networkGrabbable;
+
+        // fix for triggering pickup when hovering overitems whileholding and object causing rings to disappear
+        public Grabber grabber;
 
         public void Start() {
             // Ensure network grabbable is reset on start / scene load
@@ -21,6 +24,10 @@ namespace BNG {
         }
 
         void OnTriggerStay(Collider other) {
+
+            if(grabber.HeldGrabbable != null) {
+                return;
+            }
             // Only check the Grabbable Layer
             if (other.gameObject.layer == grabbableLayer) {
                 networkGrabbable = other.GetComponent<NetworkGrabbable>();

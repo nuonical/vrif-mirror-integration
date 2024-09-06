@@ -629,7 +629,6 @@ MonoBehaviour:
   HandAnimationSpeed: 20
   grabber: {fileID: 0}
   HandPoseOverride: {fileID: 0}
-  ReadControllerInputs: 1
   GripAmount: 0
   PointAmount: 0
   ThumbAmount: 0
@@ -746,7 +745,6 @@ MonoBehaviour:
   HandAnimationSpeed: 20
   grabber: {fileID: 0}
   HandPoseOverride: {fileID: 0}
-  ReadControllerInputs: 1
   GripAmount: 0
   PointAmount: 0
   ThumbAmount: 0
@@ -1043,7 +1041,6 @@ MonoBehaviour:
   CanRemoveItem: 1
   ScaleItem: 1
   DisableColliders: 1
-  ParentObjectToSnapZone: 0
   DuplicateItemOnGrab: 0
   MaxDropTime: 0.1
   LastSnapTime: 0
@@ -1099,7 +1096,6 @@ MonoBehaviour:
   RemoteGrabbable: 0
   RemoteGrabMechanic: 0
   RemoteGrabDistance: 2
-  CanDropMidGrab: 0
   ThrowForceMultiplier: 2
   ThrowForceMultiplierAngular: 1.5
   BreakDistance: 1
@@ -2564,7 +2560,6 @@ MonoBehaviour:
   CanRemoveItem: 1
   ScaleItem: 1
   DisableColliders: 1
-  ParentObjectToSnapZone: 1
   DuplicateItemOnGrab: 0
   MaxDropTime: 0.1
   LastSnapTime: 0
@@ -2625,7 +2620,6 @@ MonoBehaviour:
   RemoteGrabbable: 0
   RemoteGrabMechanic: 0
   RemoteGrabDistance: 2
-  CanDropMidGrab: 0
   ThrowForceMultiplier: 2
   ThrowForceMultiplierAngular: 1.5
   BreakDistance: 1
@@ -3773,7 +3767,6 @@ MonoBehaviour:
   RemoteGrabbable: 0
   RemoteGrabMechanic: 0
   RemoteGrabDistance: 2
-  CanDropMidGrab: 0
   ThrowForceMultiplier: 2
   ThrowForceMultiplierAngular: 1.5
   BreakDistance: 1
@@ -4063,7 +4056,6 @@ MonoBehaviour:
   CanRemoveItem: 1
   ScaleItem: 1
   DisableColliders: 1
-  ParentObjectToSnapZone: 1
   DuplicateItemOnGrab: 0
   MaxDropTime: 0.1
   LastSnapTime: 0
@@ -4120,7 +4112,6 @@ MonoBehaviour:
   RemoteGrabbable: 0
   RemoteGrabMechanic: 0
   RemoteGrabDistance: 2
-  CanDropMidGrab: 0
   ThrowForceMultiplier: 2
   ThrowForceMultiplierAngular: 1.5
   BreakDistance: 1
@@ -5497,6 +5488,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -6697,7 +6689,6 @@ MonoBehaviour:
   CanRemoveItem: 1
   ScaleItem: 1
   DisableColliders: 1
-  ParentObjectToSnapZone: 1
   DuplicateItemOnGrab: 0
   MaxDropTime: 0.1
   LastSnapTime: 0
@@ -6758,7 +6749,6 @@ MonoBehaviour:
   RemoteGrabbable: 0
   RemoteGrabMechanic: 0
   RemoteGrabDistance: 2
-  CanDropMidGrab: 0
   ThrowForceMultiplier: 2
   ThrowForceMultiplierAngular: 1.5
   BreakDistance: 1
@@ -6893,6 +6883,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -8606,7 +8597,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8ef3fb08709aab4cb6e18ac7630ea73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DebugFont: {fileID: 0}
   LogTextColor: {r: 0, g: 1, b: 1, a: 1}
   WarnTextColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   ErrTextColor: {r: 1, g: 0, b: 0, a: 1}
@@ -9731,7 +9721,6 @@ MonoBehaviour:
   CanRemoveItem: 1
   ScaleItem: 1
   DisableColliders: 1
-  ParentObjectToSnapZone: 0
   DuplicateItemOnGrab: 0
   MaxDropTime: 0.1
   LastSnapTime: 0
@@ -9787,7 +9776,6 @@ MonoBehaviour:
   RemoteGrabbable: 0
   RemoteGrabMechanic: 0
   RemoteGrabDistance: 2
-  CanDropMidGrab: 0
   ThrowForceMultiplier: 2
   ThrowForceMultiplierAngular: 1.5
   BreakDistance: 1
@@ -10854,8 +10842,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 7646747471053750559}
   headTransform: {fileID: 5921816763539936826}
-  LeftHandTransform: {fileID: 316934091882881645}
-  RightHandTransform: {fileID: 5918123605206407676}
+  LeftHandTransform: {fileID: 4939808046079386108}
+  RightHandTransform: {fileID: 4939808045181011574}
   playerBody: {fileID: 8579960584394931324}
   GrabberLeft: {fileID: 1703847965976764128}
   GrabberRight: {fileID: 89460339008455444}
@@ -11585,6 +11573,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
