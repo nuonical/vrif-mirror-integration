@@ -27,7 +27,7 @@ namespace BNG
         }
 
         // this is called only on the server and the currenthealth is synced back to clients
-        [Server]
+        //[Server]
         public void TakeDamage(float damageAmount)
         {
             if (destroyed)
@@ -36,7 +36,7 @@ namespace BNG
 
             if (_currentHealth <= 0f)
             {
-                DestroyThis();
+                //DestroyThis();
                 _currentHealth = 0f;
             }
         }
@@ -86,6 +86,8 @@ namespace BNG
                 col.enabled = false;
             }
         }
+
+        
 
     }
 }
