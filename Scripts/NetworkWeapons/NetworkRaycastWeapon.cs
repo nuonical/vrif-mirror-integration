@@ -279,7 +279,7 @@ public class NetworkRaycastWeapon : NetworkBehaviour
 
         private float TriggerValueCheck()
         {
-            float triggerValue = InputBridge.Instance.RightTrigger;
+            float triggerValue = InputBridge.Instance.RightTrigger; //  place new input structer here
             return triggerValue;
         }
 
@@ -292,7 +292,7 @@ public class NetworkRaycastWeapon : NetworkBehaviour
 
         }
 
-        // the input
+        // the input // had to change the input because we needed to derive from NetworkBehaviour not GrabbableEvents
         public void OnTrigger()
         {
             float triggerValue = TriggerValueCheck();
@@ -421,7 +421,8 @@ public class NetworkRaycastWeapon : NetworkBehaviour
                 // Only play empty sound once per trigger down
                 if (!playedEmptySound)
                 {
-                    VRUtils.Instance.PlaySpatialClipAt(EmptySound, transform.position, EmptySoundVolume, 0.5f);
+                    VRUtils.Instance.PlaySpatialClipAt(EmptySound, transform.position, EmptySoundVolume, 0.5f); //  add to an rpc so others can hear it
+                    CmdSyncDamageAndEffects(false, 0);
                     playedEmptySound = true;
                 }
 
@@ -431,12 +432,13 @@ public class NetworkRaycastWeapon : NetworkBehaviour
             // Need to release slide
             if (ws != null && ws.LockedBack)
             {
-                VRUtils.Instance.PlaySpatialClipAt(EmptySound, transform.position, EmptySoundVolume, 0.5f);
+                VRUtils.Instance.PlaySpatialClipAt(EmptySound, transform.position, EmptySoundVolume, 0.5f); // add to rpc so others can hear it
+                CmdSyncDamageAndEffects(false, 0);
                 return;
             }
 
             // Create our own spatial clip
-            VRUtils.Instance.PlaySpatialClipAt(GunShotSound, transform.position, GunShotVolume);
+            VRUtils.Instance.PlaySpatialClipAt(GunShotSound, transform.position, GunShotVolume); //  add to RPC to other clients so they can hear it
 
             // Haptics
             if (thisGrabber != null)
@@ -474,9 +476,9 @@ public class NetworkRaycastWeapon : NetworkBehaviour
             }
             else
             {
-                if (isOwned)
+                if (isOwned) 
                 {
-                    CmdDoNetworkDamage();
+                    CmdSyncDamageAndEffects(true, 1); // only do damage on the server and send int to switch for audio to play(Gunshot)
                 }
                 // Raycast to hit
                 //  RaycastHit hit;
@@ -541,16 +543,49 @@ public class NetworkRaycastWeapon : NetworkBehaviour
                 StartCoroutine(shotRoutine);
             }
         }
-        // added for server only hit damage
+        // added for server only hit damage and syncing audio and visual effects to other clients
         [Command]
-        public void CmdDoNetworkDamage()
+        public void CmdSyncDamageAndEffects(bool doRaycast, int effectToPlay)
         {
-            RaycastHit hit;
-            if (Physics.Raycast(MuzzlePointTransform.position, MuzzlePointTransform.forward, out hit, MaxRange, ValidLayers, QueryTriggerInteraction.Ignore))
+            if (doRaycast)
             {
-                OnRaycastHit(hit);
+                RaycastHit hit;
+                if (Physics.Raycast(MuzzlePointTransform.position, MuzzlePointTransform.forward, out hit, MaxRange, ValidLayers, QueryTriggerInteraction.Ignore))
+                {
+                    OnRaycastHit(hit);
+                }
+
+                RpcSyncAudioAndEffects(effectToPlay);
+            }
+
+            else
+            {
+                RpcSyncAudioAndEffects(effectToPlay);
             }
         }
+        // sync relevant information like audio to other clients excluding the owner because this is done locally for instant effects
+        [ClientRpc(includeOwner = false)]
+        void RpcSyncAudioAndEffects(int effectsToPlay)
+        {
+            switch (effectsToPlay)
+            {
+                case 0:
+                    // Play the gunshot sound on other clients
+                    VRUtils.Instance.PlaySpatialClipAt(EmptySound, transform.position, EmptySoundVolume, 0.5f);                    
+                    break;
+
+                case 1:
+                    VRUtils.Instance.PlaySpatialClipAt(GunShotSound, transform.position, GunShotVolume);
+                    StartCoroutine(doMuzzleFlash());
+                    break;
+
+                default:
+                    Debug.LogWarning("Invalid soundToPlay value: " + effectsToPlay);
+                    break;
+            }
+
+        }
+
         // Apply recoil by requesting sprinyness and apply a local force to the muzzle point
         public virtual void ApplyRecoil()
         {
@@ -566,12 +601,19 @@ public class NetworkRaycastWeapon : NetworkBehaviour
         }
 
         // Hit something without Raycast. Apply damage, apply FX, etc.
+        // this is called only on on the server from the the Shoot() function
         public virtual void OnRaycastHit(RaycastHit hit)
         {
-
-            ApplyParticleFX(hit.point, Quaternion.FromToRotation(Vector3.forward, hit.normal), hit.collider); // move to rpc
-                                                                                                              // RpcApplyParicleEffects(hit);
-                                                                                                              // push object if rigidbody
+            // get the hit gameobject
+            GameObject rootObject = hit.collider.transform.root.gameObject;
+            // get the hit network id to pass to the rpc
+            NetworkIdentity netId = rootObject.GetComponent<NetworkIdentity>();
+         // get the child path to the hit collider so we can pass the index to the rpc
+            string childPath = GetChildPath(hit.collider.transform, rootObject.transform);
+            
+            //ApplyParticleFX(hit.point, Quaternion.FromToRotation(Vector3.forward, hit.normal), hit.collider); // move to rpc
+            ApplyParticleFX(hit.point, Quaternion.FromToRotation(Vector3.forward, hit.normal), netId, childPath); 
+                                                                                                             
             Rigidbody hitRigid = hit.collider.attachedRigidbody;
             if (hitRigid != null)
             {
@@ -598,25 +640,75 @@ public class NetworkRaycastWeapon : NetworkBehaviour
             }
         }
 
-        [ClientRpc]
-        public void RpcApplyParicleEffects(RaycastHit hit)
+        // function to get the child path to the hit object so it can be passed to an rpc as a string
+        string GetChildPath(Transform child, Transform root)
         {
-            ApplyParticleFX(hit.point, Quaternion.FromToRotation(Vector3.forward, hit.normal), hit.collider); // move to rpc
+            string path = child.name;
+
+            while (child.parent != null && child.parent != root)
+            {
+                child = child.parent;
+                path = child.name + "/" + path;
+            }
+
+            return path;
         }
 
-        public virtual void ApplyParticleFX(Vector3 position, Quaternion rotation, Collider attachTo)
+        //public virtual void ApplyParticleFX(Vector3 position, Quaternion rotation, Collider attachTo)
+        public virtual void ApplyParticleFX(Vector3 position, Quaternion rotation, NetworkIdentity netId, string childPath)
         {
             if (HitFXPrefab)
             {
+                // spawn the hit effects on all clients
                 GameObject impact = Instantiate(HitFXPrefab, position, rotation) as GameObject;
-
+                NetworkIdentity impactNetId = impact.GetComponent<NetworkIdentity>();
                 NetworkServer.Spawn(impact);
-                // Attach bullet hole to object if possible
-                BulletHole hole = impact.GetComponent<BulletHole>();
+
+                // pass relative info to the clients to attach the prefab
+                RpcAttachBulletHole(position, rotation, netId, impactNetId, childPath);
+            }
+        }
+        
+        Collider attachTo;
+
+        [ClientRpc]
+        public void RpcAttachBulletHole(Vector3 position, Quaternion rotation, NetworkIdentity netId, NetworkIdentity impactNetId, string childPath)
+        {
+            // if hit object has a network identity
+            if (netId)
+            {
+                Debug.Log("Position: " + position + ", Rotation: " + rotation + ", NetId: " + netId.name + ", Child Path: " + childPath);
+
+                //  Collider attachTo = null;
+                GameObject impact = netId.gameObject;
+                Transform childTransform = impact.transform.root.Find(childPath);
+                // if the hit collider is a child transform
+                if (childTransform != null)
+                {
+                    Debug.Log(childTransform.name);
+                    attachTo = childTransform.GetComponent<Collider>();
+                }
+                // if the hit has no child colliders attach to the root collider
+                else
+                {
+                    attachTo = impact.GetComponent<Collider>();
+                }
+
+                BulletHole hole = impactNetId.gameObject.GetComponent<BulletHole>();
+
                 if (hole)
                 {
+                    Debug.Log("HoleisNotNull");
                     hole.TryAttachTo(attachTo);
                 }
+            }
+
+            // if the hit object does not have a net id
+            else if (!netId)
+            {
+                // we can't pass a game object or a collider to a client from the server without a Network ID, so the bullet hole may
+                // need rewritten into a network Bullet hole to handle scale or put it here to handle that
+                return;
             }
         }
 

@@ -5051,7 +5051,7 @@ MonoBehaviour:
   MaxScale: 0.75
   MinScale: 0.5
   RandomYRotation: 1
-  DestroyTime: 10
+  DestroyTime: 30
 --- !u!82 &-7017220325706375797
 AudioSource:
   m_ObjectHideFlags: 0

@@ -2652,6 +2652,7 @@ GameObject:
   - component: {fileID: 1286260601196215025}
   - component: {fileID: 454831037052530187}
   - component: {fileID: 454831037052530180}
+  - component: {fileID: 5951534204740328568}
   m_Layer: 10
   m_Name: Slide
   m_TagString: Untagged
@@ -3056,6 +3057,18 @@ MonoBehaviour:
   LeftHandPoseIndex: 0
   RightHandPoseIndex: 0
   holdingStatus: 0
+--- !u!114 &5951534204740328568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1286260601196214986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51328566bbd01dd4e8681341199abe2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1286260601217876022
 GameObject:
   m_ObjectHideFlags: 0
@@ -7633,6 +7646,7 @@ GameObject:
   - component: {fileID: 5156174093647225299}
   - component: {fileID: 5156174093647225298}
   - component: {fileID: 5156174093647225325}
+  - component: {fileID: 6877890414613000736}
   m_Layer: 10
   m_Name: NetworkShotgun
   m_TagString: Untagged
@@ -8088,6 +8102,18 @@ MonoBehaviour:
       m_Calls: []
   grab: {fileID: 0}
   thisGrabber: {fileID: 0}
+--- !u!114 &6877890414613000736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5564069462240560475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51328566bbd01dd4e8681341199abe2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5564069462664198595
 GameObject:
   m_ObjectHideFlags: 0

@@ -47,10 +47,15 @@ namespace BNG {
               //  networkGrabbableEvents = gameObject.AddComponent<NetworkGrabbableEvents>();
            // }
         }
-
+       
         void Update() {
+
+            if (!NetworkServer.active)
+            {
+                return;
+            }
             CheckResetGrabbableVelocity();
-           
+
         }
 
         public void UpdateGrabStatus(bool oldHoldStatus, bool newHoldStatus) {
