@@ -40,7 +40,7 @@ namespace BNG
         /// </summary>
         public bool ZeroMassWhenNotHeld = true;
 
-        NetworkRaycastWeapon parentWeapon;
+        RaycastWeapon parentWeapon;
         Grabbable parentGrabbable;
         Vector3 initialLocalPos;
         Grabbable thisGrabbable;
@@ -61,7 +61,7 @@ namespace BNG
         {
             initialLocalPos = transform.localPosition;
             audioSource = GetComponent<AudioSource>();
-            parentWeapon = transform.parent.GetComponent<NetworkRaycastWeapon>();
+            parentWeapon = transform.parent.GetComponent<RaycastWeapon>();
             parentGrabbable = transform.parent.GetComponent<Grabbable>();
             thisGrabbable = GetComponent<Grabbable>();
             rigid = GetComponent<Rigidbody>();
@@ -186,7 +186,8 @@ namespace BNG
                 // This is considered a charge
                 if (parentWeapon != null)
                 {
-                    parentWeapon.OnWeaponCharged(false);
+                   // parentWeapon.OnWeaponCharged(false);
+                    CmdSetWeaponCharged(false);
                 }
             }
         }
@@ -201,7 +202,8 @@ namespace BNG
 
             if (parentWeapon != null)
             {
-                parentWeapon.OnWeaponCharged(true);
+               // parentWeapon.OnWeaponCharged(true);
+                CmdSetWeaponCharged(true);
             }
 
             slidingBack = false;
@@ -258,6 +260,19 @@ namespace BNG
                 audioSource.Play();
                 audioSource.SetScheduledEndTime(AudioSettings.dspTime + (toSeconds - fromSeconds));
             }
+        }
+
+
+        [Command]
+        void CmdSetWeaponCharged(bool chargedStatus)
+        {
+            RpcSetWeaponCharged(chargedStatus);
+        }
+
+        [ClientRpc]
+        void RpcSetWeaponCharged(bool _chargeStatus)
+        {     
+            parentWeapon.OnWeaponCharged(_chargeStatus);
         }
     }
 }

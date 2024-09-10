@@ -1,11 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Mirror;
 
 namespace BNG
 {
-    public class NetworkBulletInsert : NetworkBehaviour
+    public class BulletInsertNetworked : MonoBehaviour
     {
         /// <summary>
         /// The weapon we will be adding Bullets to
@@ -19,13 +18,9 @@ namespace BNG
 
         public AudioClip InsertSound;
 
-        [SyncVar(hook = nameof(UpdateBulletCount))]
-        bool countChanged = false;
-
         void OnTriggerEnter(Collider other)
         {
-            if (!isOwned)
-                return;
+
             Grabbable grab = other.GetComponent<Grabbable>();
             if (grab != null)
             {
@@ -41,10 +36,12 @@ namespace BNG
                     // Drop the bullet and add ammo to gun
                     grab.DropItem(false, true);
                     grab.transform.parent = null;
-                    // GameObject.Destroy(grab.gameObject);
-                    NetworkIdentity netId = grab.GetComponent<NetworkIdentity>();
-                    CmdUdpateBullet(netId);
+                    GameObject.Destroy(grab.gameObject);
 
+                    // Up Ammo Count
+                    GameObject b = new GameObject();
+                    b.AddComponent<Bullet>();
+                    b.transform.parent = Weapon.transform;
 
                     // Play Sound
                     if (InsertSound)
@@ -54,22 +51,5 @@ namespace BNG
                 }
             }
         }
-
-        [Command]
-        void CmdUdpateBullet(NetworkIdentity _netId)
-        {
-            // Up Ammo Count
-            countChanged = !countChanged;
-            NetworkServer.Destroy(_netId.gameObject);
-        }
-
-        // I don't think this will update to late joiners past adding a count might change to int sync var and move to a for each to get accurate count for late joiners
-        void UpdateBulletCount(bool oldBool, bool newBool)
-        {
-            GameObject b = new GameObject();
-            b.AddComponent<Bullet>();
-            b.transform.parent = Weapon.transform;
-        }
     }
 }
-

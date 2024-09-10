@@ -11,7 +11,9 @@ namespace BNG
         
         [Server]
         void Start()
-        {   
+        {
+            if (!NetworkServer.active)
+                return;
             StartCoroutine(DestoryObjectDelay());
         }
 
