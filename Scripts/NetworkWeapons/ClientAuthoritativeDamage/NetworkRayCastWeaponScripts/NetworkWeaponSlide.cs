@@ -208,7 +208,10 @@ namespace BNG
             if (parentWeapon != null)
             {
                 parentWeapon.OnWeaponCharged(true);
-                raycastWeaponNetworked.CmdSyncCharge(true);
+                if (isOwned)
+                {
+                    raycastWeaponNetworked.CmdSyncCharge(true);
+                }
             }
 
             slidingBack = false;
