@@ -41,6 +41,7 @@ namespace BNG
         public bool ZeroMassWhenNotHeld = true;
 
         RaycastWeapon parentWeapon;
+        RaycastWeaponNetworked raycastWeaponNetworked;
         Grabbable parentGrabbable;
         Vector3 initialLocalPos;
         Grabbable thisGrabbable;
@@ -62,6 +63,7 @@ namespace BNG
             initialLocalPos = transform.localPosition;
             audioSource = GetComponent<AudioSource>();
             parentWeapon = transform.parent.GetComponent<RaycastWeapon>();
+            raycastWeaponNetworked = parentWeapon.GetComponent<RaycastWeaponNetworked>(); // added for networking charge status
             parentGrabbable = transform.parent.GetComponent<Grabbable>();
             thisGrabbable = GetComponent<Grabbable>();
             rigid = GetComponent<Rigidbody>();
@@ -186,8 +188,11 @@ namespace BNG
                 // This is considered a charge
                 if (parentWeapon != null)
                 {
-                   // parentWeapon.OnWeaponCharged(false);
-                    CmdSetWeaponCharged(false);
+                    parentWeapon.OnWeaponCharged(false);
+                    if(isOwned)
+                    {
+                        raycastWeaponNetworked.CmdSyncCharge(false);
+                    }
                 }
             }
         }
@@ -202,8 +207,8 @@ namespace BNG
 
             if (parentWeapon != null)
             {
-               // parentWeapon.OnWeaponCharged(true);
-                CmdSetWeaponCharged(true);
+                parentWeapon.OnWeaponCharged(true);
+                raycastWeaponNetworked.CmdSyncCharge(true);
             }
 
             slidingBack = false;
@@ -260,19 +265,7 @@ namespace BNG
                 audioSource.Play();
                 audioSource.SetScheduledEndTime(AudioSettings.dspTime + (toSeconds - fromSeconds));
             }
-        }
 
-
-        [Command]
-        void CmdSetWeaponCharged(bool chargedStatus)
-        {
-            RpcSetWeaponCharged(chargedStatus);
-        }
-
-        [ClientRpc]
-        void RpcSetWeaponCharged(bool _chargeStatus)
-        {     
-            parentWeapon.OnWeaponCharged(_chargeStatus);
         }
     }
 }

@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Mirror;
 namespace BNG
 {
-    public class BulletInsertNetworked : MonoBehaviour
+    public class BulletInsertNetworked : NetworkBehaviour
     {
         /// <summary>
         /// The weapon we will be adding Bullets to
@@ -17,6 +17,8 @@ namespace BNG
         public string AcceptBulletName = "Bullet";
 
         public AudioClip InsertSound;
+
+        public GameObject bulletGameObject;
 
         void OnTriggerEnter(Collider other)
         {
@@ -37,11 +39,12 @@ namespace BNG
                     grab.DropItem(false, true);
                     grab.transform.parent = null;
                     GameObject.Destroy(grab.gameObject);
-
+                   // NetworkIdentity netId = grab.gameObject.GetComponent<NetworkIdentity>();
                     // Up Ammo Count
-                    GameObject b = new GameObject();
-                    b.AddComponent<Bullet>();
-                    b.transform.parent = Weapon.transform;
+                    if(isOwned)
+                    {
+                        CmdAddBullet();
+                    }
 
                     // Play Sound
                     if (InsertSound)
@@ -51,5 +54,16 @@ namespace BNG
                 }
             }
         }
+
+        [Command]
+        void CmdAddBullet()
+        {
+           //NetworkServer.Destroy(_netId.gameObject);
+
+            GameObject b = Instantiate(bulletGameObject);
+            b.transform.parent = Weapon.transform;
+            NetworkServer.Spawn(b);
+        }
+
     }
 }
