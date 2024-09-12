@@ -41,7 +41,7 @@ namespace BNG
         public bool ZeroMassWhenNotHeld = true;
 
         RaycastWeapon parentWeapon;
-        RaycastWeaponNetworked raycastWeaponNetworked;
+        public RaycastWeaponNetworked raycastWeaponNetworked;
         Grabbable parentGrabbable;
         Vector3 initialLocalPos;
         Grabbable thisGrabbable;
