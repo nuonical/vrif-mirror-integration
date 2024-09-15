@@ -8,7 +8,7 @@ namespace BNG
     {
         public float maxHealth = 100;
         [SyncVar(hook = nameof(OnHealthChanged))]
-        private float _currentHealth;
+        public float _currentHealth;
 
         [Tooltip("Activate these GameObjects on Death")]
         public List<GameObject> ActivateGameObjectsOnDeath;
@@ -26,8 +26,7 @@ namespace BNG
             _currentHealth = maxHealth;
         }
 
-        // this is called only on the server and the currenthealth is synced back to clients
-        //[Server]
+        // this is called only on the server and the currenthealth is synced back to clients   
         public void TakeDamage(float damageAmount)
         {
             if (destroyed)
@@ -35,13 +34,24 @@ namespace BNG
             _currentHealth -= damageAmount;
 
             if (_currentHealth <= 0f)
-            {
-                //DestroyThis();
+            {               
                 _currentHealth = 0f;
             }
         }
 
+        // for client authoritative damage
+        [Command(requiresAuthority = false)]
+        public void CmdClientAuthorityTakeDamage(float damageAmount)
+        {
+            if (destroyed)
+                return;
+            _currentHealth -= damageAmount;
 
+            if (_currentHealth <= 0f)
+            {
+                _currentHealth = 0f;
+            }
+        }
 
         // function to add health like from a pickup
         [Command]
@@ -53,9 +63,8 @@ namespace BNG
         private void OnHealthChanged(float oldHealth, float newHealth)
         {
             // place any effects we want here like explosions etc
-            // place any player UI updates like a health bar or value shown on a UI etc
 
-            // set destroyed on the clients
+            // set destroyed on all clients
             if (_currentHealth <= 0f && !destroyed)
             {
                 DestroyThis();
@@ -86,9 +95,6 @@ namespace BNG
                 col.enabled = false;
             }
         }
-
-        
-
     }
 }
 

@@ -1488,10 +1488,11 @@ GameObject:
   - component: {fileID: 9148596257437500464}
   - component: {fileID: 9148596257437500478}
   - component: {fileID: 8216736267275558262}
-  - component: {fileID: 9148596257437500470}
   - component: {fileID: 8216736267275558265}
   - component: {fileID: 8216736267275558264}
   - component: {fileID: 8216736267275558267}
+  - component: {fileID: 7136809921476016913}
+  - component: {fileID: 6444381611387507707}
   m_Layer: 10
   m_Name: Hammer
   m_TagString: Untagged
@@ -1779,25 +1780,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.09061694, y: 0.08940944, z: 0.2}
   m_Center: {x: -0.00041878223, y: 0.1452129, z: 0}
---- !u!114 &9148596257437500470
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9148596257437500617}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 821cfb7c3eab3764bbb57d764c6e26d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Damage: 25
-  ColliderRigidbody: {fileID: 0}
-  MinForce: 0.1
-  LastRelativeVelocity: 0
-  LastDamageForce: 0
-  TakeCollisionDamage: 0
-  CollisionDamage: 5
 --- !u!114 &8216736267275558265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1871,6 +1853,40 @@ MonoBehaviour:
   positionSensitivity: 0.01
   rotationSensitivity: 0.01
   scaleSensitivity: 0.01
+--- !u!114 &7136809921476016913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9148596257437500617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51328566bbd01dd4e8681341199abe2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6444381611387507707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9148596257437500617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f64b3505599dcd4f98419750b11a31d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  Damage: 25
+  ColliderRigidbody: {fileID: 9148596257437500467}
+  MinForce: 0.1
+  LastRelativeVelocity: 0
+  LastDamageForce: 0
+  TakeCollisionDamage: 1
+  CollisionDamage: 5
 --- !u!1 &9148596258606635929
 GameObject:
   m_ObjectHideFlags: 0
