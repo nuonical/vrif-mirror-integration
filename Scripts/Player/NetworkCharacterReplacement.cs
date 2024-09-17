@@ -25,11 +25,9 @@ namespace BNG
             // Instantiate the new character on the server
             GameObject newCharacter = Instantiate(networkCharacters[characterIndex], currentPlayer.transform.position, currentPlayer.transform.rotation);
 
-            // Spawn the new character on the server
+            // Spawn the new character on the server and give authority to the client connection
             NetworkServer.Spawn(newCharacter, conn);
 
-            // Optionally: Transfer ownership to the new character
-            newCharacter.GetComponent<NetworkIdentity>().AssignClientAuthority(conn);
         }
     }
 }
