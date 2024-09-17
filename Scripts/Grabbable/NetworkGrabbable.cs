@@ -97,7 +97,30 @@ namespace BNG {
                 yield return null;
             }
 
-            CmdSetHoldingStatus(true);
+            float timeNotHeld = 0f; // Timer for how long the object has not been held
+            float maxTime = 3f; // Time limit for how long we wait
+
+            // fix for not fully grabbing the grabbable so the ring and grabbable don't get disabled unless the object is fully grabbed
+            // set with a timer to avoid leaving the coroutine in an endless loop waiting to be held
+            while (true) 
+            {
+                if (!grabbables[0].BeingHeld)
+                {
+                    timeNotHeld += UnityEngine.Time.deltaTime; 
+
+                    if (timeNotHeld >= maxTime) 
+                    {                       
+                        yield break; 
+                    }
+                }
+                else
+                {                   
+                    CmdSetHoldingStatus(true);
+                    yield break;
+                }
+
+                yield return null; 
+            }    
         }
 
         public void DropEventHoldFalse() {
