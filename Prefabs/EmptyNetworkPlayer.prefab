@@ -66,4 +66,6 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   networkCharacters:
+  - {fileID: 8117164273310995092, guid: fbe2003a880cbcc459df4fcd57709b8b, type: 3}
   - {fileID: 8117164273310995092, guid: d44eb33159203b948babf1882c9d5553, type: 3}
+  useOfflineCharacterSelect: 1

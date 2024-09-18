@@ -17,6 +17,8 @@ namespace BNG {
 
         public TMP_Text DisplayText;
 
+        public List<GameObject> DisableGameObjects;
+
         // Shown for Debug
         public bool ClientConnected;
 
@@ -100,6 +102,11 @@ namespace BNG {
             }
             if (HostButton) {
                 HostButton.SetActive(false);
+            }
+
+            foreach(GameObject go in DisableGameObjects)
+            {
+                go.SetActive(false);
             }
         }
 

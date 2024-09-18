@@ -23,6 +23,7 @@ namespace BNG {
 
         // Any local player data we may want to store for later
         public string PlayerName;
+        public int playerPrefabIndex = 0;
 
         void Awake() {
             // Setup singletone so only one object exists at a time
@@ -46,6 +47,12 @@ namespace BNG {
             if(savePrefs) {
                 PlayerPrefs.SetString("PlayerName", PlayerName);
             }
+        }
+
+        // set player prefab selection index from menu
+        public void SetPlayerPrefabIndex(int prefabIndex)
+        {
+            playerPrefabIndex = prefabIndex;
         }
     }
 }

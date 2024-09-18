@@ -2961,7 +2961,7 @@ GameObject:
   - component: {fileID: 8117164273310995094}
   - component: {fileID: 5081947912967683422}
   m_Layer: 0
-  m_Name: Networked Player
+  m_Name: Networked Player Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
