@@ -29,7 +29,7 @@ namespace BNG
             }
         }
 
-        [Command] // command to the server to replace the character;
+        [Command(requiresAuthority = false)] // command to the server to replace the character;
         public void CmdReplaceCharacter(int characterIndex)
         {            
             // Get the current player object

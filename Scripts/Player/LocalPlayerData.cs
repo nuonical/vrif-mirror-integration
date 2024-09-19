@@ -49,7 +49,7 @@ namespace BNG {
             }
         }
 
-        // set player prefab selection index from menu
+        // set player prefab selection index from menu 
         public void SetPlayerPrefabIndex(int prefabIndex)
         {
             playerPrefabIndex = prefabIndex;

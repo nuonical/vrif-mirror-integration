@@ -143,10 +143,12 @@ namespace BNG {
             }
         }
 
-        [Command]
+        [Command(requiresAuthority = false)]
         void CmdSetHoldingStatus(bool status) {
             holdingStatus = status;
         }
+
+       
 
         public void SnapZoneSetHoldingStatus(bool status) {
             CmdSetHoldingStatus(status);
