@@ -80,7 +80,10 @@ namespace BNG
             // Activate
             foreach (var go in ActivateGameObjectsOnDeath)
             {
-                go.SetActive(true);
+                //go.SetActive(true);
+                // may need to make this NetworkServerSpawn depending on the object
+                Instantiate(go, transform.position, transform.rotation);
+                // perhaps check the instantiated object and if it has a NetId.. then server spawn
             }
 
             // Deactivate

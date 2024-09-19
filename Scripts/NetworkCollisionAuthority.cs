@@ -13,6 +13,8 @@ namespace BNG
             if (!isOwned)
                 return;
 
+            
+
             Rigidbody colRb = collision.transform.root.GetComponentInChildren<Rigidbody>();
 
             if (colRb == null) // if there isn't a rigidbody, then it isn't a physics object, no need to continue
@@ -36,6 +38,7 @@ namespace BNG
             // if its not being held and we hit it take ownership so it can be moved on collision
             if (netId != null && netId.isOwned == false)
             {
+                Debug.Log(collision.transform.name);
                 CmdRequestOwnership(netId);
             }
         }
