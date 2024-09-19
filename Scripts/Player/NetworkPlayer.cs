@@ -217,6 +217,14 @@ namespace BNG {
         }
 
         public void ApplyLeftHandPoseIndex(bool oldBool, bool newBool) {
+           
+            StartCoroutine(WaitToSetLeftHandPose());
+        }
+
+        // fix for not setting hand pose correctly when grabbing from the snap point, a delay was needed
+        IEnumerator WaitToSetLeftHandPose()
+        {
+            yield return null;
             leftNetworkHandPoser.CurrentPose = HandPoses[LeftPoseIndex];
             leftNetworkHandPoser.OnPoseChanged();
             leftNetworkPoseBlender.UpdatePose = false;
@@ -254,10 +262,17 @@ namespace BNG {
 
         public void ApplyRightHandPoseIndex(bool oldBool, bool newBool) {
             if(HandPoses != null && HandPoses.Count >0 && HandPoses.Count >= rightPoseIndex) {
-                rightNetworkHandPoser.CurrentPose = HandPoses[rightPoseIndex];
-                rightNetworkHandPoser.OnPoseChanged();
-                rightNetworkPoseBlender.UpdatePose = false;
+              
+                StartCoroutine(WaitToSetRightHandPose());
             }
+        }
+        // fix for not setting hand pose correctly when grabbing from the snap point, a delay was needed
+        IEnumerator WaitToSetRightHandPose()
+        {
+            yield return null;
+            rightNetworkHandPoser.CurrentPose = HandPoses[rightPoseIndex];
+            rightNetworkHandPoser.OnPoseChanged();
+            rightNetworkPoseBlender.UpdatePose = false;
         }
 
         [Command]
