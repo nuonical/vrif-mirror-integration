@@ -58,19 +58,19 @@ namespace BNG
             }
 
             // remove the client authority once the object has stopped moving
-            RemoveClientAuthority(rb, targetNetId);
+           // StartCoroutine(RemoveClientAuthority(rb, targetNetId));
         }
 
         // once the object has stopped moving remove the authority
-        IEnumerator RemoveClientAuthority(Rigidbody rb, NetworkIdentity netId)
-        {
-            while(rb.velocity.magnitude > 0.1f)
-            {
-                yield return null;
-            }
-            ResetInteractableVelocity(rb);
-            netId.RemoveClientAuthority();
-        }
+       // IEnumerator RemoveClientAuthority(Rigidbody rb, NetworkIdentity netId)
+       // {
+         //   while(rb.velocity.magnitude > 0.1f)
+         //   {
+              //  yield return null;
+           // }
+           // ResetInteractableVelocity(rb);
+           // netId.RemoveClientAuthority();
+       // }
 
         public virtual void ResetInteractableVelocity(Rigidbody rb)
         {
