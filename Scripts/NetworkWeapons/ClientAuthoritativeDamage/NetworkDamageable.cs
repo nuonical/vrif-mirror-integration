@@ -10,8 +10,11 @@ namespace BNG
         [SyncVar(hook = nameof(OnHealthChanged))]
         public float _currentHealth;
 
-        [Tooltip("Activate these GameObjects on Death")]
-        public List<GameObject> ActivateGameObjectsOnDeath;
+        [Tooltip("Instantiate these Network Objects  on Death")]
+        public List<GameObject> InstantiateNetworkObjectsOnDeath;
+
+        [Tooltip("Instantiate these UnNetworked GameObjects on Death")]
+        public List<GameObject> InstantiateGameObjectsOnDeath;
 
         [Tooltip("Deactivate these GameObjects on Death")]
         public List<GameObject> DeactivateGameObjectsOnDeath;
@@ -39,7 +42,7 @@ namespace BNG
             }
         }
 
-        // for client authoritative damage
+        // for client authoritative damage, call this instead of Take Damage if doing Client Authoritative Damage
         [Command(requiresAuthority = false)]
         public void CmdClientAuthorityTakeDamage(float damageAmount)
         {
@@ -62,28 +65,28 @@ namespace BNG
 
         private void OnHealthChanged(float oldHealth, float newHealth)
         {
-            // place any effects we want here like explosions etc
-
             // set destroyed on all clients
             if (_currentHealth <= 0f && !destroyed)
             {
                 DestroyThis();
             }
 
-            // add here to respawn or trigger player teleport on death etc
+            // add here to respawn or trigger player teleport on death etc 
+            // recommend making player death and teleport its own Class, as it is not networked and is handled on the Local XRRig Player
         }
 
         public void DestroyThis()
         {
             destroyed = true;
-
-            // Activate
-            foreach (var go in ActivateGameObjectsOnDeath)
+            // Instantiate network objects
+            if (isServer)
             {
-                //go.SetActive(true);
-                // may need to make this NetworkServerSpawn depending on the object
-                Instantiate(go, transform.position, transform.rotation);
-                // perhaps check the instantiated object and if it has a NetId.. then server spawn
+                SpawnNetworkObject();
+            }
+            // Instantiate unnetworked objects like destroyed objects that don't need networked
+            foreach (var go in InstantiateGameObjectsOnDeath)
+            {                
+                Instantiate(go, transform.position, transform.rotation);                             
             }
 
             // Deactivate
@@ -96,6 +99,18 @@ namespace BNG
             foreach (var col in DeactivateCollidersOnDeath)
             {
                 col.enabled = false;
+            }
+        }
+
+        [Server]
+        void SpawnNetworkObject()
+        {
+            foreach (var go in InstantiateNetworkObjectsOnDeath)
+            {
+                GameObject spawnedGo = Instantiate(go, transform.position, transform.rotation);
+
+                NetworkServer.Spawn(spawnedGo);
+                
             }
         }
     }

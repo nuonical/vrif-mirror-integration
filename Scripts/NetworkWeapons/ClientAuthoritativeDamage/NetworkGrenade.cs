@@ -21,10 +21,14 @@ namespace BNG
 
         public AudioClip beepSound; // sound that plays with the count down like a beep on a frag grenade or tick on a bomb
 
+        // synced so someone else can't pick it up and trigger the audio again etc..
+        [SyncVar]
+        bool countDownStarted = false;
+
         public void ControlInput()
         {
-            // may need to add logic here so another person cant pick it up and trigger it again after the countdown has been triggered
-            if (isOwned)
+            
+            if (isOwned && !countDownStarted)
             {
                 CmdServerExplosion();
             }
@@ -34,7 +38,7 @@ namespace BNG
         [Command]
         public void CmdServerExplosion()
         {
-            
+            countDownStarted = true;
             StartCoroutine(CountDown());
         }
 
@@ -60,6 +64,7 @@ namespace BNG
         void Explode()
         {
             // Play explosion sound
+            // if using the emulator, this sound will trigger multiple times, but not in game headset
             RpcPlayExplosionSound();
 
             // Spawn explosion effect on all clients
