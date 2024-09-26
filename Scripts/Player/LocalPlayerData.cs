@@ -32,6 +32,8 @@ namespace BNG {
                 return;
             }
 
+            DontDestroyOnLoad(gameObject);
+
             LoadPlayerSettings();
         }
 
