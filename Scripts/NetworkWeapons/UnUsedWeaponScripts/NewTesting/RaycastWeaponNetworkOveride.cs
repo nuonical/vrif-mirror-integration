@@ -44,11 +44,11 @@ namespace BNG
             }
 
             // These are here for convenience. Could be called through GrabbableUnityEvents instead
-            checkSlideInput(); //  had to make this public in the RaycastWeapon Component 
-            checkEjectInput();//  had to make this public in the RaycastWeapon Component
+          //  checkSlideInput(); //  had to make this public in the RaycastWeapon Component 
+           // checkEjectInput();//  had to make this public in the RaycastWeapon Component
             CheckReloadInput();
 
-            updateChamberedBullet();//  had to make this public in the RaycastWeapon Component
+           // updateChamberedBullet();//  had to make this public in the RaycastWeapon Component
 
             base.OnTrigger(triggerValue);
         }
@@ -57,10 +57,10 @@ namespace BNG
         {
             // Has enough time passed between shots
             float shotInterval = Time.timeScale < 1 ? SlowMoRateOfFire : FiringRate;
-            if (Time.time - lastShotTime < shotInterval) //  last shot time made public on raycast weapon so it can be accessed for override
-            {
-                return;
-            }
+            //if (Time.time - lastShotTime < shotInterval) //  last shot time made public on raycast weapon so it can be accessed for override
+           // {
+              //  return;
+           // }
 
             // Need to Chamber round into weapon
             if (!BulletInChamber && MustChamberRounds)
@@ -132,7 +132,7 @@ namespace BNG
             // Try to load a new bullet into chamber         
             if (AutoChamberRounds)
             {
-                chamberRound();
+               // chamberRound();
             }
             else
             {
@@ -158,7 +158,7 @@ namespace BNG
             }
 
             // Store our last shot time to be used for rate of fire
-            lastShotTime = Time.time;
+           // lastShotTime = Time.time;
 
             // Stop previous routine
             if (shotRoutine != null)
@@ -185,26 +185,26 @@ namespace BNG
             return;
         }
 
-        public override void chamberRound()
-        {
+       // public override void chamberRound()
+       // {
 
-            int currentBulletCount = GetBulletCount();
+          //  int currentBulletCount = GetBulletCount();
 
-            if (currentBulletCount > 0)
-            {
+          //  if (currentBulletCount > 0)
+          //  {
                 // Remove the first bullet we find in the clip                
-                RemoveBullet();
+            //    RemoveBullet();
 
                 // That bullet is now in chamber
                 // BulletInChamber = true;
-                networkHandler.CmdSyncBulletInChamber(true);
-            }
+               // networkHandler.CmdSyncBulletInChamber(true);
+           // }
             // Unable to chamber a bullet
-            else
-            {
+          //  else
+          //  {
                 // BulletInChamber = false;
-                networkHandler.CmdSyncBulletInChamber(false);
-            }
-        }
+             //   networkHandler.CmdSyncBulletInChamber(false);
+           // }
+       // }
     }
 }
