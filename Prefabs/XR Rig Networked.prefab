@@ -146,6 +146,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controllerHand: 1
   grabbableLayer: 10
+  grabber: {fileID: 89460339008455444}
 --- !u!1 &89460339008455442
 GameObject:
   m_ObjectHideFlags: 0
@@ -1041,6 +1042,7 @@ MonoBehaviour:
   CanRemoveItem: 1
   ScaleItem: 1
   DisableColliders: 1
+  ParentObjectToSnapZone: 0
   DuplicateItemOnGrab: 0
   MaxDropTime: 0.1
   LastSnapTime: 0
@@ -2560,6 +2562,7 @@ MonoBehaviour:
   CanRemoveItem: 1
   ScaleItem: 1
   DisableColliders: 1
+  ParentObjectToSnapZone: 0
   DuplicateItemOnGrab: 0
   MaxDropTime: 0.1
   LastSnapTime: 0
@@ -3956,6 +3959,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controllerHand: 0
   grabbableLayer: 10
+  grabber: {fileID: 1703847965976764128}
 --- !u!1 &4111191637322707420
 GameObject:
   m_ObjectHideFlags: 0
@@ -4056,6 +4060,7 @@ MonoBehaviour:
   CanRemoveItem: 1
   ScaleItem: 1
   DisableColliders: 1
+  ParentObjectToSnapZone: 1
   DuplicateItemOnGrab: 0
   MaxDropTime: 0.1
   LastSnapTime: 0
@@ -6689,6 +6694,7 @@ MonoBehaviour:
   CanRemoveItem: 1
   ScaleItem: 1
   DisableColliders: 1
+  ParentObjectToSnapZone: 0
   DuplicateItemOnGrab: 0
   MaxDropTime: 0.1
   LastSnapTime: 0
@@ -8901,8 +8907,8 @@ GameObject:
   - component: {fileID: 5921816763539772438}
   - component: {fileID: 5921816763541523622}
   - component: {fileID: 4939808044549510880}
-  - component: {fileID: 5497640609368108490}
   - component: {fileID: 8579960584062431392}
+  - component: {fileID: 8579960583951854512}
   m_Layer: 0
   m_Name: CenterEyeAnchor
   m_TagString: MainCamera
@@ -8996,7 +9002,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &5497640609368108490
+--- !u!114 &8579960584062431392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5921816763540425242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d9560e911de58f4cb0d9f82e68ff296, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Device: 0
+--- !u!114 &8579960583951854512
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9013,19 +9032,6 @@ MonoBehaviour:
   FadeInSpeed: 2
   FadeOutSpeed: 1
   SceneFadeInDelay: 0.5
---- !u!114 &8579960584062431392
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5921816763540425242}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d9560e911de58f4cb0d9f82e68ff296, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Device: 0
 --- !u!1 &5921816763540425244
 GameObject:
   m_ObjectHideFlags: 0
@@ -9721,6 +9727,7 @@ MonoBehaviour:
   CanRemoveItem: 1
   ScaleItem: 1
   DisableColliders: 1
+  ParentObjectToSnapZone: 0
   DuplicateItemOnGrab: 0
   MaxDropTime: 0.1
   LastSnapTime: 0
@@ -10588,7 +10595,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7646747471053397297}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 855d72b36bb9d904e80e3c9e587f3d8c, type: 3}
   m_Name: 

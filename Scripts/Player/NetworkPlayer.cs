@@ -95,6 +95,7 @@ namespace BNG {
             
         }
 
+
         // await ownership to proceed, if we do not get ownership, timeout to break the loop if it is not the local player
         private IEnumerator CheckOwnership()
         {
@@ -132,12 +133,15 @@ namespace BNG {
             }
 
             SkinnedRenderers.AddRange(GetComponentsInChildren<SkinnedMeshRenderer>());
+
             for (int x = 0; x < SkinnedRenderers.Count; x++)
             {
                 SkinnedRenderers[x].enabled = false;
             }
 
             MeshRenderers.AddRange(GetComponentsInChildren<MeshRenderer>());
+
+
             for (int x = 0; x < MeshRenderers.Count; x++)
             {
                 MeshRenderers[x].enabled = false;
@@ -148,6 +152,29 @@ namespace BNG {
             // Only run this if we are the local player, so if we own it, then it is the local representation
             if (!isOwned || hardwareRig == null) {
                 return;
+            }
+
+            // added for testing for subscene switch, meshes not getting disabled for the local player on subscene change
+            if(SkinnedRenderers.Count > 0 )
+            {
+                if(SkinnedRenderers[0].enabled)
+                {
+                    for (int x = 0; x < SkinnedRenderers.Count; x++)
+                    {
+                        SkinnedRenderers[x].enabled = false;
+                    }
+                }
+            }
+
+            if (MeshRenderers.Count > 0)
+            {
+                if (MeshRenderers[0].enabled)
+                {
+                    for (int x = 0; x < MeshRenderers.Count; x++)
+                    {
+                        MeshRenderers[x].enabled = false;
+                    }
+                }
             }
 
             if (hardwareRig != null) {

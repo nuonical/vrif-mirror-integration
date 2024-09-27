@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Mirror;
 
 namespace BNG
@@ -85,8 +86,14 @@ namespace BNG
             }
             // Instantiate unnetworked objects like destroyed objects that don't need networked
             foreach (var go in InstantiateGameObjectsOnDeath)
-            {                
-                Instantiate(go, transform.position, transform.rotation);                             
+            {
+                // Instantiate the object at the current position and rotation
+                GameObject instantiatedObject = Instantiate(go, transform.position, transform.rotation);
+
+                // this is needed for physics subscenes
+                Scene currentScene = gameObject.scene;
+                // Move the instantiated object to the current scene
+                SceneManager.MoveGameObjectToScene(instantiatedObject, currentScene);
             }
 
             // Deactivate
@@ -108,6 +115,10 @@ namespace BNG
             foreach (var go in InstantiateNetworkObjectsOnDeath)
             {
                 GameObject spawnedGo = Instantiate(go, transform.position, transform.rotation);
+
+                // needed for if we are using subscenes so the object is spawned in the current scene
+                Scene currentScene = gameObject.scene; 
+                SceneManager.MoveGameObjectToScene(spawnedGo, currentScene);
 
                 NetworkServer.Spawn(spawnedGo);
                 
