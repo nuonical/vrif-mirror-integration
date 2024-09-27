@@ -2960,10 +2960,9 @@ GameObject:
   - component: {fileID: 8117164273310995095}
   - component: {fileID: 8117164273310995094}
   - component: {fileID: 5081947912967683422}
-  - component: {fileID: 740120616828872009}
   m_Layer: 0
   m_Name: Networked Player Blue
-  m_TagString: NetworkPlayer
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3025,12 +3024,8 @@ MonoBehaviour:
   networkLeftHand: {fileID: 8117164273359010855}
   networkRightHand: {fileID: 8117164273390403730}
   networkBody: {fileID: 5578156629068298939}
-  hardwareRig: {fileID: 0}
   SkinnedRenderers: []
   MeshRenderers: []
-  checkInterval: 0.5
-  timeout: 5
-  maxRetries: 10
   leftNetworkPoseBlender: {fileID: 669291979214078550}
   rightNetworkPoseBlender: {fileID: 7292000837697627616}
   rightNetworkHandPoser: {fileID: 1848955550828361408}
@@ -3222,20 +3217,6 @@ MonoBehaviour:
   positionSensitivity: 0.01
   rotationSensitivity: 0.01
   scaleSensitivity: 0.01
---- !u!136 &740120616828872009
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8117164273310995092}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 0.23
-  m_Height: 1.25
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.24, z: 0}
 --- !u!1 &8117164273359010854
 GameObject:
   m_ObjectHideFlags: 0

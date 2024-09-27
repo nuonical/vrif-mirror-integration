@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using Mirror;
 
 namespace BNG
@@ -25,18 +24,6 @@ namespace BNG
         // synced so someone else can't pick it up and trigger the audio again etc..
         [SyncVar]
         bool countDownStarted = false;
-
-        // for getting the current physics scene, needed for phyics subscenes for raycast etc..
-        PhysicsScene currentPhysicsScene;
-
-        // is this a custom physics scene/ if we are using physics subscenes
-        bool isSubScene = false;
-
-        private void Start()
-        {
-            currentPhysicsScene = gameObject.scene.GetPhysicsScene();
-            isSubScene = gameObject.scene.GetPhysicsScene() != Physics.defaultPhysicsScene;
-        }
 
         public void ControlInput()
         {
@@ -71,17 +58,10 @@ namespace BNG
             }
 
             // Trigger the explosion after the countdown
-            if (!isSubScene)
-            {
-                ExplodeDefault();
-            }
-            else
-            {
-                ExplodeSubScene();
-            }
+            Explode();
         }
 
-        void ExplodeDefault()
+        void Explode()
         {
             // Play explosion sound
             // if using the emulator, this sound will trigger multiple times, but not in game headset
@@ -93,7 +73,6 @@ namespace BNG
 
             // Apply damage or other effects to objects within the explosion radius
             Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
-           
             // hashset to keep track of the damage component so it only gets damaged once
             HashSet<NetworkDamageable> damagedPlayers = new HashSet<NetworkDamageable>();
 
@@ -112,54 +91,6 @@ namespace BNG
                 {
                     networkD.TakeDamage(damageAmount);
 
-                    damagedPlayers.Add(networkD);
-                }
-            }
-
-            // Destroy the grenade after exploding
-            Destroy(this.gameObject);
-        }
-
-        void ExplodeSubScene()
-        {
-            // Play explosion sound
-            RpcPlayExplosionSound();
-
-            // Spawn explosion effect on all clients
-            GameObject explosionEffect = Instantiate(explosionEffectPrefab, transform.position, Quaternion.identity);
-
-            // Move the explosion effect to the same subscene as the grenade
-            Scene currentScene = gameObject.scene;  // Get the current scene (subscene) the grenade is in
-            SceneManager.MoveGameObjectToScene(explosionEffect, currentScene); // Move explosion to the correct subscene
-
-            // Now spawn the object across the network
-            NetworkServer.Spawn(explosionEffect);
-
-            // Prepare a results array for the colliders that are within the explosion radius
-            Collider[] colliders = new Collider[50];
-
-            int numberOfColliders = currentPhysicsScene.OverlapSphere(transform.position, explosionRadius, colliders,
-                Physics.AllLayers, QueryTriggerInteraction.UseGlobal);
-
-            // Hashset to keep track of the damage component so it only gets damaged once
-            HashSet<NetworkDamageable> damagedPlayers = new HashSet<NetworkDamageable>();
-
-            for (int i = 0; i < numberOfColliders; i++)
-            {
-                Collider collider = colliders[i];
-
-                Rigidbody rb = collider.GetComponent<Rigidbody>();
-                if (rb != null)
-                {
-                    // Apply force to objects within the explosion radius
-                    rb.AddExplosionForce(explosionForce, transform.position, explosionRadius);
-                }
-
-                NetworkDamageable networkD = collider.transform.root.GetComponentInChildren<NetworkDamageable>();
-
-                if (networkD != null && !damagedPlayers.Contains(networkD))
-                {
-                    networkD.TakeDamage(damageAmount);
                     damagedPlayers.Add(networkD);
                 }
             }

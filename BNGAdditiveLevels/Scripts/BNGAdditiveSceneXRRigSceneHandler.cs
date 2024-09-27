@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Mirror;
+
 // this script will move the XRRig, the EventSystem and the Line Renderer that spawns from the rig to the active subscene as scenes are changed
 namespace BNG
 {
-    public class BNGAdditiveSceneXRRigSceneHandler : NetworkBehaviour
+    public class BNGAdditiveSceneXRRigSceneHandler : MonoBehaviour
     {
         public GameObject XRRig;
         public GameObject EventSystem;
@@ -14,71 +14,43 @@ namespace BNG
 
         public ScreenFader fader;
 
-        private bool isProcessingSceneChange = false; // State variable
-
-        // Subscribe to the scene loaded event
+        // subscribe to the scene loaded event
         private void OnEnable()
-        {           
-            BNGAdditiveLevelNetworkManager.singleton.OnClientSceneChangedEvent += HandleClientSceneChanged;
+        {
+            SceneManager.sceneLoaded += OnSceneLoaded;
         }
 
         private void OnDisable()
-        {           
-            BNGAdditiveLevelNetworkManager.singleton.OnClientSceneChangedEvent -= HandleClientSceneChanged;
-        }
-
-       
-
-        private void HandleClientSceneChanged(string scene)
         {
-            // Remove the ".unity" extension from the scene name if it exists
-            if (scene.EndsWith(".unity"))
-            {
-                scene = scene.Substring(0, scene.Length - ".unity".Length);
-            }
-
-            // Get the Scene object using the cleaned scene name
-            Scene sceneToLoad = SceneManager.GetSceneByName(scene);
-
-            // Only process if not currently handling a scene change
-            if (!isProcessingSceneChange)
-            {
-                isProcessingSceneChange = true; // Set state to processing
-                StartCoroutine(GetAndMoveObjects(sceneToLoad));
-            }
+            SceneManager.sceneLoaded -= OnSceneLoaded;
         }
 
-        private IEnumerator GetAndMoveObjects(Scene scene)
+        private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            // when the scene is changed, we do this in a coroutine so we have time to get the line renderer
+            StartCoroutine(GetAndMoveObjects(scene));
+        }
+
+        IEnumerator GetAndMoveObjects(Scene scene)
         {
             yield return null;
-
-            if (LineRenderer == null)
-            {
-                LineRenderer = GameObject.Find("LineRenderer");
-            }
-
+            LineRenderer = GameObject.Find("LineRenderer");
             yield return null;
             MoveToSubScene(scene);
-
-            // Reset state variable after processing
-            isProcessingSceneChange = false;
+          //  yield return new WaitForSeconds(fader.FadeOutSpeed);
+           // fader.DoFadeOut(); // fader is causing issues with scene change.. tried just disabling it, but had to remove it.. will look into it..
         }
 
-        // Move objects to the active scene
+        // move objects to the active scene
         private void MoveToSubScene(Scene subScene)
         {
-           
             SceneManager.MoveGameObjectToScene(XRRig, subScene);
             SceneManager.MoveGameObjectToScene(EventSystem, subScene);
-            SceneManager.MoveGameObjectToScene(this.gameObject, subScene);
-            // If LineRenderer is not parented to XRRig, move it as well
-            if (LineRenderer != null && LineRenderer.transform.parent == null)
-            {
-                SceneManager.MoveGameObjectToScene(LineRenderer, subScene);
-            }
+            SceneManager.MoveGameObjectToScene(LineRenderer, subScene);
+            // call the screen fader to fade in .. without this it stays blacked out on change?
+           //fader.DoFadeOut();
 
-            // Uncomment to call the screen fader if necessary
-            // fader.DoFadeOut();
         }
+
     }
 }

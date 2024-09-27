@@ -7,11 +7,6 @@ public class BNGAdditiveLevelNetworkManager : NetworkManager
 {
     public static new BNGAdditiveLevelNetworkManager singleton => (BNGAdditiveLevelNetworkManager)NetworkManager.singleton;
 
-    // Define a delegate for the scene changed event
-    public delegate void ClientSceneChangedHandler(string sceneName);
-    // Create an event based on that delegate
-    public event ClientSceneChangedHandler OnClientSceneChangedEvent;
-
     [Header("Additive Scenes - First is start scene")]
 
     [Scene, Tooltip("Add additive scenes here.\nFirst entry will be players' start scene")]
@@ -70,17 +65,15 @@ public class BNGAdditiveLevelNetworkManager : NetworkManager
 
         if (sceneOperation == SceneOperation.LoadAdditive)
             StartCoroutine(LoadAdditive(sceneName));
- 
-
     }
 
     IEnumerator LoadAdditive(string sceneName)
     {
         isInTransition = true;
-        OnClientSceneChangedEvent?.Invoke(sceneName);
+
         // This will return immediately if already faded in
         // e.g. by UnloadAdditive or by default startup state
-        // yield return fadeInOut.FadeIn();
+       // yield return fadeInOut.FadeIn();
 
         // host client is on server...don't load the additive scene again
         if (mode == NetworkManagerMode.ClientOnly)
@@ -108,7 +101,7 @@ public class BNGAdditiveLevelNetworkManager : NetworkManager
 
         // This will return immediately if already faded in
         // e.g. by LoadAdditive above or by default startup state.
-        // yield return fadeInOut.FadeIn();
+       // yield return fadeInOut.FadeIn();
 
         // host client is on server...don't unload the additive scene here.
         if (mode == NetworkManagerMode.ClientOnly)
