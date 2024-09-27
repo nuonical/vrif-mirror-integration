@@ -3420,6 +3420,7 @@ GameObject:
   - component: {fileID: 1361873256}
   - component: {fileID: 1361873255}
   - component: {fileID: 1361873254}
+  - component: {fileID: 1361873257}
   m_Layer: 0
   m_Name: BNGNetworkManager
   m_TagString: Untagged
@@ -3499,7 +3500,7 @@ MonoBehaviour:
   - {fileID: 4207629010924850946, guid: d0612e35d609f124b88d8b50056dd10e, type: 3}
   - {fileID: 8117164273310995092, guid: d44eb33159203b948babf1882c9d5553, type: 3}
   - {fileID: 8117164273310995092, guid: fbe2003a880cbcc459df4fcd57709b8b, type: 3}
-  - {fileID: 0}
+  - {fileID: 4297880161569991137, guid: 2b4b7e84aefb6214989e9ee9437c83ec, type: 3}
   exceptionsDisconnect: 1
   snapshotSettings:
     bufferTimeMultiplier: 2
@@ -3530,6 +3531,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1361873257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1361873252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6442dc8070ceb41f094e44de0bf87274, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offsetX: 0
+  offsetY: 0
 --- !u!1001 &1420532609
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3804,6 +3819,16 @@ PrefabInstance:
     - target: {fileID: 1725541463306743941, guid: cf42233f335ff8c4083ef5ee4a742b22,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1725541463306743946, guid: cf42233f335ff8c4083ef5ee4a742b22,
+        type: 3}
+      propertyPath: syncDirection
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1725541463306743947, guid: cf42233f335ff8c4083ef5ee4a742b22,
+        type: 3}
+      propertyPath: explosionForce
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1725541463306743948, guid: cf42233f335ff8c4083ef5ee4a742b22,
@@ -38893,8 +38918,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6720606388314045379, guid: e6ad593124694b24fa2671abdc42a823,
         type: 3}
+      propertyPath: _currentHealth
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6720606388314045379, guid: e6ad593124694b24fa2671abdc42a823,
+        type: 3}
       propertyPath: InstantiateGameObjectsOnDeath.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6720606388314045379, guid: e6ad593124694b24fa2671abdc42a823,
         type: 3}
@@ -38916,13 +38946,19 @@ PrefabInstance:
     - target: {fileID: 6720606388314045379, guid: e6ad593124694b24fa2671abdc42a823,
         type: 3}
       propertyPath: InstantiateNetworkObjectsOnDeath.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6720606388314045379, guid: e6ad593124694b24fa2671abdc42a823,
         type: 3}
       propertyPath: InstantiateNetworkObjectsOnDeath.Array.data[0]
       value: 
       objectReference: {fileID: 9148596257437500617, guid: 45d3656d13f8ecb4c8fca3979e1a55a6,
+        type: 3}
+    - target: {fileID: 6720606388314045379, guid: e6ad593124694b24fa2671abdc42a823,
+        type: 3}
+      propertyPath: InstantiateNetworkObjectsOnDeath.Array.data[1]
+      value: 
+      objectReference: {fileID: 4297880161569991137, guid: 2b4b7e84aefb6214989e9ee9437c83ec,
         type: 3}
     - target: {fileID: 7718952332036868561, guid: e6ad593124694b24fa2671abdc42a823,
         type: 3}
