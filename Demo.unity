@@ -3836,6 +3836,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: NetworkGrenade
       objectReference: {fileID: 0}
+    - target: {fileID: 1725541463306743948, guid: cf42233f335ff8c4083ef5ee4a742b22,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1725541464275743490, guid: cf42233f335ff8c4083ef5ee4a742b22,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1725541464375395714, guid: cf42233f335ff8c4083ef5ee4a742b22,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1725541465134557607, guid: cf42233f335ff8c4083ef5ee4a742b22,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cf42233f335ff8c4083ef5ee4a742b22, type: 3}
 --- !u!1 &1583376822
