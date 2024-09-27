@@ -126,6 +126,7 @@ namespace BNG {
         public void DropEventHoldFalse() {
             // set the holding status to false when you let go so others can pick it up
             CmdSetHoldingStatus(false);
+            
         }
 
         // Request object authority if we don't already own it
