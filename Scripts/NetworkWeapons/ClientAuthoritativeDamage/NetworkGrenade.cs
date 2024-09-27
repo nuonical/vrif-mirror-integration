@@ -77,7 +77,7 @@ namespace BNG
             }
             else
             {
-                ExplodeSubScene();
+               ExplodeSubScene();
             }
         }
 

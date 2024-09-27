@@ -24373,7 +24373,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: XR Rig Networked
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8579960583951854512, guid: 0fc190f2fab2a6744ba2dbaf631b35b8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 0fc190f2fab2a6744ba2dbaf631b35b8, type: 3}
 --- !u!65 &8652075351026851875
 BoxCollider:

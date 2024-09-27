@@ -15,33 +15,43 @@ namespace BNG
 
         private void Start()
         {
-            if (!useOfflineCharacterSelect)
+            if (!useOfflineCharacterSelect || !isLocalPlayer) // Ensure only local player initiates this process
                 return;
-            // Find the local player object
-            var player = NetworkClient.localPlayer;
 
-            if (player != null && player.isOwned)
-            {
-                // get the index of the player selected on the menu
-                int playerIndex = LocalPlayerData.Instance.playerPrefabIndex;
-                // spawn the player object at that index of networkCharacters
-                CmdReplaceCharacter(playerIndex);
-            }
+            // Get the index of the player selected in the menu
+            int playerIndex = LocalPlayerData.Instance.playerPrefabIndex;
+            CmdReplaceCharacter(playerIndex);
         }
 
-        [Command(requiresAuthority = false)] // command to the server to replace the character;
-        public void CmdReplaceCharacter(int characterIndex)
-        {            
+        [Command] // Send command to the server to replace the character for this connection
+        public void CmdReplaceCharacter(int characterIndex, NetworkConnectionToClient conn = null)
+        {
+            // Default to this player's connection if none provided
+            if (conn == null)
+            {
+                conn = connectionToClient;
+            }
+
             // Get the current player object
             GameObject emptyPlayerObject = gameObject;
 
-            // Find the player's connection
-            NetworkConnectionToClient conn = connectionToClient;
-            // Destroy the empty character on the server
-            NetworkServer.Destroy(emptyPlayerObject);
-            // Instantiate the new character on the server and replace the player for connection 
-            GameObject newCharacter = Instantiate(networkCharacters[characterIndex], emptyPlayerObject.transform.position, emptyPlayerObject.transform.rotation);         
-            NetworkServer.ReplacePlayerForConnection(conn, newCharacter, true);           
+            // Check if the character index is valid
+            if (characterIndex >= 0 && characterIndex < networkCharacters.Count)
+            {
+                // Destroy the empty player object on the server
+                NetworkServer.Destroy(emptyPlayerObject);
+
+                // Instantiate the selected character on the server
+                GameObject newCharacter = Instantiate(networkCharacters[characterIndex], emptyPlayerObject.transform.position, emptyPlayerObject.transform.rotation);
+
+                // Assign ownership of the new character to the client's connection
+                NetworkServer.ReplacePlayerForConnection(conn, newCharacter, true);
+            }
+            else
+            {
+                Debug.LogError("Invalid character index: " + characterIndex);
+            }
         }
     }
 }
+
