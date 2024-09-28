@@ -131,16 +131,15 @@ namespace BNG {
                 hardwareRightHand = hardwareRig.RightHandTransform;
                 hardwarePlayerBody = hardwareRig.playerBody;
             }
-
+            // disable all skinned mesh renders on the local network rig
             SkinnedRenderers.AddRange(GetComponentsInChildren<SkinnedMeshRenderer>());
 
             for (int x = 0; x < SkinnedRenderers.Count; x++)
             {
                 SkinnedRenderers[x].enabled = false;
             }
-
+            // disable all mesh renderers on the the local network rig
             MeshRenderers.AddRange(GetComponentsInChildren<MeshRenderer>());
-
 
             for (int x = 0; x < MeshRenderers.Count; x++)
             {
@@ -176,6 +175,7 @@ namespace BNG {
                     }
                 }
             }
+            // end test for subscenes
 
             if (hardwareRig != null) {
                 // Set the position and rotation of the network rig player, head and hands to match that of the Hardware Rig transforms

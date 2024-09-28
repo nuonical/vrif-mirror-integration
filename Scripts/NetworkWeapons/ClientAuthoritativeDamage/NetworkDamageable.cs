@@ -90,7 +90,7 @@ namespace BNG
             // Spawn networked objects if needed
             CmdSpawnNetworkObject();
 
-            // Instantiate unnetworked objects like destroyed debris
+            // Instantiate unnetworked objects this will likely not be needed in multiplayer.. but I left it in
             foreach (var go in InstantiateGameObjectsOnDeath)
             {
                 GameObject instantiatedObject = Instantiate(go, transform.position, transform.rotation);
@@ -106,7 +106,7 @@ namespace BNG
                 go.SetActive(false);
             }
 
-            // Disable colliders
+            // Disable colliders on clients
             foreach (var col in DeactivateCollidersOnDeath)
             {
                 col.enabled = false;
@@ -123,6 +123,12 @@ namespace BNG
             foreach (var go in DeactivateGameObjectsOnDeath)
             {
                 go.SetActive(false);
+            }
+
+            // deactivate colliders on the server
+            foreach (var col in DeactivateCollidersOnDeath)
+            {
+                col.enabled = false;
             }
 
             // Instantiate and spawn networked objects
