@@ -24,6 +24,10 @@ namespace BNG {
         [SyncVar(hook = (nameof(UpdateGrabStatus)))]
         public bool holdingStatus = false;
 
+        [SyncVar(hook = (nameof(SetFlightStatus)))]
+        public bool flightStatus = false;
+
+
         Rigidbody rb;
 
         NetworkGrabbableEvents networkGrabbableEvents;
@@ -75,6 +79,11 @@ namespace BNG {
             }
         }
 
+        public void SetFlightStatus(bool oldFlightStatus, bool newFlightStatus)
+        {
+            // just need the bool to be synced, no logic to run here
+        }
+    
         // Called from the NetworkGrabber component on the RemoteGrabber of the Network Rig
         public void PickUpEvent() {
             // Check to see if the object is being held, if so, abort
@@ -85,9 +94,7 @@ namespace BNG {
             if (!isOwned) {
                 CmdPickup();
             }
-
-            // CmdSetHoldingStatus(true);
-
+            
             StartCoroutine(WaitForOwnership());
         }
 
@@ -109,7 +116,8 @@ namespace BNG {
                     timeNotHeld += UnityEngine.Time.deltaTime; 
 
                     if (timeNotHeld >= maxTime) 
-                    {                       
+                    {
+                       
                         yield break; 
                     }
                 }
@@ -149,7 +157,11 @@ namespace BNG {
             holdingStatus = status;
         }
 
-       
+        [Command(requiresAuthority = false)]
+        public void CmdSetFlightStatus(bool currentStatus)
+        {
+            flightStatus = currentStatus;
+        }
 
         public void SnapZoneSetHoldingStatus(bool status) {
             CmdSetHoldingStatus(status);

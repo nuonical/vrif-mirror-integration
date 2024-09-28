@@ -706,6 +706,7 @@ MonoBehaviour:
   LeftHandPoseIndex: 2
   RightHandPoseIndex: 2
   holdingStatus: 0
+  flightStatus: 0
 --- !u!114 &472328750
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2926,6 +2927,7 @@ MonoBehaviour:
   LeftHandPoseIndex: 1
   RightHandPoseIndex: 1
   holdingStatus: 0
+  flightStatus: 0
 --- !u!114 &1257351423
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4236,6 +4238,7 @@ MonoBehaviour:
   LeftHandPoseIndex: 1
   RightHandPoseIndex: 1
   holdingStatus: 0
+  flightStatus: 0
 --- !u!114 &1791214285
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22173,6 +22176,7 @@ MonoBehaviour:
   LeftHandPoseIndex: 1
   RightHandPoseIndex: 1
   holdingStatus: 0
+  flightStatus: 0
 --- !u!114 &2028152983607077617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36484,6 +36488,7 @@ MonoBehaviour:
   LeftHandPoseIndex: 2
   RightHandPoseIndex: 2
   holdingStatus: 0
+  flightStatus: 0
 --- !u!114 &4277662016965165701
 MonoBehaviour:
   m_ObjectHideFlags: 0
