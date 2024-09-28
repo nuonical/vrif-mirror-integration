@@ -26,7 +26,7 @@ namespace BNG {
         [SerializeField] 
         Transform networkBody;
 
-        XRLocalRig hardwareRig;
+        public XRLocalRig hardwareRig;
 
         // Transforms cached from the XRLocalRig script
         Transform hardwarePlayer;
@@ -38,6 +38,10 @@ namespace BNG {
         // Graphics of the player so they can be disabled for the local network rig
         public List<SkinnedMeshRenderer> SkinnedRenderers;
         public List<MeshRenderer> MeshRenderers;
+
+        public float checkInterval = 0.5f; // Time interval between ownership checks
+        public float timeout = 5f;         // Total time before giving up on ownership
+        public int maxRetries = 10;        // Maximum retries before stopping
 
         // Hand pose sync
         [SerializeField] 
@@ -85,12 +89,38 @@ namespace BNG {
             previousRightHandPoseData = new HandPoseData(-1f, -1f, -1f);
             previousLeftHandPoseData = new HandPoseData(-1f, -1f, -1f);
 
-            // Only run this if we are the local player, so if we own it, then it is the local representation 
-            if (!isOwned) {
-                return;
+            // await ownership to get var assignments, as we only want to assign if we own the object
+            StartCoroutine(CheckOwnership());
+
+            
+        }
+
+
+        // await ownership to proceed, if we do not get ownership, timeout to break the loop if it is not the local player
+        private IEnumerator CheckOwnership()
+        {
+            float elapsedTime = 0f;
+            int attempts = 0;
+
+            while (!isOwned)
+            {
+                yield return new WaitForSeconds(checkInterval);
+
+                elapsedTime += checkInterval;
+                attempts++;
+
+                // Break out if we reach the timeout or max retries
+                if (elapsedTime >= timeout || attempts >= maxRetries)
+                {
+                    Debug.LogWarning("Ownership was not acquired within the given time."); // time out on the remote to break out of the coroutine
+                    yield break;
+                }
             }
+
+            // Now that we own the object, proceed with local player-specific logic
             hardwareRig = XRLocalRig.Instance;
-            if (hardwareRig != null) {
+            if (hardwareRig != null)
+            {
 
                 hardwareRig.SetNetworkPlayer(this);
 
@@ -101,23 +131,51 @@ namespace BNG {
                 hardwareRightHand = hardwareRig.RightHandTransform;
                 hardwarePlayerBody = hardwareRig.playerBody;
             }
-
+            // disable all skinned mesh renders on the local network rig
             SkinnedRenderers.AddRange(GetComponentsInChildren<SkinnedMeshRenderer>());
-            for (int x = 0; x < SkinnedRenderers.Count; x++) {
+
+            for (int x = 0; x < SkinnedRenderers.Count; x++)
+            {
                 SkinnedRenderers[x].enabled = false;
             }
-
+            // disable all mesh renderers on the the local network rig
             MeshRenderers.AddRange(GetComponentsInChildren<MeshRenderer>());
-            for (int x = 0; x < MeshRenderers.Count; x++) {
+
+            for (int x = 0; x < MeshRenderers.Count; x++)
+            {
                 MeshRenderers[x].enabled = false;
             }
         }
 
         void Update() {
             // Only run this if we are the local player, so if we own it, then it is the local representation
-            if (!isOwned) {
+            if (!isOwned || hardwareRig == null) {
                 return;
             }
+
+            // added for testing for subscene switch, meshes not getting disabled for the local player on subscene change
+            if(SkinnedRenderers.Count > 0 )
+            {
+                if(SkinnedRenderers[0].enabled)
+                {
+                    for (int x = 0; x < SkinnedRenderers.Count; x++)
+                    {
+                        SkinnedRenderers[x].enabled = false;
+                    }
+                }
+            }
+
+            if (MeshRenderers.Count > 0)
+            {
+                if (MeshRenderers[0].enabled)
+                {
+                    for (int x = 0; x < MeshRenderers.Count; x++)
+                    {
+                        MeshRenderers[x].enabled = false;
+                    }
+                }
+            }
+            // end test for subscenes
 
             if (hardwareRig != null) {
                 // Set the position and rotation of the network rig player, head and hands to match that of the Hardware Rig transforms
@@ -217,6 +275,14 @@ namespace BNG {
         }
 
         public void ApplyLeftHandPoseIndex(bool oldBool, bool newBool) {
+           
+            StartCoroutine(WaitToSetLeftHandPose());
+        }
+
+        // fix for not setting hand pose correctly when grabbing from the snap point, a delay was needed
+        IEnumerator WaitToSetLeftHandPose()
+        {
+            yield return null;
             leftNetworkHandPoser.CurrentPose = HandPoses[LeftPoseIndex];
             leftNetworkHandPoser.OnPoseChanged();
             leftNetworkPoseBlender.UpdatePose = false;
@@ -254,10 +320,17 @@ namespace BNG {
 
         public void ApplyRightHandPoseIndex(bool oldBool, bool newBool) {
             if(HandPoses != null && HandPoses.Count >0 && HandPoses.Count >= rightPoseIndex) {
-                rightNetworkHandPoser.CurrentPose = HandPoses[rightPoseIndex];
-                rightNetworkHandPoser.OnPoseChanged();
-                rightNetworkPoseBlender.UpdatePose = false;
+              
+                StartCoroutine(WaitToSetRightHandPose());
             }
+        }
+        // fix for not setting hand pose correctly when grabbing from the snap point, a delay was needed
+        IEnumerator WaitToSetRightHandPose()
+        {
+            yield return null;
+            rightNetworkHandPoser.CurrentPose = HandPoses[rightPoseIndex];
+            rightNetworkHandPoser.OnPoseChanged();
+            rightNetworkPoseBlender.UpdatePose = false;
         }
 
         [Command]

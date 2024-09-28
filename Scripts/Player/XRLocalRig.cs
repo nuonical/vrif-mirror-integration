@@ -18,7 +18,7 @@ namespace BNG {
         }
         private static XRLocalRig _instance;
 
-        // A reference to the networkPlayer. Poplulates when the player porefab spawns
+        // A reference to the networkPlayer. Poplulates when the player prefab spawns
         NetworkPlayer networkPlayer;
 
         [Header("The Player Controller Transform")]
@@ -48,7 +48,7 @@ namespace BNG {
 
         void Awake() {
             // Only one rig may exist at a time.
-            // Design your app so one XR rig is always in the scene, then load your levels additively
+            
             if (_instance != null && _instance != this) {
                 Destroy(this);
                 return;

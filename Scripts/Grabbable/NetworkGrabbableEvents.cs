@@ -6,6 +6,7 @@ namespace BNG {
 
         NetworkGrabbable netGrabbable;
 
+
         void Start() {
             netGrabbable = GetComponent<NetworkGrabbable>();
         }
@@ -16,8 +17,8 @@ namespace BNG {
         }
 
         public override void OnRelease() {
-            netGrabbable.DropEventHoldFalse();
 
+            netGrabbable.DropEventHoldFalse();
             base.OnRelease();
         }
 
