@@ -96,7 +96,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000002, guid: 7bd4cbd671c48244d90d11295b17207b,
+  m_LightingDataAsset: {fileID: 112000000, guid: 4eebec39b18320e42ba60e7add10b8e8,
     type: 2}
   m_LightingSettings: {fileID: 4890085278179872738, guid: 5480dd28ee55ee647bd29c1f625e1d4f,
     type: 2}
@@ -307,6 +307,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0fc190f2fab2a6744ba2dbaf631b35b8, type: 3}
+--- !u!4 &124329178 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7646747471053750559, guid: 0fc190f2fab2a6744ba2dbaf631b35b8,
+    type: 3}
+  m_PrefabInstance: {fileID: 124329177}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &203151409
 GameObject:
   m_ObjectHideFlags: 0
@@ -401,6 +407,52 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 70, y: -30, z: 0}
+--- !u!1 &1614233594
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1614233596}
+  - component: {fileID: 1614233595}
+  m_Layer: 0
+  m_Name: SceneRigTeleporter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1614233595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1614233594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8719dcc2330e6fe4190c95c6165d5728, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerController: {fileID: 124329178}
+  targetTransformNameInNewScene: XRRigTarget
+--- !u!4 &1614233596
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1614233594}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.373468, y: -0.26762432, z: -9.713675}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1841150988
 GameObject:
   m_ObjectHideFlags: 0

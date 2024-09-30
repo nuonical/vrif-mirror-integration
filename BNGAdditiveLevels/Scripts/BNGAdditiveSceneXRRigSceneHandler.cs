@@ -3,82 +3,77 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Mirror;
-// this script will move the XRRig, the EventSystem and the Line Renderer that spawns from the rig to the active subscene as scenes are changed
+// this script will teleport the player controller to a target in the scene on scene change
 namespace BNG
 {
-    public class BNGAdditiveSceneXRRigSceneHandler : NetworkBehaviour
+    public class BNGAdditiveSceneXRRigSceneHandler : MonoBehaviour
     {
-        public GameObject XRRig;
-        public GameObject EventSystem;
-        public GameObject LineRenderer;
+        public Transform playerController;
+        CharacterController characterController;
+        PlayerRotation playerRotation;
+        public string targetTransformNameInNewScene; // The name of the Transform in the new scene
 
-        public ScreenFader fader;
 
-        private bool isProcessingSceneChange = false; // State variable
-
-        // Subscribe to the scene loaded event
-        private void OnEnable()
-        {           
-           // BNGAdditiveLevelNetworkManager.singleton.OnClientSceneChangedEvent += HandleClientSceneChanged;
-        }
-
-        private void OnDisable()
-        {           
-           // BNGAdditiveLevelNetworkManager.singleton.OnClientSceneChangedEvent -= HandleClientSceneChanged;
-        }
-
-       
-
-        private void HandleClientSceneChanged(string scene)
+        private void Start()
         {
-            // Remove the ".unity" extension from the scene name if it exists
-            if (scene.EndsWith(".unity"))
+            characterController = playerController.GetComponent<CharacterController>();
+            playerRotation = playerController.GetComponent<PlayerRotation>();
+        }
+
+        void OnEnable()
+        {
+            SceneManager.sceneLoaded += OnSceneLoaded;
+        }
+
+        void OnDisable()
+        {
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+        }
+
+        // This is called when a new scene is loaded
+        void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            // Find the target Transform by searching through all root objects in the scene
+            Transform targetTransform = FindTargetTransform(scene);
+
+            if (targetTransform != null)
             {
-                scene = scene.Substring(0, scene.Length - ".unity".Length);
+                // playerController.position = targetTransform.position; // Teleport the player controller to the target position
+                StartCoroutine(TeleportPlayer(targetTransform));
             }
-
-            // Get the Scene object using the cleaned scene name
-            Scene sceneToLoad = SceneManager.GetSceneByName(scene);
-
-            // Only process if not currently handling a scene change
-            if (!isProcessingSceneChange)
+            else
             {
-                isProcessingSceneChange = true; // Set state to processing
-                StartCoroutine(GetAndMoveObjects(sceneToLoad));
+                Debug.LogError($"Target Transform '{targetTransformNameInNewScene}' not found in the scene '{scene.name}'.");
             }
         }
 
-        private IEnumerator GetAndMoveObjects(Scene scene)
+        IEnumerator TeleportPlayer(Transform target)
         {
+            // diable player movement
+            characterController.enabled = false;
+            playerRotation.enabled = false;
             yield return null;
-
-            if (LineRenderer == null)
-            {
-                LineRenderer = GameObject.Find("LineRenderer");
-            }
-
+            // teleport the player
+            playerController.SetPositionAndRotation(target.position, target.rotation);
             yield return null;
-            MoveToSubScene(scene);
+            // enable player movement
+            characterController.enabled = true;
+            playerRotation.enabled = true;
 
-            // Reset state variable after processing
-            isProcessingSceneChange = false;
         }
 
-        // Move objects to the active scene
-        private void MoveToSubScene(Scene subScene)
+        // Find the target Transform by iterating through root objects in the scene
+        Transform FindTargetTransform(Scene scene)
         {
-           
-            SceneManager.MoveGameObjectToScene(XRRig, subScene);
-            SceneManager.MoveGameObjectToScene(EventSystem, subScene);
-            SceneManager.MoveGameObjectToScene(this.gameObject, subScene);
-            // If LineRenderer is not parented to XRRig, move it as well
-            if (LineRenderer != null && LineRenderer.transform.parent == null)
+            foreach (GameObject rootObj in scene.GetRootGameObjects())
             {
-                SceneManager.MoveGameObjectToScene(LineRenderer, subScene);
+                Transform foundTransform = rootObj.transform.Find(targetTransformNameInNewScene);
+                if (foundTransform != null)
+                {
+                    return foundTransform;
+                }
             }
-
-            // Uncomment to call the screen fader if necessary
-            // fader.DoFadeOut();
+            return null;
         }
     }
 }
