@@ -145,6 +145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controllerHand: 1
+  DefaultGrabButton: 0
   grabbableLayer: 10
   grabber: {fileID: 89460339008455444}
 --- !u!1 &89460339008455442
@@ -3958,6 +3959,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controllerHand: 0
+  DefaultGrabButton: 0
   grabbableLayer: 10
   grabber: {fileID: 1703847965976764128}
 --- !u!1 &4111191637322707420
@@ -9028,7 +9030,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FadeOnSceneLoaded: 1
-  FadeColor: {r: 0, g: 0, b: 0, a: 0.9882353}
+  FadeColor: {r: 0, g: 0, b: 0, a: 1}
   FadeInSpeed: 2
   FadeOutSpeed: 1
   SceneFadeInDelay: 0.5

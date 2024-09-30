@@ -35,12 +35,11 @@ namespace BNG
 
         public override void OnStartClient()
         {
-           // if (label.TryGetComponent(out LookAtMainCamera lookAtMainCamera))
            if(label.TryGetComponent(out BNGAdditiveLookAtMainCamera lookAtMainCamera))
             {
                 lookAtMainCamera.enabled = true;
             }
-              //  lookAtMainCamera.enabled = true;
+              
         }
 
         // Note that I have created layers called Player(6) and Portal(7) and set them

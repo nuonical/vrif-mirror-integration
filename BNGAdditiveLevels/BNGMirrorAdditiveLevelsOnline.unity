@@ -295,8 +295,17 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 8579960583951854512, guid: 0fc190f2fab2a6744ba2dbaf631b35b8, type: 3}
+    - target: {fileID: 8579960583951854512, guid: 0fc190f2fab2a6744ba2dbaf631b35b8,
+        type: 3}
+      propertyPath: FadeColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8579960583951854512, guid: 0fc190f2fab2a6744ba2dbaf631b35b8,
+        type: 3}
+      propertyPath: FadeOnSceneLoaded
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0fc190f2fab2a6744ba2dbaf631b35b8, type: 3}
 --- !u!1 &203151409
 GameObject:
