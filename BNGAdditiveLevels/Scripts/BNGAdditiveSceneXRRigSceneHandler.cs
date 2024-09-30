@@ -19,12 +19,12 @@ namespace BNG
         // Subscribe to the scene loaded event
         private void OnEnable()
         {           
-            BNGAdditiveLevelNetworkManager.singleton.OnClientSceneChangedEvent += HandleClientSceneChanged;
+           // BNGAdditiveLevelNetworkManager.singleton.OnClientSceneChangedEvent += HandleClientSceneChanged;
         }
 
         private void OnDisable()
         {           
-            BNGAdditiveLevelNetworkManager.singleton.OnClientSceneChangedEvent -= HandleClientSceneChanged;
+           // BNGAdditiveLevelNetworkManager.singleton.OnClientSceneChangedEvent -= HandleClientSceneChanged;
         }
 
        

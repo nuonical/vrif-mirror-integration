@@ -89,35 +89,9 @@ namespace BNG {
             previousRightHandPoseData = new HandPoseData(-1f, -1f, -1f);
             previousLeftHandPoseData = new HandPoseData(-1f, -1f, -1f);
 
-            // await ownership to get var assignments, as we only want to assign if we own the object
-            StartCoroutine(CheckOwnership());
+            if (!isOwned)
+                return;
 
-            
-        }
-
-
-        // await ownership to proceed, if we do not get ownership, timeout to break the loop if it is not the local player
-        private IEnumerator CheckOwnership()
-        {
-            float elapsedTime = 0f;
-            int attempts = 0;
-
-            while (!isOwned)
-            {
-                yield return new WaitForSeconds(checkInterval);
-
-                elapsedTime += checkInterval;
-                attempts++;
-
-                // Break out if we reach the timeout or max retries
-                if (elapsedTime >= timeout || attempts >= maxRetries)
-                {
-                    Debug.LogWarning("Ownership was not acquired within the given time."); // time out on the remote to break out of the coroutine
-                    yield break;
-                }
-            }
-
-            // Now that we own the object, proceed with local player-specific logic
             hardwareRig = XRLocalRig.Instance;
             if (hardwareRig != null)
             {
@@ -152,30 +126,6 @@ namespace BNG {
             if (!isOwned || hardwareRig == null) {
                 return;
             }
-
-            // added for testing for subscene switch, meshes not getting disabled for the local player on subscene change
-            if(SkinnedRenderers.Count > 0 )
-            {
-                if(SkinnedRenderers[0].enabled)
-                {
-                    for (int x = 0; x < SkinnedRenderers.Count; x++)
-                    {
-                        SkinnedRenderers[x].enabled = false;
-                    }
-                }
-            }
-
-            if (MeshRenderers.Count > 0)
-            {
-                if (MeshRenderers[0].enabled)
-                {
-                    for (int x = 0; x < MeshRenderers.Count; x++)
-                    {
-                        MeshRenderers[x].enabled = false;
-                    }
-                }
-            }
-            // end test for subscenes
 
             if (hardwareRig != null) {
                 // Set the position and rotation of the network rig player, head and hands to match that of the Hardware Rig transforms

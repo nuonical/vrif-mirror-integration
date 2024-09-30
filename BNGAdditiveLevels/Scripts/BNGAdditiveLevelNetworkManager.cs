@@ -3,14 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Mirror;
+using Mirror.Examples.AdditiveLevels;
+
 public class BNGAdditiveLevelNetworkManager : NetworkManager
 {
     public static new BNGAdditiveLevelNetworkManager singleton => (BNGAdditiveLevelNetworkManager)NetworkManager.singleton;
-
-    // Define a delegate for the scene changed event
-    public delegate void ClientSceneChangedHandler(string sceneName);
-    // Create an event based on that delegate
-    public event ClientSceneChangedHandler OnClientSceneChangedEvent;
 
     [Header("Additive Scenes - First is start scene")]
 
@@ -19,8 +16,8 @@ public class BNGAdditiveLevelNetworkManager : NetworkManager
 
     [Header("Fade Control - See child FadeCanvas")]
 
-   // [Tooltip("Reference to FadeInOut script on child FadeCanvas")]
-   // public FadeInOut fadeInOut;
+    [Tooltip("Reference to FadeInOut script on child FadeCanvas")]
+    public FadeInOut fadeInOut;
 
     // This is set true after server loads all subscene instances
     bool subscenesLoaded;
@@ -70,17 +67,15 @@ public class BNGAdditiveLevelNetworkManager : NetworkManager
 
         if (sceneOperation == SceneOperation.LoadAdditive)
             StartCoroutine(LoadAdditive(sceneName));
- 
-
     }
 
     IEnumerator LoadAdditive(string sceneName)
     {
         isInTransition = true;
-        OnClientSceneChangedEvent?.Invoke(sceneName);
+
         // This will return immediately if already faded in
         // e.g. by UnloadAdditive or by default startup state
-        // yield return fadeInOut.FadeIn();
+        yield return fadeInOut.FadeIn();
 
         // host client is on server...don't load the additive scene again
         if (mode == NetworkManagerMode.ClientOnly)
@@ -99,7 +94,7 @@ public class BNGAdditiveLevelNetworkManager : NetworkManager
         OnClientSceneChanged();
 
         // Reveal the new scene content.
-       // yield return fadeInOut.FadeOut();
+        yield return fadeInOut.FadeOut();
     }
 
     IEnumerator UnloadAdditive(string sceneName)
@@ -108,7 +103,7 @@ public class BNGAdditiveLevelNetworkManager : NetworkManager
 
         // This will return immediately if already faded in
         // e.g. by LoadAdditive above or by default startup state.
-        // yield return fadeInOut.FadeIn();
+        yield return fadeInOut.FadeIn();
 
         // host client is on server...don't unload the additive scene here.
         if (mode == NetworkManagerMode.ClientOnly)
@@ -189,4 +184,5 @@ public class BNGAdditiveLevelNetworkManager : NetworkManager
 
     #endregion
 }
+
 

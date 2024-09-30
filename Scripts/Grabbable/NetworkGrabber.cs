@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Mirror;
+
 namespace BNG {
     public class NetworkGrabber : MonoBehaviour {
 
@@ -20,6 +20,8 @@ namespace BNG {
         // fix for triggering pickup when hovering overitems whileholding and object causing rings to disappear
         public Grabber grabber;
 
+        private Coroutine pickUpCoroutine;
+
         public void Start() {
             // Ensure network grabbable is reset on start / scene load
             networkGrabbable = null;
@@ -27,8 +29,8 @@ namespace BNG {
 
         void OnTriggerStay(Collider other)
         {
-
-            if (grabber.HeldGrabbable != null)
+            // if we are holding an object or the object is not a grabbable, do nothing
+            if (grabber.HeldGrabbable != null || other.gameObject.layer != grabbableLayer)
             {
                 return;
             }
@@ -40,13 +42,21 @@ namespace BNG {
 
             if (networkGrabbable != null)
             {
-                // Change this input to suit your needs //  only request authority if we pull the grip
+                if(pickUpCoroutine == null)
+                {
+                   // pickUpCoroutine = StartCoroutine(HandlePickUpEvent());
+                }
+
+
+               
+
+                // Change this input to suit your needs 
                 if (controllerHand == ControllerHand.Right && InputBridge.Instance.RightGripDown || controllerHand == ControllerHand.Left && InputBridge.Instance.LeftGripDown)
                 {
                     if (!networkGrabbable.flightStatus)
-                    {
-                        networkGrabbable.PickUpEvent();
+                    {                       
                         networkGrabbable.CmdSetFlightStatus(true);
+                        networkGrabbable.PickUpEvent();
                     }
                 }
                 
@@ -57,15 +67,32 @@ namespace BNG {
                         networkGrabbable.CmdSetFlightStatus(false);
                     }
                 }
+            }           
+        }
+
+        IEnumerator HandlePickUpEvent()
+        {
+            yield return new WaitForSeconds(0.05f);
+
+            while (networkGrabbable != null && !networkGrabbable.flightStatus)
+            {
+                networkGrabbable.PickUpEvent();
+                yield return new WaitForSeconds(0.1f);
             }
 
-            
+            pickUpCoroutine = null;
         }
 
         // Clear the current grabbable on exit
         void OnTriggerExit(Collider other) {
             if (networkGrabbable != null && other.gameObject.layer == grabbableLayer) {               
                  networkGrabbable = null;
+            }
+
+            if(pickUpCoroutine != null)
+            {
+                StopCoroutine(pickUpCoroutine);
+                pickUpCoroutine = null;
             }
         }
     }

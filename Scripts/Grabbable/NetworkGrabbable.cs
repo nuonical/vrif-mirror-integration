@@ -41,16 +41,7 @@ namespace BNG {
                 ringHelper = GetComponentInChildren<RingHelper>();
                 ringCanvas = ringHelper.GetComponent<Canvas>();
             }
-        }
-
-        private void Start()
-        {
-           // networkGrabbableEvents = GetComponent<NetworkGrabbableEvents>();
-           // if (networkGrabbableEvents == null)
-           // {
-              //  networkGrabbableEvents = gameObject.AddComponent<NetworkGrabbableEvents>();
-           // }
-        }
+        }       
        
         void Update() {
 

@@ -33,11 +33,15 @@ namespace BNG
             labelText = Regex.Replace(labelText, @"\B[A-Z0-9]+", " $0");
         }
 
-      //  public override void OnStartClient()
-       // {
-          //  if (label.TryGetComponent(out LookAtMainCamera lookAtMainCamera))
+        public override void OnStartClient()
+        {
+           // if (label.TryGetComponent(out LookAtMainCamera lookAtMainCamera))
+           if(label.TryGetComponent(out BNGAdditiveLookAtMainCamera lookAtMainCamera))
+            {
+                lookAtMainCamera.enabled = true;
+            }
               //  lookAtMainCamera.enabled = true;
-      //  }
+        }
 
         // Note that I have created layers called Player(6) and Portal(7) and set them
         // up in the Physics collision matrix so only Player collides with Portal.
