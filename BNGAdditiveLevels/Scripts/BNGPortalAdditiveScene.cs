@@ -47,14 +47,25 @@ namespace BNG
         void OnTriggerEnter(Collider other)
         {
             // tag check in case you didn't set up the layers and matrix as noted above
-            if (!other.CompareTag("NetworkPlayer")) return;
+            //  if (other.CompareTag("NetworkPlayer") || other.CompareTag("NetworkGrabbable"))
+            // {
+            if (other.tag == "NetworkGrabbable" && !isServer)
+            {
+                Debug.Log("grab collision");
+                NetworkIdentity netId = other.GetComponent<NetworkIdentity>();
+                SendGrabbableToNewScene(netId);
+            }
 
-            // applies to host client on server and remote clients
-          //  if (other.TryGetComponent(out PlayerController playerController))
-             //   playerController.enabled = false;
+            if (!isServer)
+                return;
 
-            if (isServer)
+            if (other.CompareTag("NetworkPlayer"))
+            {
                 StartCoroutine(SendPlayerToNewScene(other.gameObject));
+            }
+            // this does not work / causes grabbable and player to be visiable in both scenes and eventually on scene change, the scene no longer loads, scene is deactivated
+           
+
         }
 
         [ServerCallback]
@@ -62,6 +73,7 @@ namespace BNG
         {
             if (player.TryGetComponent(out NetworkIdentity identity))
             {
+                yield return null;
                 NetworkConnectionToClient conn = identity.connectionToClient;
                 if (conn == null) yield break;
 
@@ -96,6 +108,21 @@ namespace BNG
               //  if (NetworkClient.localPlayer != null && NetworkClient.localPlayer.TryGetComponent(out PlayerController playerController))
                   // playerController.enabled = true;
             }
+        }
+
+        [Command(requiresAuthority = false)]
+        void SendGrabbableToNewScene(NetworkIdentity grabbable)
+        {
+            GameObject GoGrab = grabbable.gameObject;
+           // if (grabbable.TryGetComponent(out NetworkIdentity identity))
+           // {
+                // Rigidbody rb = identity.GetComponent<Rigidbody>();
+                // rb.velocity = Vector3.zero;
+                // rb.angularVelocity = Vector3.zero;
+                // identity.RemoveClientAuthority();            
+                // SceneManager.MoveGameObjectToScene(GoGrab, SceneManager.GetSceneByName(destinationScene));
+                NetworkServer.Destroy(GoGrab);
+            //}
         }
     }
 }

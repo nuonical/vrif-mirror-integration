@@ -1495,7 +1495,7 @@ GameObject:
   - component: {fileID: 6444381611387507707}
   m_Layer: 10
   m_Name: Hammer
-  m_TagString: Untagged
+  m_TagString: NetworkGrabbable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1801,6 +1801,7 @@ MonoBehaviour:
   LeftHandPoseIndex: 1
   RightHandPoseIndex: 1
   holdingStatus: 0
+  flightStatus: 0
 --- !u!114 &8216736267275558264
 MonoBehaviour:
   m_ObjectHideFlags: 0

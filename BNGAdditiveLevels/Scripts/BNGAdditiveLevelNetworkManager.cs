@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Mirror;
 using Mirror.Examples.AdditiveLevels;
+using System.Linq;
 
 namespace BNG
 {
@@ -63,7 +64,9 @@ namespace BNG
         public override void OnClientChangeScene(string sceneName, SceneOperation sceneOperation, bool customHandling)
         {
             //Debug.Log($"{System.DateTime.Now:HH:mm:ss:fff} OnClientChangeScene {sceneName} {sceneOperation}");
-
+            
+           // RemoveOwnershipOfClientObjects(NetworkClient.connection);
+            
             // get the screen fader on the local xrrig 
             if (screenFader == null)
             {
@@ -77,10 +80,36 @@ namespace BNG
                 StartCoroutine(LoadAdditive(sceneName));
         }
 
+
+        private void RemoveOwnershipOfClientObjects(NetworkConnection conn)
+        {
+            if (conn != null && conn.identity != null)
+            {
+                NetworkConnectionToClient connectionToClient = conn as NetworkConnectionToClient;
+                if (connectionToClient != null)
+                {
+                    // Make a copy of the owned objects
+                    NetworkIdentity[] ownedObjects = connectionToClient.owned.ToArray();
+
+                    // Loop through owned objects and remove authority
+                    foreach (var identity in ownedObjects)
+                    {
+                        // Avoid resetting the player's identity itself
+                        if (identity != connectionToClient.identity)
+                        {
+                             identity.RemoveClientAuthority();
+                            //  Debug.Log($"Removed ownership of object: {identity.gameObject.name}");
+                           // NetworkServer.Destroy(identity.gameObject);
+                        }
+                    }
+                }
+            }
+        }
+
         IEnumerator LoadAdditive(string sceneName)
         {           
             isInTransition = true;
-
+            
             // This will return immediately if already faded in
             // e.g. by UnloadAdditive or by default startup state
             screenFader.DoFadeIn();
@@ -115,6 +144,7 @@ namespace BNG
             screenFader.DoFadeIn();
             yield return new WaitForSeconds(screenFader.FadeInSpeed);
             // host client is on server...don't unload the additive scene here.
+            
             if (mode == NetworkManagerMode.ClientOnly)
             {
                 yield return SceneManager.UnloadSceneAsync(sceneName);
@@ -143,7 +173,7 @@ namespace BNG
             // This will be called from LoadAdditive / UnloadAdditive after setting isInTransition to false
             // but will also be called first by Mirror when the scene loading finishes.
             if (!isInTransition)
-                base.OnClientSceneChanged();
+                base.OnClientSceneChanged();           
         }
 
         #endregion
