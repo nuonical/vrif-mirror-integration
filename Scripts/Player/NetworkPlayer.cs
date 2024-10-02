@@ -34,7 +34,11 @@ namespace BNG {
         Transform hardwareLeftHand;
         Transform hardwareRightHand;
         Transform hardwarePlayerBody;
+        Grabber leftGrabber;
+        Grabber rightGrabber;
 
+        // bools to set held grabbable status to sync
+        private Grabbable previousRightHeldGrabbable;
         // Graphics of the player so they can be disabled for the local network rig
         public List<SkinnedMeshRenderer> SkinnedRenderers;
         public List<MeshRenderer> MeshRenderers;
@@ -104,6 +108,8 @@ namespace BNG {
                 hardwareLeftHand = hardwareRig.LeftHandTransform;
                 hardwareRightHand = hardwareRig.RightHandTransform;
                 hardwarePlayerBody = hardwareRig.playerBody;
+                leftGrabber = hardwareRig.GrabberLeft;
+                rightGrabber = hardwareRig.GrabberRight;
             }
             // disable all skinned mesh renders on the local network rig
             SkinnedRenderers.AddRange(GetComponentsInChildren<SkinnedMeshRenderer>());
@@ -119,9 +125,31 @@ namespace BNG {
             {
                 MeshRenderers[x].enabled = false;
             }
+            // quick fix, but this needs moved to some other one and done function
+            StartCoroutine(SendReleaseHandPoses());
         }
 
-        void Update() {
+        private IEnumerator SendReleaseHandPoses()
+        {
+            while (true) // Keep the coroutine running indefinitely
+            {
+                // Check if the right grabber is not holding anything and send the right hand release command
+                if (rightGrabber.HeldGrabbable == null)
+                {
+                    CmdReleaseRightHandPose();
+                }
+
+                // Check if the left grabber is not holding anything and send the left hand release command
+                if (leftGrabber.HeldGrabbable == null)
+                {
+                    CmdReleaseLeftHandPose();
+                }
+
+                yield return new WaitForSeconds(1f); // Wait for 1 second before checking again
+            }
+        }
+
+        void LateUpdate() {
             // Only run this if we are the local player, so if we own it, then it is the local representation
             if (!isOwned || hardwareRig == null) {
                 return;
@@ -168,7 +196,11 @@ namespace BNG {
                     }
                 }
             }
+
+           
+
         }
+
 
         // Check to see if the pose data has changed
         public virtual bool ShouldSendPoseData(HandPoseData previousData, HandPoseData currentData) {

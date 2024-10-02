@@ -47,24 +47,17 @@ namespace BNG
         void OnTriggerEnter(Collider other)
         {
             // tag check in case you didn't set up the layers and matrix as noted above
-            //  if (other.CompareTag("NetworkPlayer") || other.CompareTag("NetworkGrabbable"))
-            // {
-            if (other.tag == "NetworkGrabbable" && !isServer)
-            {
-                Debug.Log("grab collision");
-                NetworkIdentity netId = other.GetComponent<NetworkIdentity>();
-                SendGrabbableToNewScene(netId);
-            }
-
-            if (!isServer)
-                return;
-
             if (other.CompareTag("NetworkPlayer"))
             {
-                StartCoroutine(SendPlayerToNewScene(other.gameObject));
+
+                if (!isServer)
+                    return;
+
+                if (other.CompareTag("NetworkPlayer"))
+                {
+                    StartCoroutine(SendPlayerToNewScene(other.gameObject));
+                }
             }
-            // this does not work / causes grabbable and player to be visiable in both scenes and eventually on scene change, the scene no longer loads, scene is deactivated
-           
 
         }
 
@@ -77,6 +70,18 @@ namespace BNG
                 NetworkConnectionToClient conn = identity.connectionToClient;
                 if (conn == null) yield break;
 
+                // Loop through all NetworkIdentity objects in the scene
+                foreach (var networkIdentity in NetworkServer.spawned.Values)
+                {
+                    // Ensure we do not remove authority from the player object itself
+                    if (networkIdentity.connectionToClient == conn && networkIdentity != conn.identity)
+                    {
+                        // Remove authority
+                        networkIdentity.RemoveClientAuthority();
+                        Debug.Log($"Removed authority from {networkIdentity.gameObject.name}.");
+                    }
+                }
+                yield return null;
                 // Tell client to unload previous subscene with custom handling (see NetworkManager::OnClientChangeScene).
                 conn.Send(new SceneMessage { sceneName = gameObject.scene.path, sceneOperation = SceneOperation.UnloadAdditive, customHandling = true });
 
@@ -87,12 +92,12 @@ namespace BNG
                 NetworkServer.RemovePlayerForConnection(conn, RemovePlayerOptions.Unspawn);
 
                 // reposition player on server and client
-                player.transform.position = startPosition;
+            //    player.transform.position = startPosition;
 
                 // Rotate player to face center of scene
                 // Player is 2m tall with pivot at 0,1,0 so we need to look at
                 // 1m height to not tilt the player down to look at origin
-                player.transform.LookAt(Vector3.up);
+              //  player.transform.LookAt(Vector3.up);
 
                 // Move player to new subscene.
                 SceneManager.MoveGameObjectToScene(player, SceneManager.GetSceneByPath(destinationScene));
@@ -109,21 +114,7 @@ namespace BNG
                   // playerController.enabled = true;
             }
         }
-
-        [Command(requiresAuthority = false)]
-        void SendGrabbableToNewScene(NetworkIdentity grabbable)
-        {
-            GameObject GoGrab = grabbable.gameObject;
-           // if (grabbable.TryGetComponent(out NetworkIdentity identity))
-           // {
-                // Rigidbody rb = identity.GetComponent<Rigidbody>();
-                // rb.velocity = Vector3.zero;
-                // rb.angularVelocity = Vector3.zero;
-                // identity.RemoveClientAuthority();            
-                // SceneManager.MoveGameObjectToScene(GoGrab, SceneManager.GetSceneByName(destinationScene));
-                NetworkServer.Destroy(GoGrab);
-            //}
-        }
+      
     }
 }
 
