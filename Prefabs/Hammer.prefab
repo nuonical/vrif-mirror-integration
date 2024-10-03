@@ -1795,6 +1795,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  objectIndex: 0
   grabbables: []
   ringCanvas: {fileID: 5248622536811639053}
   ringHelper: {fileID: 5248622536811639050}

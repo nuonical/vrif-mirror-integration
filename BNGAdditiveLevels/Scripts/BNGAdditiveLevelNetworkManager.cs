@@ -65,7 +65,7 @@ namespace BNG
         {
             //Debug.Log($"{System.DateTime.Now:HH:mm:ss:fff} OnClientChangeScene {sceneName} {sceneOperation}");
             
-           // RemoveOwnershipOfClientObjects(NetworkClient.connection);
+           
             
             // get the screen fader on the local xrrig 
             if (screenFader == null)
@@ -78,32 +78,6 @@ namespace BNG
 
             if (sceneOperation == SceneOperation.LoadAdditive)
                 StartCoroutine(LoadAdditive(sceneName));
-        }
-
-
-        private void RemoveOwnershipOfClientObjects(NetworkConnection conn)
-        {
-            if (conn != null && conn.identity != null)
-            {
-                NetworkConnectionToClient connectionToClient = conn as NetworkConnectionToClient;
-                if (connectionToClient != null)
-                {
-                    // Make a copy of the owned objects
-                    NetworkIdentity[] ownedObjects = connectionToClient.owned.ToArray();
-
-                    // Loop through owned objects and remove authority
-                    foreach (var identity in ownedObjects)
-                    {
-                        // Avoid resetting the player's identity itself
-                        if (identity != connectionToClient.identity)
-                        {
-                             identity.RemoveClientAuthority();
-                            //  Debug.Log($"Removed ownership of object: {identity.gameObject.name}");
-                           // NetworkServer.Destroy(identity.gameObject);
-                        }
-                    }
-                }
-            }
         }
 
         IEnumerator LoadAdditive(string sceneName)

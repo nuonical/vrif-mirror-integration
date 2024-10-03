@@ -10,6 +10,10 @@ namespace BNG {
     [RequireComponent(typeof(NetworkGrabbableEvents))]
     public class NetworkGrabbable : NetworkBehaviour {
 
+        [Header("Object Index to Be used With Scene Object Spawner")]
+        [Tooltip("Index number must match the index in the list")]
+        public int objectIndex = 0;
+
         // Grabbable components
         public List<Grabbable> grabbables;
 

@@ -46,6 +46,10 @@ namespace BNG {
 
         int handPoseIndexLeft, handPoseIndexRight;
 
+        // additive level grabbable spawner
+        public int rightGrabbableInt = -1;
+        public int leftGrabbableInt = -1;
+
         void Awake() {
             // Only one rig may exist at a time.
             
@@ -81,6 +85,12 @@ namespace BNG {
 
                 // Fix for if grabbable is outside of trigger
                 netGrabbable.PickUpEvent();
+                // set grabbable int for respawning in new scene
+                NetworkGrabbable netGrab = grabbed.GetComponent<NetworkGrabbable>();
+                if(netGrab)
+                {
+                    leftGrabbableInt = netGrab.objectIndex;
+                }
             }
         }
 
@@ -99,6 +109,13 @@ namespace BNG {
 
                 // Fix for if grabbable is outside of trigger
                 netGrabbable.PickUpEvent();
+
+                // set grabbable int for respawning in new scene
+                NetworkGrabbable netGrab = grabbed.GetComponent<NetworkGrabbable>();
+                if (netGrab)
+                {
+                    rightGrabbableInt = netGrab.objectIndex;
+                }
             }
         }
 
@@ -111,6 +128,17 @@ namespace BNG {
             if(networkPlayer) {
                 networkPlayer.CmdReleaseRightHandPose();
             }
+
+            // set the ind back to -1 so no object spawns if we dropped it before changing scenes
+        //    rightGrabbableInt = -1;
+            
+        }
+
+        IEnumerator WaitToSetGrabbaleInt()
+        {
+            yield return new WaitForSeconds(3f);
+            // set the ind back to -1 so no object spawns if we dropped it before changing scenes
+            rightGrabbableInt = -1;
         }
     }
 }

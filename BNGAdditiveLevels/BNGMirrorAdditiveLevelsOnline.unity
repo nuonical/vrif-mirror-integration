@@ -220,6 +220,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 167096666187512387, guid: 0fc190f2fab2a6744ba2dbaf631b35b8,
+        type: 3}
+      propertyPath: leftGrabbableInt
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 167096666187512387, guid: 0fc190f2fab2a6744ba2dbaf631b35b8,
+        type: 3}
+      propertyPath: rightGrabbableInt
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 5747782366616238978, guid: 0fc190f2fab2a6744ba2dbaf631b35b8,
         type: 3}
       propertyPath: m_Enabled
@@ -313,6 +323,30 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 124329177}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &124329179 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1703847965976764128, guid: 0fc190f2fab2a6744ba2dbaf631b35b8,
+    type: 3}
+  m_PrefabInstance: {fileID: 124329177}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31c428201425bc44d8eb038a0fb424d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &124329180 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 89460339008455444, guid: 0fc190f2fab2a6744ba2dbaf631b35b8,
+    type: 3}
+  m_PrefabInstance: {fileID: 124329177}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31c428201425bc44d8eb038a0fb424d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &203151409
 GameObject:
   m_ObjectHideFlags: 0
@@ -419,7 +453,7 @@ GameObject:
   - component: {fileID: 732222659}
   - component: {fileID: 732222658}
   m_Layer: 0
-  m_Name: SubSceneOneObjectSpawner
+  m_Name: SubSceneObjectSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -460,6 +494,12 @@ MonoBehaviour:
   objectsToSpawn:
   - {fileID: 9148596257437500617, guid: 45d3656d13f8ecb4c8fca3979e1a55a6, type: 3}
   sceneName: BNGMirrorAdditiveLevelsSubLevel1
+  rightHolding: 0
+  leftHolding: 0
+  rightObjectIndex: 0
+  leftObjectIndex: 0
+  rightGrabber: {fileID: 124329180}
+  leftGrabber: {fileID: 124329179}
 --- !u!4 &732222660
 Transform:
   m_ObjectHideFlags: 0

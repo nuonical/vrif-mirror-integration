@@ -35,23 +35,38 @@ namespace BNG
 
         public override void OnStartClient()
         {
-           if(label.TryGetComponent(out BNGAdditiveLookAtMainCamera lookAtMainCamera))
+            if (label.TryGetComponent(out BNGAdditiveLookAtMainCamera lookAtMainCamera))
             {
                 lookAtMainCamera.enabled = true;
             }
-              
+
         }
 
         // Note that I have created layers called Player(6) and Portal(7) and set them
         // up in the Physics collision matrix so only Player collides with Portal.
         void OnTriggerEnter(Collider other)
         {
+            if (!isServer)
+                return;
+
+            if (other.CompareTag("NetworkGrabbable"))
+            {
+                Debug.Log(other.name);
+                NetworkGrabbable netGrab = other.GetComponent<NetworkGrabbable>();
+                // check if the grabbable is being held, so it doesn't get destoryed just throughing grabbables into the trigger
+                if (netGrab && netGrab.holdingStatus)
+                {
+                    NetworkIdentity netId = other.GetComponent<NetworkIdentity>();
+                    netId.RemoveClientAuthority();
+
+                    NetworkServer.Destroy(other.gameObject);
+                }
+
+            }
+
             // tag check in case you didn't set up the layers and matrix as noted above
             if (other.CompareTag("NetworkPlayer"))
             {
-
-                if (!isServer)
-                    return;
 
                 if (other.CompareTag("NetworkPlayer"))
                 {
@@ -86,18 +101,10 @@ namespace BNG
                 conn.Send(new SceneMessage { sceneName = gameObject.scene.path, sceneOperation = SceneOperation.UnloadAdditive, customHandling = true });
 
                 // wait for fader to complete
-               // yield return new WaitForSeconds(BNGAdditiveLevelNetworkManager.singleton.fadeInOut.GetDuration());
+                // yield return new WaitForSeconds(BNGAdditiveLevelNetworkManager.singleton.fadeInOut.GetDuration());
 
                 // Remove player after fader has completed
                 NetworkServer.RemovePlayerForConnection(conn, RemovePlayerOptions.Unspawn);
-
-                // reposition player on server and client
-            //    player.transform.position = startPosition;
-
-                // Rotate player to face center of scene
-                // Player is 2m tall with pivot at 0,1,0 so we need to look at
-                // 1m height to not tilt the player down to look at origin
-              //  player.transform.LookAt(Vector3.up);
 
                 // Move player to new subscene.
                 SceneManager.MoveGameObjectToScene(player, SceneManager.GetSceneByPath(destinationScene));
@@ -108,13 +115,11 @@ namespace BNG
                 // Player will be spawned after destination scene is loaded
                 NetworkServer.AddPlayerForConnection(conn, player);
 
-                // host client playerController would have been disabled by OnTriggerEnter above
-                // Remote client players are respawned with playerController already enabled
-              //  if (NetworkClient.localPlayer != null && NetworkClient.localPlayer.TryGetComponent(out PlayerController playerController))
-                  // playerController.enabled = true;
+
             }
         }
-      
     }
+
 }
+
 

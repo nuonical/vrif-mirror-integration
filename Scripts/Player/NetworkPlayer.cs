@@ -109,7 +109,7 @@ namespace BNG {
                 hardwareRightHand = hardwareRig.RightHandTransform;
                 hardwarePlayerBody = hardwareRig.playerBody;
                 leftGrabber = hardwareRig.GrabberLeft;
-                rightGrabber = hardwareRig.GrabberRight;
+                rightGrabber = hardwareRig.GrabberRight;                
             }
             // disable all skinned mesh renders on the local network rig
             SkinnedRenderers.AddRange(GetComponentsInChildren<SkinnedMeshRenderer>());
@@ -341,5 +341,6 @@ namespace BNG {
         public void CmdReleaseRightHandPose() {
             releaseRightBool = !releaseRightBool;
         }
+    
     }
 }
