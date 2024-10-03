@@ -159,7 +159,10 @@ namespace BNG {
                 // Set the position and rotation of the network rig player, head and hands to match that of the Hardware Rig transforms
                 networkPlayer.SetPositionAndRotation(hardwarePlayer.position, hardwarePlayer.rotation);
                 networkHead.SetPositionAndRotation(hardwareHead.position, hardwareHead.rotation);
-                networkBody.SetPositionAndRotation(hardwarePlayerBody.position, hardwarePlayerBody.rotation);
+                if(hardwarePlayerBody)
+                {
+                    networkBody.SetPositionAndRotation(hardwarePlayerBody.position, hardwarePlayerBody.rotation);
+                }
 
                 networkLeftHand.SetPositionAndRotation(hardwareLeftHand.position, hardwareLeftHand.rotation);
                 networkRightHand.SetPositionAndRotation(hardwareRightHand.position, hardwareRightHand.rotation);

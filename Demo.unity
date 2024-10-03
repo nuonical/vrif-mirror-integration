@@ -700,6 +700,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  objectIndex: 0
   grabbables: []
   ringCanvas: {fileID: 0}
   ringHelper: {fileID: 0}
@@ -2921,6 +2922,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  objectIndex: 0
   grabbables: []
   ringCanvas: {fileID: 0}
   ringHelper: {fileID: 0}
@@ -3486,7 +3488,7 @@ MonoBehaviour:
   disconnectInactiveConnections: 0
   disconnectInactiveTimeout: 60
   authenticator: {fileID: 0}
-  playerPrefab: {fileID: 1017481073589590840, guid: 52d8bd3465d89444881c26c02c4a50f6,
+  playerPrefab: {fileID: 6748570664686025311, guid: 0a33fc5117a70b147bf506c65e0f8c4d,
     type: 3}
   autoCreatePlayer: 1
   playerSpawnMethod: 0
@@ -4232,6 +4234,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  objectIndex: 0
   grabbables: []
   ringCanvas: {fileID: 0}
   ringHelper: {fileID: 0}
@@ -22170,6 +22173,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  objectIndex: 0
   grabbables: []
   ringCanvas: {fileID: 0}
   ringHelper: {fileID: 0}
@@ -36482,6 +36486,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  objectIndex: 0
   grabbables: []
   ringCanvas: {fileID: 0}
   ringHelper: {fileID: 0}
@@ -39789,6 +39794,75 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1001 &6927795953320359198
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4313148249130439269, guid: 846b75224d5b017428f9a9f8187123e4,
+        type: 3}
+      propertyPath: m_Name
+      value: XR Rig Networked Full Body
+      objectReference: {fileID: 0}
+    - target: {fileID: 4313148249130439271, guid: 846b75224d5b017428f9a9f8187123e4,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 4313148249130439271, guid: 846b75224d5b017428f9a9f8187123e4,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4313148249130439271, guid: 846b75224d5b017428f9a9f8187123e4,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4313148249130439271, guid: 846b75224d5b017428f9a9f8187123e4,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4313148249130439271, guid: 846b75224d5b017428f9a9f8187123e4,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4313148249130439271, guid: 846b75224d5b017428f9a9f8187123e4,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4313148249130439271, guid: 846b75224d5b017428f9a9f8187123e4,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4313148249130439271, guid: 846b75224d5b017428f9a9f8187123e4,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4313148249130439271, guid: 846b75224d5b017428f9a9f8187123e4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4313148249130439271, guid: 846b75224d5b017428f9a9f8187123e4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4313148249130439271, guid: 846b75224d5b017428f9a9f8187123e4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 846b75224d5b017428f9a9f8187123e4, type: 3}
 --- !u!33 &7024382034597470671
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -40917,6 +40991,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: XR Rig Networked
+      objectReference: {fileID: 0}
+    - target: {fileID: 5921816763504854130, guid: 0fc190f2fab2a6744ba2dbaf631b35b8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0fc190f2fab2a6744ba2dbaf631b35b8, type: 3}
