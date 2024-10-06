@@ -24,7 +24,7 @@ namespace BNG {
         // Any local player data we may want to store for later
         public string PlayerName;
         public int playerPrefabIndex = 0;
-
+        public int playerTextureIndex = 0;
         void Awake() {
             // Setup singletone so only one object exists at a time
             if (_instance != null && _instance != this) {
@@ -55,6 +55,11 @@ namespace BNG {
         public void SetPlayerPrefabIndex(int prefabIndex)
         {
             playerPrefabIndex = prefabIndex;
+        }
+
+        public void SetPlayerTextureIndex(int preTextIndex)
+        {
+            playerTextureIndex = preTextIndex;
         }
     }
 }
