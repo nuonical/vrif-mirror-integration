@@ -3405,7 +3405,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2588309889743465483}
-  m_LocalRotation: {x: 0.00019429327, y: 0.010788284, z: -0.0024938928, w: 0.99993867}
+  m_LocalRotation: {x: 0.00019429336, y: 0.010788284, z: -0.0024938942, w: 0.99993867}
   m_LocalPosition: {x: -0.034515522, y: 1.4210854e-16, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -6468,10 +6468,18 @@ MonoBehaviour:
     - {fileID: 2800000, guid: fed26bd70919b9e499eb2af6992732d5, type: 3}
     - {fileID: 2800000, guid: 20575011b9fbcf74eabe868161a4bb6e, type: 3}
     bodyMaterial: {fileID: 2100000, guid: e690fbc102b217f4ea59137fe7fcfb7e, type: 2}
+    propTextures:
+    - {fileID: 2800000, guid: defdf4ab6a0c43e469f25f6451b4d4a2, type: 3}
+    - {fileID: 2800000, guid: 929e56d6729fa6844ba3e0ee6eb3f956, type: 3}
+    propMaterial: {fileID: 2100000, guid: d2a0c31b686d34240bd8a4a2f3d3bf3f, type: 2}
   - bodyTextures:
     - {fileID: 2800000, guid: fed26bd70919b9e499eb2af6992732d5, type: 3}
     - {fileID: 2800000, guid: 20575011b9fbcf74eabe868161a4bb6e, type: 3}
     bodyMaterial: {fileID: 2100000, guid: e690fbc102b217f4ea59137fe7fcfb7e, type: 2}
+    propTextures:
+    - {fileID: 2800000, guid: defdf4ab6a0c43e469f25f6451b4d4a2, type: 3}
+    - {fileID: 2800000, guid: 4f43f4f252c8a7348b942f050061e601, type: 3}
+    propMaterial: {fileID: 2100000, guid: d2a0c31b686d34240bd8a4a2f3d3bf3f, type: 2}
 --- !u!1 &6748570664968186451
 GameObject:
   m_ObjectHideFlags: 0

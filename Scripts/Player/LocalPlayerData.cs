@@ -41,6 +41,16 @@ namespace BNG {
             if (PlayerPrefs.HasKey("PlayerName")) {
                 PlayerName = PlayerPrefs.GetString("PlayerName");
             }
+            if(PlayerPrefs.HasKey("PrefabIndex"))
+            {
+                playerPrefabIndex = PlayerPrefs.GetInt("PrefabIndex");
+            }
+
+            if (PlayerPrefs.HasKey("PreTextIndex"))
+            {
+                playerTextureIndex = PlayerPrefs.GetInt("PreTextIndex");
+            }
+
         }
 
         public void SetPlayerName(string playerName, bool savePrefs) {
@@ -55,11 +65,13 @@ namespace BNG {
         public void SetPlayerPrefabIndex(int prefabIndex)
         {
             playerPrefabIndex = prefabIndex;
+            PlayerPrefs.SetInt("PrefabIndex", prefabIndex);
         }
 
         public void SetPlayerTextureIndex(int preTextIndex)
         {
             playerTextureIndex = preTextIndex;
+            PlayerPrefs.SetInt("PreTextIndex", preTextIndex);
         }
     }
 }
