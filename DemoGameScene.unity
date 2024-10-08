@@ -305,12 +305,14 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  objectIndex: 0
   grabbables: []
   ringCanvas: {fileID: 0}
   ringHelper: {fileID: 0}
   LeftHandPoseIndex: 2
   RightHandPoseIndex: 2
   holdingStatus: 0
+  flightStatus: 0
 --- !u!114 &472328750
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -760,12 +762,14 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  objectIndex: 0
   grabbables: []
   ringCanvas: {fileID: 0}
   ringHelper: {fileID: 0}
   LeftHandPoseIndex: 1
   RightHandPoseIndex: 1
   holdingStatus: 0
+  flightStatus: 0
 --- !u!114 &1257351423
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -938,6 +942,87 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31c428201425bc44d8eb038a0fb424d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &1740542857
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1975351006, guid: 846b75224d5b017428f9a9f8187123e4, type: 3}
+      propertyPath: menuPropImage
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1975351006, guid: 846b75224d5b017428f9a9f8187123e4, type: 3}
+      propertyPath: menuAvatarImage
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1975351006, guid: 846b75224d5b017428f9a9f8187123e4, type: 3}
+      propertyPath: menuUniformImage
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4313148249130439269, guid: 846b75224d5b017428f9a9f8187123e4,
+        type: 3}
+      propertyPath: m_Name
+      value: XR Rig Networked Full Body
+      objectReference: {fileID: 0}
+    - target: {fileID: 4313148249130439271, guid: 846b75224d5b017428f9a9f8187123e4,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4313148249130439271, guid: 846b75224d5b017428f9a9f8187123e4,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4313148249130439271, guid: 846b75224d5b017428f9a9f8187123e4,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4313148249130439271, guid: 846b75224d5b017428f9a9f8187123e4,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4313148249130439271, guid: 846b75224d5b017428f9a9f8187123e4,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4313148249130439271, guid: 846b75224d5b017428f9a9f8187123e4,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4313148249130439271, guid: 846b75224d5b017428f9a9f8187123e4,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4313148249130439271, guid: 846b75224d5b017428f9a9f8187123e4,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4313148249130439271, guid: 846b75224d5b017428f9a9f8187123e4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4313148249130439271, guid: 846b75224d5b017428f9a9f8187123e4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4313148249130439271, guid: 846b75224d5b017428f9a9f8187123e4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 846b75224d5b017428f9a9f8187123e4, type: 3}
 --- !u!1001 &1791214275
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1086,12 +1171,14 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  objectIndex: 0
   grabbables: []
   ringCanvas: {fileID: 0}
   ringHelper: {fileID: 0}
   LeftHandPoseIndex: 1
   RightHandPoseIndex: 1
   holdingStatus: 0
+  flightStatus: 0
 --- !u!114 &1791214285
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1159,6 +1246,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerName: 
   playerPrefabIndex: 0
+  bodyTextureIndex: 0
+  propTextureIndex: 0
+  playerNameInput: {fileID: 0}
 --- !u!4 &2060585638
 Transform:
   m_ObjectHideFlags: 0
@@ -9766,12 +9856,14 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  objectIndex: 0
   grabbables: []
   ringCanvas: {fileID: 0}
   ringHelper: {fileID: 0}
   LeftHandPoseIndex: 1
   RightHandPoseIndex: 1
   holdingStatus: 0
+  flightStatus: 0
 --- !u!114 &2028152983607077617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13704,12 +13796,14 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  objectIndex: 0
   grabbables: []
   ringCanvas: {fileID: 0}
   ringHelper: {fileID: 0}
   LeftHandPoseIndex: 2
   RightHandPoseIndex: 2
   holdingStatus: 0
+  flightStatus: 0
 --- !u!114 &4277662016965165701
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16838,6 +16932,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: XR Rig Networked
+      objectReference: {fileID: 0}
+    - target: {fileID: 5921816763504854130, guid: 0fc190f2fab2a6744ba2dbaf631b35b8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6097662612627121325, guid: 0fc190f2fab2a6744ba2dbaf631b35b8,
         type: 3}

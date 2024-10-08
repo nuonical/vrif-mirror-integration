@@ -95,8 +95,17 @@ namespace BNG {
 
             if (!isOwned)
                 return;
+            StartCoroutine(WaitToAssign());
+            // quick fix, but this needs moved to some other one and done function
+           // StartCoroutine(SendReleaseHandPoses());
+        }
+
+        IEnumerator WaitToAssign()
+        {
+            yield return null;
 
             hardwareRig = XRLocalRig.Instance;
+
             if (hardwareRig != null)
             {
 
@@ -109,7 +118,7 @@ namespace BNG {
                 hardwareRightHand = hardwareRig.RightHandTransform;
                 hardwarePlayerBody = hardwareRig.playerBody;
                 leftGrabber = hardwareRig.GrabberLeft;
-                rightGrabber = hardwareRig.GrabberRight;                
+                rightGrabber = hardwareRig.GrabberRight;
             }
             // disable all skinned mesh renders on the local network rig
             SkinnedRenderers.AddRange(GetComponentsInChildren<SkinnedMeshRenderer>());
@@ -125,8 +134,6 @@ namespace BNG {
             {
                 MeshRenderers[x].enabled = false;
             }
-            // quick fix, but this needs moved to some other one and done function
-            StartCoroutine(SendReleaseHandPoses());
         }
 
         private IEnumerator SendReleaseHandPoses()

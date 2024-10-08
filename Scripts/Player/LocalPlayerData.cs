@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
+
 
 // this class holds all the player settings and is do not destroy from scene to scene
 // script saves data to playerprefs(change save system to your preference) and is recalled on restart
@@ -24,7 +24,12 @@ namespace BNG {
         // Any local player data we may want to store for later
         public string PlayerName;
         public int playerPrefabIndex = 0;
-        public int playerTextureIndex = 0;
+        public int bodyTextureIndex = 0;
+        public int propTextureIndex = 0;
+
+        // menu input field to recall the player name
+        public UnityEngine.UI.InputField playerNameInput;
+
         void Awake() {
             // Setup singletone so only one object exists at a time
             if (_instance != null && _instance != this) {
@@ -40,6 +45,10 @@ namespace BNG {
         void LoadPlayerSettings() {
             if (PlayerPrefs.HasKey("PlayerName")) {
                 PlayerName = PlayerPrefs.GetString("PlayerName");
+                if (playerNameInput)
+                {
+                    playerNameInput.text = PlayerName;
+                }
             }
             if(PlayerPrefs.HasKey("PrefabIndex"))
             {
@@ -48,7 +57,12 @@ namespace BNG {
 
             if (PlayerPrefs.HasKey("PreTextIndex"))
             {
-                playerTextureIndex = PlayerPrefs.GetInt("PreTextIndex");
+                bodyTextureIndex = PlayerPrefs.GetInt("BodyTextureIndex");
+            }
+
+            if (PlayerPrefs.HasKey("PropTextureIndex"))
+            {
+                propTextureIndex = PlayerPrefs.GetInt("PropTextureIndex");
             }
 
         }
@@ -68,10 +82,16 @@ namespace BNG {
             PlayerPrefs.SetInt("PrefabIndex", prefabIndex);
         }
 
-        public void SetPlayerTextureIndex(int preTextIndex)
+        public void SetBodyTextureIndex(int preBodyTextIndex)
         {
-            playerTextureIndex = preTextIndex;
-            PlayerPrefs.SetInt("PreTextIndex", preTextIndex);
+            bodyTextureIndex = preBodyTextIndex;
+            PlayerPrefs.SetInt("BodyTextureIndex", preBodyTextIndex);
+        }
+
+        public void SetPropTextureIndex(int prePropTextIndex)
+        {
+            propTextureIndex = prePropTextIndex;
+            PlayerPrefs.SetInt("PropTextureIndex", prePropTextIndex);
         }
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace BNG
 {
@@ -9,22 +10,35 @@ namespace BNG
     {
         // get the local player data instance for saving the selection
         LocalPlayerData localPlayerData;
+        XRLocalRig xrLocalRig;
 
         [System.Serializable]
         public class AvatarPrefabSet
         {
+            [Header("Avatar Prefab")]
             public GameObject avatarPrefab;
+            // image to be used for avatar on menu
+            [Header("Image to be used on the Menu for Avatar Selected")]
+            public Texture avatarImage;
             // all possible textures
+            [Header("All textures that can be used for the avatar body")]
             public List<Texture2D> bodyTextures;
             // the body material on the prefab for comparison
+            [Header("The body material that is on the Avatar Prefab")]
             public Material bodyMaterial;
             // all possible textures
+            [Header("All textures that can be used for Avatar Props")]
             public List<Texture2D> propTextures;
             // the prop material on the prefab for comparsison
+            [Header("The material on the Avatar prefab props")]
             public Material propMaterial;
+            [Header("Name of the Avatars Hands to find the Hand Controllers")]
+            public string leftHandName;
+            public string rightHandName;
         }
 
         // the target transforms to assign to the spawned characterIk and CharacterIk Follow components
+        [Header("The target transforms to apply to the spawned avatar")]
         public Transform iKLeftHandTarget;
         public Transform iKRightHandTarget;
         public Transform iKHeadTarget;
@@ -32,6 +46,7 @@ namespace BNG
         public Transform playerController;
 
         // the parent we wish to spawn the avatar as a child of
+        [Header("The GameObject to parent the avatar to")]
         public Transform avatarParent;
         // list of the avatar prefabs that can be spawned
         public List<AvatarPrefabSet> avatarPrefabSets;
@@ -43,26 +58,30 @@ namespace BNG
 
         // localPlayer data settings
         int localCharacterIndex;
-        int localTextureIndex;
+        int localBodyTextureIndex;
+        int localPropTextureIndex;
 
-        // Start is called before the first frame update
+        // textures on Menu to indicate selection
+        [Header("Images on the Menu that change with selection")]
+        public RawImage menuAvatarImage;
+        public RawImage menuUniformImage;
+        public RawImage menuPropImage;
+
+        
+
         void Start()
         {
+            // get the local player data instance
             localPlayerData = LocalPlayerData.Instance;
+            xrLocalRig = XRLocalRig.Instance;
 
-            // get the prefab and texture index from the local player data
-            if(localPlayerData)
-            {
-                localCharacterIndex = localPlayerData.playerPrefabIndex;
-                localTextureIndex = localPlayerData.playerTextureIndex;
-            }
+            
 
             // spawn the starting character, this will spawn the last used character as the index is saved on change
             if (avatarPrefabSets.Count > 0)
             {
                 LoadLocalPlayerDataAvatar();
             }
-
             else
             {
                 Debug.LogError("No avatar prefab found");
@@ -71,7 +90,19 @@ namespace BNG
 
         void LoadLocalPlayerDataAvatar()
         {
+            
+            // get the prefab and texture index from the local player data
+            if (localPlayerData)
+            {
+                localCharacterIndex = localPlayerData.playerPrefabIndex;
+                localBodyTextureIndex = localPlayerData.bodyTextureIndex;
+                localPropTextureIndex = localPlayerData.propTextureIndex;
+            }
+
+            // spawn the avatar prefab
             avatar = Instantiate(avatarPrefabSets[localPlayerData.playerPrefabIndex].avatarPrefab, Vector3.zero, Quaternion.identity, avatarParent);
+
+            // get the characterIk and assign targets 
             CharacterIK characterIk = avatar.GetComponent<CharacterIK>();
             if (characterIk)
             {
@@ -79,56 +110,186 @@ namespace BNG
                 characterIk.FollowRightController = iKRightHandTarget;
                 characterIk.FollowHead = iKHeadTarget;
             }
-
+            //get the character ik follow and assign targets
             CharacterIKFollow characterIkFollow = avatar.GetComponent<CharacterIKFollow>();
             if (characterIkFollow)
             {
                 characterIkFollow.FollowTransform = centerEyeAnchor;
                 characterIkFollow.PlayerTransform = playerController;
             }
+            // start with all renderers on the avatar disabled so we don't see it flicker in then enable after a short period
+            StartCoroutine(WaitToSeeAvatar());
+            // get the hand contollers on the avatar and assign the grabbers to the hand controllers, assign the hand pose blenders to the XRLocalRig
+            string leftHandName = avatarPrefabSets[localPlayerData.playerPrefabIndex].leftHandName;
 
-            SetAvatarMaterials(localCharacterIndex, localTextureIndex);
+            Transform avatarLeftHand = FindInChildren(avatar.transform, leftHandName);           
+            if (avatarLeftHand != null)
+            {
+                HandController leftHandController = avatarLeftHand.GetComponent<HandController>();
+                HandPoseBlender leftHandPoseBlender = avatarLeftHand.GetComponent<HandPoseBlender>();
+                if(leftHandController)
+                {
+                    leftHandController.grabber = xrLocalRig.GrabberLeft;
+                }
+
+                if(leftHandPoseBlender)
+                {
+                    xrLocalRig.LeftHandPoseBlender = leftHandPoseBlender;
+                }
+            }
+
+            string rightHandName = avatarPrefabSets[localPlayerData.playerPrefabIndex].rightHandName;
+            Transform avatarRightHand = FindInChildren(avatar.transform, rightHandName);
+            if (avatarRightHand != null)
+            {
+                Debug.Log(avatarRightHand.name);
+                HandController rightHandController = avatarRightHand.GetComponent<HandController>();
+                HandPoseBlender rightHandPoseBlender = avatarRightHand.GetComponent<HandPoseBlender>();
+                if (rightHandController)
+                {
+                    rightHandController.grabber = xrLocalRig.GrabberRight;
+                }
+
+                if (rightHandPoseBlender)
+                {
+                    xrLocalRig.RightHandPoseBlender = rightHandPoseBlender;
+                }
+            }
+            
+
+            // change image on the menu for the avatar
+            if(menuAvatarImage)
+            {
+                menuAvatarImage.texture = avatarPrefabSets[localPlayerData.playerPrefabIndex].avatarImage;
+            }
+
+            // Apply materials and textures for the avatar after it has been instantiated
+            ApplyLocalMaterialsAndTextures(localCharacterIndex, localBodyTextureIndex, localPropTextureIndex);
         }
 
-        void SetAvatarMaterials(int characterIndex, int textureIndex)
+        // function to find the left and right hands in the children of the AVatar
+        private Transform FindInChildren(Transform parent, string childName)
         {
-            Debug.Log("Local Happened");
-            AvatarPrefabSet prefabSet = avatarPrefabSets[characterIndex];
-
-            // set the body materails
-            if (textureIndex >= 0 && textureIndex < prefabSet.bodyTextures.Count)
+            foreach (Transform child in parent)
             {
-                Texture2D selectedTexture = prefabSet.bodyTextures[textureIndex];
-
-                // Create a new material instance and apply the texture
-                Material newBodyMaterial = new Material(prefabSet.bodyMaterial);
-                newBodyMaterial.mainTexture = selectedTexture;
-
-                // Apply the new material to the character renderers
-                renderers = avatar.GetComponentsInChildren<Renderer>();
-                foreach (Renderer renderer in renderers)
+                if (child.name == childName)
                 {
-                    Material[] materials = renderer.materials;
-                    for (int i = 0; i < materials.Length; i++)
+                    return child;
+                }
+                Transform found = FindInChildren(child, childName);
+                if (found != null)
+                {
+                    return found;
+                }
+            }
+            return null;
+        }
+        private void ApplyLocalMaterialsAndTextures(int characterIndex, int bodyTextureIndex, int propTextureIndex)
+        {
+            if (characterIndex >= 0 && characterIndex < avatarPrefabSets.Count)
+            {
+                AvatarPrefabSet prefabSet = avatarPrefabSets[characterIndex];
+
+                // Apply body material if valid texture is found
+                if (bodyTextureIndex >= 0 && bodyTextureIndex < prefabSet.bodyTextures.Count)
+                {
+                    ApplyLocalMaterial(prefabSet.bodyMaterial, prefabSet.bodyTextures[bodyTextureIndex], avatar);
+                    // set the menu image 
+                    if (menuUniformImage)
                     {
-                        // compare the found material to the material in the prefab, if they match, change it
-                        if (materials[i].name == prefabSet.bodyMaterial.name + " (Instance)")
-                        {
-                            materials[i] = newBodyMaterial;
-                        }
+                        menuUniformImage.texture = prefabSet.bodyTextures[bodyTextureIndex];
                     }
-                    renderer.materials = materials;
+                }
+
+                // Apply prop material if valid texture is found
+                if (propTextureIndex >= 0 && propTextureIndex < prefabSet.propTextures.Count)
+                {
+                    ApplyLocalMaterial(prefabSet.propMaterial, prefabSet.propTextures[propTextureIndex], avatar);
+                    // set the menu image 
+                    if (menuPropImage)
+                    {
+                        menuPropImage.texture = prefabSet.propTextures[propTextureIndex];
+                    }
                 }
             }
         }
-       
-        // this to be updated to allow for changing the props on the avatar
+
+        // Method to apply a material with a new texture to renderers
+        private void ApplyLocalMaterial(Material baseMaterial, Texture2D selectedTexture, GameObject avatar)
+        {
+            // create a new material
+            Material newMaterial = new Material(baseMaterial);
+            // assign the texture to the new material
+            newMaterial.mainTexture = selectedTexture;
+
+            // Get the renderers from the instantiated avatar
+            Renderer[] renderers = avatar.GetComponentsInChildren<Renderer>();
+            foreach (Renderer renderer in renderers)
+            {
+                Material[] materials = renderer.materials;
+                for (int i = 0; i < materials.Length; i++)
+                {
+                    // compare the material found to the material on the avatar, if they match replace the material with the new material
+                    if (materials[i].name == baseMaterial.name + " (Instance)")
+                    {
+                        materials[i] = newMaterial;
+                    }
+                }
+                
+                renderer.materials = materials;
+            }
+            
+        }
+
+        // destroy the current avatar and replace it with a new one
         public void SpawnNewAvatar(int newAvatarIndex)
         {
-            if(avatar)
+            if (avatar)
             {
+                // desroty the current avatar
                 Destroy(avatar);
-                avatar = Instantiate(avatarPrefabSets[newAvatarIndex].avatarPrefab,playerController.position, Quaternion.identity, avatarParent);
+                // spawn the new avatar
+                avatar = Instantiate(avatarPrefabSets[newAvatarIndex].avatarPrefab, playerController.position, Quaternion.identity, avatarParent);
+                // start with all renderers on the avatar disabled so we don't see it flicker in then enable after a short period
+                StartCoroutine(WaitToSeeAvatar());
+                // get the hand contollers on the avatar and assign the grabbers to the hand controllers, assign the hand pose blenders to the XRLocalRig
+                string leftHandName = avatarPrefabSets[newAvatarIndex].leftHandName;
+
+                Transform avatarLeftHand = FindInChildren(avatar.transform, leftHandName);
+                if (avatarLeftHand != null)
+                {
+                    HandController leftHandController = avatarLeftHand.GetComponent<HandController>();
+                    HandPoseBlender leftHandPoseBlender = avatarLeftHand.GetComponent<HandPoseBlender>();
+                    if (leftHandController)
+                    {
+                        leftHandController.grabber = xrLocalRig.GrabberLeft;
+                    }
+
+                    if (leftHandPoseBlender)
+                    {
+                        xrLocalRig.LeftHandPoseBlender = leftHandPoseBlender;
+                    }
+                }
+
+                string rightHandName = avatarPrefabSets[newAvatarIndex].rightHandName;
+                Transform avatarRightHand = FindInChildren(avatar.transform, rightHandName);
+                if (avatarRightHand != null)
+                {
+                    Debug.Log(avatarRightHand.name);
+                    HandController rightHandController = avatarRightHand.GetComponent<HandController>();
+                    HandPoseBlender rightHandPoseBlender = avatarRightHand.GetComponent<HandPoseBlender>();
+                    if (rightHandController)
+                    {
+                        rightHandController.grabber = xrLocalRig.GrabberRight;
+                    }
+
+                    if (rightHandPoseBlender)
+                    {
+                        xrLocalRig.RightHandPoseBlender = rightHandPoseBlender;
+                    }
+                }
+
+                // get the characterIK component and assign the targets
                 CharacterIK characterIk = avatar.GetComponent<CharacterIK>();
                 if (characterIk)
                 {
@@ -136,7 +297,7 @@ namespace BNG
                     characterIk.FollowRightController = iKRightHandTarget;
                     characterIk.FollowHead = iKHeadTarget;
                 }
-
+                // get the characterIKfollow component and assign the targets
                 CharacterIKFollow characterIkFollow = avatar.GetComponent<CharacterIKFollow>();
                 if (characterIkFollow)
                 {
@@ -144,18 +305,66 @@ namespace BNG
                     characterIkFollow.PlayerTransform = playerController;
                 }
 
-                SetAvatarMaterials(newAvatarIndex, newAvatarIndex);
+                // Apply the new textures and materials after spawning the new avatar/ defaulting to 0 an all textures
+                ApplyLocalMaterialsAndTextures(newAvatarIndex, newAvatarIndex, newAvatarIndex);
+                if (menuAvatarImage)
+                {
+                    menuAvatarImage.texture = avatarPrefabSets[newAvatarIndex].avatarImage;
+                }
             }
         }
 
-        // to finish so you cant see your avatar falling in to place
         IEnumerator WaitToSeeAvatar()
         {
-            yield return null;
-            foreach (Renderer renderer in renderers)
+            yield return new WaitForSeconds(0.2f);
+            List<Renderer> renderers = new();
+            renderers.AddRange(avatar.GetComponentsInChildren<Renderer>());
+            foreach(Renderer renderer in renderers)
             {
                 renderer.enabled = true;
             }
+            yield break;
         }
+
+        // Method to change individual textures on the loaded avatar
+        public void ChangeAvatarBodyTexture(int bodyTextureIndex)
+        {
+            if (avatarPrefabSets.Count > localCharacterIndex)
+            {
+                AvatarPrefabSet prefabSet = avatarPrefabSets[localCharacterIndex];
+
+                // Change body texture if valid texture index is provided
+                if (bodyTextureIndex >= 0 && bodyTextureIndex < prefabSet.bodyTextures.Count)
+                {
+                    ApplyLocalMaterial(prefabSet.bodyMaterial, prefabSet.bodyTextures[bodyTextureIndex], avatar);
+                    localPlayerData.SetBodyTextureIndex(bodyTextureIndex);
+                    // set the menu image 
+                    if (menuUniformImage)
+                    {
+                        menuUniformImage.texture = prefabSet.bodyTextures[bodyTextureIndex];
+                    }
+                }
+            }
+        }
+
+        public void ChangeAvatarPropTexture(int propTextureIndex)
+        {
+            if (avatarPrefabSets.Count > localCharacterIndex)
+            {
+                AvatarPrefabSet prefabSet = avatarPrefabSets[localCharacterIndex];
+                // Change prop texture if valid texture index is provided
+                if (propTextureIndex >= 0 && propTextureIndex < prefabSet.propTextures.Count)
+                {
+                    ApplyLocalMaterial(prefabSet.propMaterial, prefabSet.propTextures[propTextureIndex], avatar);
+                    localPlayerData.SetPropTextureIndex(propTextureIndex);
+                    // set the menu image 
+                    if (menuPropImage)
+                    {
+                        menuPropImage.texture = prefabSet.propTextures[propTextureIndex];
+                    }
+                }
+            }
+        }
+
     }
 }

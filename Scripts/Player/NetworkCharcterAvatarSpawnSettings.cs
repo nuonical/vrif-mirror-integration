@@ -7,8 +7,16 @@ namespace BNG
 {
     public class NetworkCharcterAvatarSpawnSettings : NetworkBehaviour
     {
-        [SyncVar(hook = nameof(OnTextureChanged))]
-        public int syncedTextureIndex;
+        // struct to store the local player data settings on spawn
+        [System.Serializable]
+        public struct TextureIndexes
+        {
+            public int bodyTextureIndex;
+            public int propTextureIndex;
+        }
+
+        [SyncVar(hook = nameof(OnTextureIndicesChanged))]
+        public TextureIndexes syncedTextureIndices;
 
         [SyncVar(hook = nameof(OnCharacterChanged))]
         public int syncedCharacterIndex;
@@ -16,9 +24,13 @@ namespace BNG
         [System.Serializable]
         public class CharacterTextureSet
         {
+            [Header("All body textures available for the Avatar")]
             public List<Texture2D> bodyTextures;
+            [Header("The body material on the avatar prefab")]
             public Material bodyMaterial;
+            [Header("All prop textures available for the prefab")]
             public List<Texture2D> propTextures;
+            [Header("The prop material on the avatar prefab ")]
             public Material propMaterial;
         }
 
@@ -28,99 +40,87 @@ namespace BNG
 
         private void Start()
         {
-
-            if(isOwned)
+            if (isOwned)
             {
                 // Get the index of the player prefab from LocalPlayerData
                 int playerIndex = LocalPlayerData.Instance.playerPrefabIndex;
-                int textureIndex = LocalPlayerData.Instance.playerTextureIndex; // Locally stored texture index
-         
-                CmdSetCharacterTexture(playerIndex, textureIndex);
-            }
+                TextureIndexes textureIndices = new TextureIndexes
+                {
+                    bodyTextureIndex = LocalPlayerData.Instance.bodyTextureIndex,  // Locally stored body texture index
+                    propTextureIndex = LocalPlayerData.Instance.propTextureIndex    // Locally stored prop texture index
+                };
 
-            else if(!isOwned)
+                // set the sync vars so late joiners get the change
+                CmdSetCharacterTexture(playerIndex, textureIndices);
+            }
+            else if (!isOwned)
             {
-               ApplyMaterialsAndTextures(syncedCharacterIndex, syncedTextureIndex);
+                // set the materials and textures on other clients so they see our selected avatar
+                ApplyMaterialsAndTextures(syncedCharacterIndex, syncedTextureIndices);
             }
         }
 
-        private void OnTextureChanged(int oldTextureIndex, int newTextureIndex)
+        private void OnTextureIndicesChanged(TextureIndexes oldIndices, TextureIndexes newIndices)
         {
-            ApplyMaterialsAndTextures(syncedCharacterIndex, newTextureIndex);
+            ApplyMaterialsAndTextures(syncedCharacterIndex, newIndices);
         }
 
         private void OnCharacterChanged(int oldCharacterIndex, int newCharacterIndex)
         {
-            ApplyMaterialsAndTextures(newCharacterIndex, syncedTextureIndex);
+            ApplyMaterialsAndTextures(newCharacterIndex, syncedTextureIndices);
         }
 
-        private void ApplyMaterialsAndTextures(int characterIndex, int textureIndex)
+        private void ApplyMaterialsAndTextures(int characterIndex, TextureIndexes textureIndices)
         {
             if (characterIndex >= 0 && characterIndex < characterTextureSets.Count)
             {
                 CharacterTextureSet textureSet = characterTextureSets[characterIndex];
 
-                // set the body materails
-                if (textureIndex >= 0 && textureIndex < textureSet.bodyTextures.Count)
+                // Apply body material if valid texture is found
+                if (textureIndices.bodyTextureIndex >= 0 && textureIndices.bodyTextureIndex < textureSet.bodyTextures.Count)
                 {
-                    Texture2D selectedTexture = textureSet.bodyTextures[textureIndex];
-
-                    // Create a new material instance and apply the texture
-                    Material newBodyMaterial = new Material(textureSet.bodyMaterial);
-                    newBodyMaterial.mainTexture = selectedTexture;
-
-                    // Apply the new material to the character renderers
-                    Renderer[] renderers = GetComponentsInChildren<Renderer>();
-                    foreach (Renderer renderer in renderers)
-                    {
-                        Material[] materials = renderer.materials;
-                        for (int i = 0; i < materials.Length; i++)
-                        {
-                            // compare the found material to the material in the prefab, if they match, change it
-                            if (materials[i].name == textureSet.bodyMaterial.name + " (Instance)")
-                            {
-                                materials[i] = newBodyMaterial;
-                            }
-                        }
-                        renderer.materials = materials;
-                    }
+                    ApplyMaterial(textureSet.bodyMaterial, textureSet.bodyTextures[textureIndices.bodyTextureIndex]);
                 }
 
-                // set the prob materials
-                if (textureIndex >= 0 && textureIndex < textureSet.propTextures.Count)
+                // Apply prop material if valid texture is found
+                if (textureIndices.propTextureIndex >= 0 && textureIndices.propTextureIndex < textureSet.propTextures.Count)
                 {
-                    Texture2D selectedTexture = textureSet.propTextures[textureIndex];
-
-                    // Create a new material instance and apply the texture
-                    Material newPropMaterial = new Material(textureSet.propMaterial);
-                    newPropMaterial.mainTexture = selectedTexture;
-
-                    // Apply the new material to the character renderers
-                    Renderer[] renderers = GetComponentsInChildren<Renderer>();
-                    foreach (Renderer renderer in renderers)
-                    {
-                        Material[] materials = renderer.materials;
-                        for (int i = 0; i < materials.Length; i++)
-                        {
-                            // compare the found material to the material in the prefab, if they match, change it
-                            if (materials[i].name == textureSet.propMaterial.name + " (Instance)")
-                            {
-                                materials[i] = newPropMaterial;
-                            }
-                        }
-                        renderer.materials = materials;
-                    }
+                    ApplyMaterial(textureSet.propMaterial, textureSet.propTextures[textureIndices.propTextureIndex]);
                 }
-
             }
         }
 
-        // command to the server to set the index so late joiners will get the index form the synvar hooks
+        // Method to apply a material with a new texture to renderers
+        private void ApplyMaterial(Material baseMaterial, Texture2D selectedTexture)
+        {
+            // create a new material
+            Material newMaterial = new Material(baseMaterial);
+            // apply the texture to the new material
+            newMaterial.mainTexture = selectedTexture;
+            // get the renderers
+            Renderer[] renderers = GetComponentsInChildren<Renderer>();
+            foreach (Renderer renderer in renderers)
+            {
+                Material[] materials = renderer.materials;
+                for (int i = 0; i < materials.Length; i++)
+                {
+                    // compare the avatar material to the new material and update if they match
+                    if (materials[i].name == baseMaterial.name + " (Instance)")
+                    {
+                        materials[i] = newMaterial;
+                    }
+                }
+                renderer.materials = materials;
+            }
+        }
+
+        // Command to the server to set the indices so late joiners will get the indices from the SyncVar hooks
         [Command(requiresAuthority = false)]
-        public void CmdSetCharacterTexture(int characterIndex, int textureIndex)
+        public void CmdSetCharacterTexture(int characterIndex, TextureIndexes textureIndices)
         {
             syncedCharacterIndex = characterIndex;
-            syncedTextureIndex = textureIndex;
+            syncedTextureIndices = textureIndices;
         }
     }
 }
+
