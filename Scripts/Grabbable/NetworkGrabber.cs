@@ -9,8 +9,6 @@ namespace BNG {
         [SerializeField]
         ControllerHand controllerHand;
 
-        public GrabButton DefaultGrabButton = GrabButton.Grip;
-
         [Header("Defauld Grabbable Layer is 10; Change If needed")]
         [SerializeField]
         int grabbableLayer = 10; //  grabbale layer for VRIF is 10 by default, change if needed
@@ -21,6 +19,9 @@ namespace BNG {
         public Grabber grabber;
 
         private Coroutine pickUpCoroutine;
+
+        [Header("Set true to Request Authority on controller input, false to continuously request input")]
+        public bool authorityOnInput = true;
 
         public void Start() {
             // Ensure network grabbable is reset on start / scene load
@@ -42,29 +43,34 @@ namespace BNG {
 
             if (networkGrabbable != null)
             {
-                if(pickUpCoroutine == null)
+                if (!authorityOnInput)
                 {
-                   // pickUpCoroutine = StartCoroutine(HandlePickUpEvent());
-                }
-
-
-               
-
-                // Change this input to suit your needs 
-                if (controllerHand == ControllerHand.Right && InputBridge.Instance.RightGripDown || controllerHand == ControllerHand.Left && InputBridge.Instance.LeftGripDown)
-                {
-                    if (!networkGrabbable.flightStatus)
-                    {                       
-                        networkGrabbable.CmdSetFlightStatus(true);
-                        networkGrabbable.PickUpEvent();
+                    if (pickUpCoroutine == null)
+                    {
+                        pickUpCoroutine = StartCoroutine(HandlePickUpEvent());
                     }
                 }
-                
-                else if(controllerHand == ControllerHand.Right && !InputBridge.Instance.RightGripDown || controllerHand == ControllerHand.Left && !InputBridge.Instance.LeftGripDown)
+
+
+
+                else if (authorityOnInput)
                 {
-                    if (networkGrabbable.flightStatus)
+                    // Change this input to suit your needs 
+                    if (controllerHand == ControllerHand.Right && InputBridge.Instance.RightGripDown || controllerHand == ControllerHand.Left && InputBridge.Instance.LeftGripDown)
                     {
-                        networkGrabbable.CmdSetFlightStatus(false);
+                        if (!networkGrabbable.flightStatus)
+                        {
+                            networkGrabbable.CmdSetFlightStatus(true);
+                            networkGrabbable.PickUpEvent();
+                        }
+                    }
+
+                    else if (controllerHand == ControllerHand.Right && !InputBridge.Instance.RightGripDown || controllerHand == ControllerHand.Left && !InputBridge.Instance.LeftGripDown)
+                    {
+                        if (networkGrabbable.flightStatus)
+                        {
+                            networkGrabbable.CmdSetFlightStatus(false);
+                        }
                     }
                 }
             }           
