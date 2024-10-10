@@ -53,8 +53,8 @@ namespace BNG
         // cache for all the renders 
         Renderer[] renderers;
 
-        // cache the instantiated Avatar
-        GameObject avatar;
+        [Header("Assign Avatar root if not spawning an avatar on start")]
+        public GameObject avatar;
 
         // localPlayer data settings
         int localCharacterIndex;
@@ -67,7 +67,13 @@ namespace BNG
         public RawImage menuUniformImage;
         public RawImage menuPropImage;
 
-        
+        // set true if you want to replace and spawn a new character
+        [Header("Select false if not spawning an avatar on start to the local rig")]
+        public bool spawnLocalAvatar = false;
+
+        [Header("Set true if you want to get the assign avatar Character Ik transforms on start from " +
+            "Ik Target transforms on this component")]
+        public bool assignTransformsOnStart = false;
 
         void Start()
         {
@@ -98,73 +104,76 @@ namespace BNG
                 localBodyTextureIndex = localPlayerData.bodyTextureIndex;
                 localPropTextureIndex = localPlayerData.propTextureIndex;
             }
-
-            // spawn the avatar prefab
-            avatar = Instantiate(avatarPrefabSets[localPlayerData.playerPrefabIndex].avatarPrefab, Vector3.zero, Quaternion.identity, avatarParent);
-
-            // get the characterIk and assign targets 
-            CharacterIK characterIk = avatar.GetComponent<CharacterIK>();
-            if (characterIk)
-            {
-                characterIk.FollowLeftController = iKLeftHandTarget;
-                characterIk.FollowRightController = iKRightHandTarget;
-                characterIk.FollowHead = iKHeadTarget;
+            if (spawnLocalAvatar)
+            {             // spawn the avatar prefab
+                avatar = Instantiate(avatarPrefabSets[localPlayerData.playerPrefabIndex].avatarPrefab, Vector3.zero, Quaternion.identity, avatarParent);
             }
-            //get the character ik follow and assign targets
-            CharacterIKFollow characterIkFollow = avatar.GetComponent<CharacterIKFollow>();
-            if (characterIkFollow)
+            if (avatar && assignTransformsOnStart)
             {
-                characterIkFollow.FollowTransform = centerEyeAnchor;
-                characterIkFollow.PlayerTransform = playerController;
-            }
-            // start with all renderers on the avatar disabled so we don't see it flicker in then enable after a short period
-            StartCoroutine(WaitToSeeAvatar());
-            // get the hand contollers on the avatar and assign the grabbers to the hand controllers, assign the hand pose blenders to the XRLocalRig
-            string leftHandName = avatarPrefabSets[localPlayerData.playerPrefabIndex].leftHandName;
-
-            Transform avatarLeftHand = FindInChildren(avatar.transform, leftHandName);           
-            if (avatarLeftHand != null)
-            {
-                HandController leftHandController = avatarLeftHand.GetComponent<HandController>();
-                HandPoseBlender leftHandPoseBlender = avatarLeftHand.GetComponent<HandPoseBlender>();
-                if(leftHandController)
+                // get the characterIk and assign targets 
+                CharacterIK characterIk = avatar.GetComponent<CharacterIK>();
+                if (characterIk)
                 {
-                    leftHandController.grabber = xrLocalRig.GrabberLeft;
+                    characterIk.FollowLeftController = iKLeftHandTarget;
+                    characterIk.FollowRightController = iKRightHandTarget;
+                    characterIk.FollowHead = iKHeadTarget;
+                }
+                //get the character ik follow and assign targets
+                CharacterIKFollow characterIkFollow = avatar.GetComponent<CharacterIKFollow>();
+                if (characterIkFollow)
+                {
+                    characterIkFollow.FollowTransform = centerEyeAnchor;
+                    characterIkFollow.PlayerTransform = playerController;
+                }
+                // start with all renderers on the avatar disabled so we don't see it flicker in then enable after a short period
+                StartCoroutine(WaitToSeeAvatar());
+                // get the hand contollers on the avatar and assign the grabbers to the hand controllers, assign the hand pose blenders to the XRLocalRig
+                string leftHandName = avatarPrefabSets[localPlayerData.playerPrefabIndex].leftHandName;
+
+                Transform avatarLeftHand = FindInChildren(avatar.transform, leftHandName);
+                if (avatarLeftHand != null)
+                {
+                    HandController leftHandController = avatarLeftHand.GetComponent<HandController>();
+                    HandPoseBlender leftHandPoseBlender = avatarLeftHand.GetComponent<HandPoseBlender>();
+                    if (leftHandController)
+                    {
+                        leftHandController.grabber = xrLocalRig.GrabberLeft;
+                    }
+
+                    if (leftHandPoseBlender)
+                    {
+                        xrLocalRig.LeftHandPoseBlender = leftHandPoseBlender;
+                    }
                 }
 
-                if(leftHandPoseBlender)
+                string rightHandName = avatarPrefabSets[localPlayerData.playerPrefabIndex].rightHandName;
+                Transform avatarRightHand = FindInChildren(avatar.transform, rightHandName);
+                if (avatarRightHand != null)
                 {
-                    xrLocalRig.LeftHandPoseBlender = leftHandPoseBlender;
-                }
-            }
+                    Debug.Log(avatarRightHand.name);
+                    HandController rightHandController = avatarRightHand.GetComponent<HandController>();
+                    HandPoseBlender rightHandPoseBlender = avatarRightHand.GetComponent<HandPoseBlender>();
+                    if (rightHandController)
+                    {
+                        rightHandController.grabber = xrLocalRig.GrabberRight;
+                    }
 
-            string rightHandName = avatarPrefabSets[localPlayerData.playerPrefabIndex].rightHandName;
-            Transform avatarRightHand = FindInChildren(avatar.transform, rightHandName);
-            if (avatarRightHand != null)
-            {
-                Debug.Log(avatarRightHand.name);
-                HandController rightHandController = avatarRightHand.GetComponent<HandController>();
-                HandPoseBlender rightHandPoseBlender = avatarRightHand.GetComponent<HandPoseBlender>();
-                if (rightHandController)
+                    if (rightHandPoseBlender)
+                    {
+                        xrLocalRig.RightHandPoseBlender = rightHandPoseBlender;
+                    }
+                }
+
+
+                // change image on the menu for the avatar
+                if (menuAvatarImage)
                 {
-                    rightHandController.grabber = xrLocalRig.GrabberRight;
+                    menuAvatarImage.texture = avatarPrefabSets[localPlayerData.playerPrefabIndex].avatarImage;
                 }
 
-                if (rightHandPoseBlender)
-                {
-                    xrLocalRig.RightHandPoseBlender = rightHandPoseBlender;
-                }
+                // Apply materials and textures for the avatar after it has been instantiated
+                ApplyLocalMaterialsAndTextures(localCharacterIndex, localBodyTextureIndex, localPropTextureIndex);
             }
-            
-
-            // change image on the menu for the avatar
-            if(menuAvatarImage)
-            {
-                menuAvatarImage.texture = avatarPrefabSets[localPlayerData.playerPrefabIndex].avatarImage;
-            }
-
-            // Apply materials and textures for the avatar after it has been instantiated
-            ApplyLocalMaterialsAndTextures(localCharacterIndex, localBodyTextureIndex, localPropTextureIndex);
         }
 
         // function to find the left and right hands in the children of the AVatar

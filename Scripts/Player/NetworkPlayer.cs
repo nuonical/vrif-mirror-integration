@@ -95,20 +95,10 @@ namespace BNG {
 
             if (!isOwned)
                 return;
-            StartCoroutine(WaitToAssign());
-            // quick fix, but this needs moved to some other one and done function
-           // StartCoroutine(SendReleaseHandPoses());
-        }
-
-        IEnumerator WaitToAssign()
-        {
-            yield return null;
-
             hardwareRig = XRLocalRig.Instance;
 
             if (hardwareRig != null)
             {
-
                 hardwareRig.SetNetworkPlayer(this);
 
                 // Cache the transforms needed for position and rotation of the network rig from the BNGHardwareRig Script
@@ -134,6 +124,9 @@ namespace BNG {
             {
                 MeshRenderers[x].enabled = false;
             }
+            
+            // quick fix, but this needs moved to some other one and done function
+           // StartCoroutine(SendReleaseHandPoses());
         }
 
         private IEnumerator SendReleaseHandPoses()
@@ -206,8 +199,6 @@ namespace BNG {
                     }
                 }
             }
-
-           
 
         }
 

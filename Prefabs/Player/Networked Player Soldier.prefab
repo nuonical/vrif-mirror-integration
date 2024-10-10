@@ -5059,7 +5059,7 @@ MonoBehaviour:
   ShowGizmos: 1
   ResourcePath: Assets/BNG Framework/HandPoser/Poses/Resources/
   PoseName: Default
-  CurrentPose: {fileID: 11400000, guid: 892632dd462824245b24f35bb6cf6380, type: 2}
+  CurrentPose: {fileID: 0}
   AnimationSpeed: 15
   UpdateJointRotations: 1
   UpdateJointPositions: 0
