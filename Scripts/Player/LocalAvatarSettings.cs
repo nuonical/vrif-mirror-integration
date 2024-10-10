@@ -57,9 +57,9 @@ namespace BNG
         public GameObject avatar;
 
         // localPlayer data settings
-        int localCharacterIndex;
-        int localBodyTextureIndex;
-        int localPropTextureIndex;
+        public int localCharacterIndex;
+        public int localBodyTextureIndex;
+        public int localPropTextureIndex;
 
         // textures on Menu to indicate selection
         [Header("Images on the Menu that change with selection")]
@@ -86,7 +86,7 @@ namespace BNG
             // spawn the starting character, this will spawn the last used character as the index is saved on change
             if (avatarPrefabSets.Count > 0)
             {
-                LoadLocalPlayerDataAvatar();
+               StartCoroutine(LoadLocalPlayerDataAvatar());
             }
             else
             {
@@ -94,9 +94,10 @@ namespace BNG
             }
         }
 
-        void LoadLocalPlayerDataAvatar()
+        IEnumerator LoadLocalPlayerDataAvatar()
         {
-            
+            yield return null;
+            Debug.Log("Textures started to apply");
             // get the prefab and texture index from the local player data
             if (localPlayerData)
             {
@@ -169,11 +170,12 @@ namespace BNG
                 if (menuAvatarImage)
                 {
                     menuAvatarImage.texture = avatarPrefabSets[localPlayerData.playerPrefabIndex].avatarImage;
-                }
-
-                // Apply materials and textures for the avatar after it has been instantiated
-                ApplyLocalMaterialsAndTextures(localCharacterIndex, localBodyTextureIndex, localPropTextureIndex);
+                }    
             }
+
+            // Apply materials and textures for the avatar after it has been instantiated
+            ApplyLocalMaterialsAndTextures(localCharacterIndex, localBodyTextureIndex, localPropTextureIndex);
+
         }
 
         // function to find the left and right hands in the children of the AVatar

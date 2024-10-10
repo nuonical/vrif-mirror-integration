@@ -78,6 +78,11 @@ namespace BNG {
             else {
                 NetworkManager.singleton.StopHost();
             }
+
+            if(isServer)
+            {
+                NetworkManager.singleton.StopHost();
+            }
             
             HideDisconnectButton();
         }
