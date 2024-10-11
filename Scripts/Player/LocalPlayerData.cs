@@ -27,10 +27,7 @@ namespace BNG {
         public int bodyTextureIndex = 0;
         public int propTextureIndex = 0;
 
-        // menu input field to recall the player name
-        public UnityEngine.UI.InputField playerNameInput;
-
-        void Awake() {
+        void Start() {
             // Setup singletone so only one object exists at a time
             if (_instance != null && _instance != this) {
                 Destroy(this);
@@ -39,59 +36,29 @@ namespace BNG {
 
             DontDestroyOnLoad(gameObject);
 
-            LoadPlayerSettings();
         }
 
-        void LoadPlayerSettings() {
-            if (PlayerPrefs.HasKey("PlayerName")) {
-                PlayerName = PlayerPrefs.GetString("PlayerName");
-                if (playerNameInput)
-                {
-                    playerNameInput.text = PlayerName;
-                }
-            }
-            if(PlayerPrefs.HasKey("PrefabIndex"))
-            {
-                playerPrefabIndex = PlayerPrefs.GetInt("PrefabIndex");
-            }
-
-            if (PlayerPrefs.HasKey("PreTextIndex"))
-            {
-                bodyTextureIndex = PlayerPrefs.GetInt("BodyTextureIndex");
-            }
-
-            if (PlayerPrefs.HasKey("PropTextureIndex"))
-            {
-                propTextureIndex = PlayerPrefs.GetInt("PropTextureIndex");
-            }
-
-        }
-
-        public void SetPlayerName(string playerName, bool savePrefs) {
-            PlayerName = playerName;
-
-            if(savePrefs) {
-                PlayerPrefs.SetString("PlayerName", PlayerName);
-            }
+        // called from network demo ui on save
+        public void SetPlayerName(string playerName)
+        {
+            PlayerName = playerName;           
         }
 
         // set player prefab selection index from menu 
+        // these are called from Local Avatar Settings on the Player Controller
         public void SetPlayerPrefabIndex(int prefabIndex)
         {
-            playerPrefabIndex = prefabIndex;
-            PlayerPrefs.SetInt("PrefabIndex", prefabIndex);
+            playerPrefabIndex = prefabIndex;          
         }
 
         public void SetBodyTextureIndex(int preBodyTextIndex)
         {
-            bodyTextureIndex = preBodyTextIndex;
-            PlayerPrefs.SetInt("BodyTextureIndex", preBodyTextIndex);
+            bodyTextureIndex = preBodyTextIndex;           
         }
 
         public void SetPropTextureIndex(int prePropTextIndex)
         {
-            propTextureIndex = prePropTextIndex;
-            PlayerPrefs.SetInt("PropTextureIndex", prePropTextIndex);
+            propTextureIndex = prePropTextIndex;            
         }
     }
 }

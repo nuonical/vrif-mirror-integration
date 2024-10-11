@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace BNG {
     public class NetworkDemoUI : NetworkBehaviour {
-        
+
         public InputField PlayerNameInput;
 
         public GameObject ConnectButton;
@@ -21,13 +21,6 @@ namespace BNG {
 
         // Shown for Debug
         public bool ClientConnected;
-
-        void Awake() {
-            // Load up the name from prefs for convenience
-            if (PlayerPrefs.HasKey("PlayerName")) {
-                PlayerNameInput.text = PlayerPrefs.GetString("PlayerName");
-            }
-        }
 
         public override void OnStartServer() {
             Debug.Log("OnStartServer");
@@ -54,9 +47,7 @@ namespace BNG {
             DisplayText.text = "Connecting..\n";
 
             NetworkManager.singleton.StartClient();
-
-            LocalPlayerData.Instance.SetPlayerName(PlayerNameInput.text, true);
-
+            SaveLocalPlayersData();
             // Hide the connect buttons
             ShowDisconnectButton();
         }
@@ -64,9 +55,7 @@ namespace BNG {
         public void OnHostButton() {
             NetworkManager.singleton.StartHost();
 
-            // Make sure player name is set, even for host
-            LocalPlayerData.Instance.SetPlayerName(PlayerNameInput.text, true);
-
+            SaveLocalPlayersData();
             // Hide the connect buttons
             ShowDisconnectButton();
         }
@@ -125,6 +114,20 @@ namespace BNG {
             if (HostButton) {
                 HostButton.SetActive(true);
             }
+        }
+
+       public void SaveLocalPlayersData()
+        {
+            // save player data
+            SaveLoadData saveLoadData = SaveLoadData.Instance;
+            LocalPlayerData localPlayerData = LocalPlayerData.Instance;
+            // assign the localplayerdata the player name
+            localPlayerData.SetPlayerName(PlayerNameInput.text);
+            // save player player data from local player data
+            saveLoadData.SavePlayerPref("PlayerName", localPlayerData.PlayerName);
+            saveLoadData.SavePlayerPref("PrefabIndex", localPlayerData.playerPrefabIndex);
+            saveLoadData.SavePlayerPref("BodyTextureIndex", localPlayerData.bodyTextureIndex);
+            saveLoadData.SavePlayerPref("PropTextureIndex", localPlayerData.propTextureIndex);
         }
     }
 }
