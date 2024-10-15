@@ -41859,6 +41859,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2226960964634723372, guid: 846b75224d5b017428f9a9f8187123e4,
         type: 3}
+      propertyPath: EditorOnly
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2226960964634723372, guid: 846b75224d5b017428f9a9f8187123e4,
+        type: 3}
       propertyPath: AllowUpDownControls
       value: 1
       objectReference: {fileID: 0}

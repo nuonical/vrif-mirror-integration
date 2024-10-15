@@ -64,6 +64,8 @@ namespace BNG {
         [SyncVar]
         public NetworkIdentity grabbableID;
 
+        // lone collider used for explosion damage
+        public Collider explosionCollider;
         // struct to hold the hand pose data
         [System.Serializable]
         public struct HandPoseData {
@@ -131,7 +133,10 @@ namespace BNG {
             colliders.AddRange(GetComponentsInChildren<Collider>());
             foreach(Collider col in colliders)
             {
-                col.enabled = false;
+                if (col != explosionCollider)
+                {
+                    col.enabled = false;
+                }
             }
             
             // quick fix, but this needs moved to some other one and done function
