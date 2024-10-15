@@ -89,6 +89,7 @@ namespace BNG {
 
         void Start() {
 
+
             // Initialize previous pose data with invalid values
             previousRightHandPoseData = new HandPoseData(-1f, -1f, -1f);
             previousLeftHandPoseData = new HandPoseData(-1f, -1f, -1f);
@@ -123,6 +124,14 @@ namespace BNG {
             for (int x = 0; x < MeshRenderers.Count; x++)
             {
                 MeshRenderers[x].enabled = false;
+            }
+
+            // disable colliders on local network player
+            List<Collider> colliders = new();
+            colliders.AddRange(GetComponentsInChildren<Collider>());
+            foreach(Collider col in colliders)
+            {
+                col.enabled = false;
             }
             
             // quick fix, but this needs moved to some other one and done function
@@ -342,6 +351,7 @@ namespace BNG {
         public void CmdReleaseRightHandPose() {
             releaseRightBool = !releaseRightBool;
         }
-    
+
+        
     }
 }

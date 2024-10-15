@@ -1565,7 +1565,7 @@ MonoBehaviour:
   BeingHeld: 0
   GrabButton: 2
   Grabtype: 2
-  GrabPhysics: 0
+  GrabPhysics: 4
   GrabMechanic: 0
   GrabSpeed: 15
   RemoteGrabbable: 1
@@ -1883,7 +1883,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  Damage: 25
+  Damage: 10
   ColliderRigidbody: {fileID: 9148596257437500467}
   MinForce: 0.05
   LastRelativeVelocity: 0
