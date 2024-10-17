@@ -43,13 +43,13 @@ namespace BNG
             
             if (isOwned && !countDownStarted)
             {
-                CmdServerExplosion();
+                ServerExplosion();
             }
 
         }
 
-        [Command]
-        public void CmdServerExplosion()
+        //[Command]
+        public void ServerExplosion()
         {
             countDownStarted = true;
             StartCoroutine(CountDown());
@@ -63,33 +63,22 @@ namespace BNG
                 if (beepSound)
                 {
                     Debug.Log("beep started");
-                    RpcPlayBeepSound();
+                    CmdPlayBeepSound();
                 }
 
                 // Wait for 1 second
                 yield return new WaitForSeconds(1f);
             }
-
-            // Trigger the explosion after the countdown
-            if (!isSubScene)
-            {
-                ExplodeDefault();
-            }
-            else
-            {
-               ExplodeSubScene();
-            }
+            
+            ExplodeDefault();
+            
         }
 
         void ExplodeDefault()
         {
             // Play explosion sound
             // if using the emulator, this sound will trigger multiple times, but not in game headset
-            RpcPlayExplosionSound();
-
-            // Spawn explosion effect on all clients
-            GameObject explosionEffect = Instantiate(explosionEffectPrefab, transform.position, Quaternion.identity);
-            NetworkServer.Spawn(explosionEffect);
+            CmdDoExplosiontFX();
 
             // Apply damage or other effects to objects within the explosion radius
             Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
@@ -99,6 +88,7 @@ namespace BNG
 
             foreach (Collider collider in colliders)
             {
+                Debug.Log(collider);
                 Rigidbody rb = collider.GetComponent<Rigidbody>();
                 if (rb != null)
                 {
@@ -106,11 +96,11 @@ namespace BNG
                     rb.AddExplosionForce(explosionForce, transform.position, explosionRadius);
                 }
 
-                NetworkDamageable networkD = collider.transform.root.GetComponentInChildren<NetworkDamageable>();
-
+                NetworkDamageable networkD = collider.transform.root.GetComponent<NetworkDamageable>();
+               
                 if (networkD != null && !damagedPlayers.Contains(networkD))
                 {
-                    networkD.TakeDamage(damageAmount);
+                    networkD.CmdClientAuthorityTakeDamage(damageAmount);
 
                     damagedPlayers.Add(networkD);
                 }
@@ -120,55 +110,12 @@ namespace BNG
             Destroy(this.gameObject);
         }
 
-        void ExplodeSubScene()
+        [Command]
+        public void CmdPlayBeepSound()
         {
-            // Play explosion sound
-            RpcPlayExplosionSound();
-
-            // Spawn explosion effect on all clients
-            GameObject explosionEffect = Instantiate(explosionEffectPrefab, transform.position, Quaternion.identity);
-
-            // Move the explosion effect to the same subscene as the grenade
-            Scene currentScene = gameObject.scene;  // Get the current scene (subscene) the grenade is in
-            SceneManager.MoveGameObjectToScene(explosionEffect, currentScene); // Move explosion to the correct subscene
-
-            // Now spawn the object across the network
-            NetworkServer.Spawn(explosionEffect);
-
-            // Prepare a results array for the colliders that are within the explosion radius
-            Collider[] colliders = new Collider[50];
-
-            int numberOfColliders = currentPhysicsScene.OverlapSphere(transform.position, explosionRadius, colliders,
-                Physics.AllLayers, QueryTriggerInteraction.UseGlobal);
-
-            // Hashset to keep track of the damage component so it only gets damaged once
-            HashSet<NetworkDamageable> damagedPlayers = new HashSet<NetworkDamageable>();
-
-            for (int i = 0; i < numberOfColliders; i++)
-            {
-                Collider collider = colliders[i];
-
-                Rigidbody rb = collider.GetComponent<Rigidbody>();
-                if (rb != null)
-                {
-                    // Apply force to objects within the explosion radius
-                    rb.AddExplosionForce(explosionForce, transform.position, explosionRadius);
-                }
-
-                NetworkDamageable networkD = collider.transform.root.GetComponentInChildren<NetworkDamageable>();
-
-                if (networkD != null && !damagedPlayers.Contains(networkD))
-                {
-                    networkD.TakeDamage(damageAmount);
-                    damagedPlayers.Add(networkD);
-                }
-            }
-
-            // Destroy the grenade after exploding
-            Destroy(this.gameObject);
+            RpcPlayBeepSound();
         }
-
-
+      
         [ClientRpc]
         void RpcPlayBeepSound()
         {
@@ -179,8 +126,14 @@ namespace BNG
             }
         }
 
+        [Command]
+        public void CmdDoExplosiontFX()
+        {
+            GameObject explosionEffect = Instantiate(explosionEffectPrefab, transform.position, Quaternion.identity);
+            NetworkServer.Spawn(explosionEffect);
+            RpcPlayExplosionSound();
+        }
 
-        [ClientRpc]
         void RpcPlayExplosionSound()
         {
             // Play explosion sound on all clients

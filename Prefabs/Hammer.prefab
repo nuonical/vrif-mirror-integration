@@ -111,7 +111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   handPoseType: 1
-  SelectedHandPose: {fileID: 11400000, guid: cd1585b0cd5a39741b0e61743cc4fd76, type: 2}
+  SelectedHandPose: {fileID: 11400000, guid: 965c46e1afbab684385a4961e3d95f2c, type: 2}
   HandPose: 0
   LeftHandIsValid: 0
   RightHandIsValid: 1
@@ -250,7 +250,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   handPoseType: 1
-  SelectedHandPose: {fileID: 11400000, guid: cd1585b0cd5a39741b0e61743cc4fd76, type: 2}
+  SelectedHandPose: {fileID: 11400000, guid: 965c46e1afbab684385a4961e3d95f2c, type: 2}
   HandPose: 0
   LeftHandIsValid: 1
   RightHandIsValid: 0
@@ -1493,9 +1493,10 @@ GameObject:
   - component: {fileID: 8216736267275558267}
   - component: {fileID: 7136809921476016913}
   - component: {fileID: 6444381611387507707}
+  - component: {fileID: 6571602720409424147}
   m_Layer: 10
   m_Name: Hammer
-  m_TagString: Untagged
+  m_TagString: NetworkGrabbable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1564,7 +1565,7 @@ MonoBehaviour:
   BeingHeld: 0
   GrabButton: 2
   Grabtype: 2
-  GrabPhysics: 0
+  GrabPhysics: 4
   GrabMechanic: 0
   GrabSpeed: 15
   RemoteGrabbable: 1
@@ -1574,7 +1575,7 @@ MonoBehaviour:
   ThrowForceMultiplierAngular: 1.125
   BreakDistance: 0.65
   HideHandGraphics: 0
-  ParentToHands: 1
+  ParentToHands: 0
   ParentHandModel: 1
   SnapHandModel: 1
   CanBeDropped: 1
@@ -1795,12 +1796,14 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  objectIndex: 0
   grabbables: []
   ringCanvas: {fileID: 5248622536811639053}
   ringHelper: {fileID: 5248622536811639050}
   LeftHandPoseIndex: 1
   RightHandPoseIndex: 1
   holdingStatus: 0
+  flightStatus: 0
 --- !u!114 &8216736267275558264
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1880,13 +1883,28 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  Damage: 25
+  Damage: 10
   ColliderRigidbody: {fileID: 9148596257437500467}
-  MinForce: 0.1
+  MinForce: 0.05
   LastRelativeVelocity: 0
   LastDamageForce: 0
   TakeCollisionDamage: 1
   CollisionDamage: 5
+--- !u!114 &6571602720409424147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9148596257437500617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52f76491b506224ea3c1ddaad0463cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
 --- !u!1 &9148596258606635929
 GameObject:
   m_ObjectHideFlags: 0

@@ -40,20 +40,40 @@ namespace BNG
         }
 
         public virtual void OnCollisionEvent(Collision collision)
-        {           
+        {
+            Debug.Log(collision.collider.name);
+
             LastDamageForce = collision.impulse.magnitude;
             LastRelativeVelocity = collision.relativeVelocity.magnitude;
+
+            // Get the NetworkIdentity of the local player (weapon holder)
+            NetworkIdentity localPlayerIdentity = NetworkClient.connection.identity;
+
+            // Get the NetworkIdentity of the object we collided with
+            NetworkIdentity collidedNetworkIdentity = collision.transform.root.gameObject.GetComponent<NetworkIdentity>();
+
+            // Check if the object we collided with has a NetworkIdentity and compare netId
+            if (collidedNetworkIdentity != null && localPlayerIdentity != null)
+            {
+                if (collidedNetworkIdentity.netId == localPlayerIdentity.netId)
+                {
+                    // Don't apply damage to ourselves (the local player)
+                    Debug.Log("Avoiding self-damage.");
+                    return;
+                }
+            }
 
             if (LastDamageForce >= MinForce)
             {
                 // Can we damage what we hit?
-                NetworkDamageable nD = collision.gameObject.GetComponent<NetworkDamageable>();
+                NetworkDamageable nD = collision.gameObject.transform.root.GetComponentInChildren<NetworkDamageable>();
 
                 if (nD && nD._currentHealth > 0)
-                {                   
+                {
                     nD.CmdClientAuthorityTakeDamage(Damage);
                     hasDealtDamage = true; // Ensure that damage is only applied once per collision
                 }
+
                 // Otherwise, can we take damage ourselves from this collision?
                 if (TakeCollisionDamage && thisNetworkDamageable != null && nD)
                 {

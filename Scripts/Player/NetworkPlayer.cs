@@ -34,7 +34,11 @@ namespace BNG {
         Transform hardwareLeftHand;
         Transform hardwareRightHand;
         Transform hardwarePlayerBody;
+        Grabber leftGrabber;
+        Grabber rightGrabber;
 
+        // bools to set held grabbable status to sync
+        private Grabbable previousRightHeldGrabbable;
         // Graphics of the player so they can be disabled for the local network rig
         public List<SkinnedMeshRenderer> SkinnedRenderers;
         public List<MeshRenderer> MeshRenderers;
@@ -60,6 +64,8 @@ namespace BNG {
         [SyncVar]
         public NetworkIdentity grabbableID;
 
+        // lone collider used for explosion damage
+        public Collider explosionCollider;
         // struct to hold the hand pose data
         [System.Serializable]
         public struct HandPoseData {
@@ -85,43 +91,17 @@ namespace BNG {
 
         void Start() {
 
+
             // Initialize previous pose data with invalid values
             previousRightHandPoseData = new HandPoseData(-1f, -1f, -1f);
             previousLeftHandPoseData = new HandPoseData(-1f, -1f, -1f);
 
-            // await ownership to get var assignments, as we only want to assign if we own the object
-            StartCoroutine(CheckOwnership());
-
-            
-        }
-
-
-        // await ownership to proceed, if we do not get ownership, timeout to break the loop if it is not the local player
-        private IEnumerator CheckOwnership()
-        {
-            float elapsedTime = 0f;
-            int attempts = 0;
-
-            while (!isOwned)
-            {
-                yield return new WaitForSeconds(checkInterval);
-
-                elapsedTime += checkInterval;
-                attempts++;
-
-                // Break out if we reach the timeout or max retries
-                if (elapsedTime >= timeout || attempts >= maxRetries)
-                {
-                    Debug.LogWarning("Ownership was not acquired within the given time."); // time out on the remote to break out of the coroutine
-                    yield break;
-                }
-            }
-
-            // Now that we own the object, proceed with local player-specific logic
+            if (!isOwned)
+                return;
             hardwareRig = XRLocalRig.Instance;
+
             if (hardwareRig != null)
             {
-
                 hardwareRig.SetNetworkPlayer(this);
 
                 // Cache the transforms needed for position and rotation of the network rig from the BNGHardwareRig Script
@@ -130,6 +110,8 @@ namespace BNG {
                 hardwareLeftHand = hardwareRig.LeftHandTransform;
                 hardwareRightHand = hardwareRig.RightHandTransform;
                 hardwarePlayerBody = hardwareRig.playerBody;
+                leftGrabber = hardwareRig.GrabberLeft;
+                rightGrabber = hardwareRig.GrabberRight;
             }
             // disable all skinned mesh renders on the local network rig
             SkinnedRenderers.AddRange(GetComponentsInChildren<SkinnedMeshRenderer>());
@@ -145,43 +127,56 @@ namespace BNG {
             {
                 MeshRenderers[x].enabled = false;
             }
+
+            // disable colliders on local network player
+            List<Collider> colliders = new();
+            colliders.AddRange(GetComponentsInChildren<Collider>());
+            foreach(Collider col in colliders)
+            {
+                if (col != explosionCollider)
+                {
+                    col.enabled = false;
+                }
+            }
+            
+            // quick fix, but this needs moved to some other one and done function
+           // StartCoroutine(SendReleaseHandPoses());
         }
 
-        void Update() {
+        private IEnumerator SendReleaseHandPoses()
+        {
+            while (true) // Keep the coroutine running indefinitely
+            {
+                // Check if the right grabber is not holding anything and send the right hand release command
+                if (rightGrabber.HeldGrabbable == null)
+                {
+                    CmdReleaseRightHandPose();
+                }
+
+                // Check if the left grabber is not holding anything and send the left hand release command
+                if (leftGrabber.HeldGrabbable == null)
+                {
+                    CmdReleaseLeftHandPose();
+                }
+
+                yield return new WaitForSeconds(1f); // Wait for 1 second before checking again
+            }
+        }
+
+        void LateUpdate() {
             // Only run this if we are the local player, so if we own it, then it is the local representation
             if (!isOwned || hardwareRig == null) {
                 return;
             }
 
-            // added for testing for subscene switch, meshes not getting disabled for the local player on subscene change
-            if(SkinnedRenderers.Count > 0 )
-            {
-                if(SkinnedRenderers[0].enabled)
-                {
-                    for (int x = 0; x < SkinnedRenderers.Count; x++)
-                    {
-                        SkinnedRenderers[x].enabled = false;
-                    }
-                }
-            }
-
-            if (MeshRenderers.Count > 0)
-            {
-                if (MeshRenderers[0].enabled)
-                {
-                    for (int x = 0; x < MeshRenderers.Count; x++)
-                    {
-                        MeshRenderers[x].enabled = false;
-                    }
-                }
-            }
-            // end test for subscenes
-
             if (hardwareRig != null) {
                 // Set the position and rotation of the network rig player, head and hands to match that of the Hardware Rig transforms
                 networkPlayer.SetPositionAndRotation(hardwarePlayer.position, hardwarePlayer.rotation);
                 networkHead.SetPositionAndRotation(hardwareHead.position, hardwareHead.rotation);
-                networkBody.SetPositionAndRotation(hardwarePlayerBody.position, hardwarePlayerBody.rotation);
+                if(hardwarePlayerBody)
+                {
+                    networkBody.SetPositionAndRotation(hardwarePlayerBody.position, hardwarePlayerBody.rotation);
+                }
 
                 networkLeftHand.SetPositionAndRotation(hardwareLeftHand.position, hardwareLeftHand.rotation);
                 networkRightHand.SetPositionAndRotation(hardwareRightHand.position, hardwareRightHand.rotation);
@@ -218,7 +213,9 @@ namespace BNG {
                     }
                 }
             }
+
         }
+
 
         // Check to see if the pose data has changed
         public virtual bool ShouldSendPoseData(HandPoseData previousData, HandPoseData currentData) {
@@ -359,5 +356,7 @@ namespace BNG {
         public void CmdReleaseRightHandPose() {
             releaseRightBool = !releaseRightBool;
         }
+
+        
     }
 }

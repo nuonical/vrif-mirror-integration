@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
@@ -8,44 +7,51 @@ namespace BNG
     // sent an index / int from the menu  for the index of the prefab the player wants
     public class NetworkCharacterReplacement : NetworkBehaviour
     {
-        [Header("Add all Player Prefabs to this list and Make sure they are added as Spawnable objects on the Network Manager")]
-        public List<GameObject> networkCharacters;
+        [System.Serializable]
+        public class CharacterPrefabSet
+        {
+            public GameObject characterPrefab;
+        }
+
+        [Header("Add all Player Character Prefabs")]
+        public List<CharacterPrefabSet> characterPrefabSets;
 
         [SerializeField] bool useOfflineCharacterSelect = true;
 
         private void Start()
         {
-            if (!useOfflineCharacterSelect || !isLocalPlayer) // Ensure only local player initiates this process
+            if (!useOfflineCharacterSelect || !isLocalPlayer)
                 return;
 
-            // Get the index of the player selected in the menu
+            // Get the index of the player prefab from LocalPlayerData
             int playerIndex = LocalPlayerData.Instance.playerPrefabIndex;
+
+            // Send the prefab and texture index to the server to replace the character
             CmdReplaceCharacter(playerIndex);
         }
 
-        [Command] // Send command to the server to replace the character for this connection
+        [Command]
         public void CmdReplaceCharacter(int characterIndex, NetworkConnectionToClient conn = null)
         {
-            // Default to this player's connection if none provided
             if (conn == null)
             {
                 conn = connectionToClient;
             }
 
-            // Get the current player object
-            GameObject emptyPlayerObject = gameObject;
-
-            // Check if the character index is valid
-            if (characterIndex >= 0 && characterIndex < networkCharacters.Count)
+            if (characterIndex >= 0 && characterIndex < characterPrefabSets.Count)
             {
+                // Get the current player object
+                GameObject emptyPlayerObject = gameObject;
+
                 // Destroy the empty player object on the server
                 NetworkServer.Destroy(emptyPlayerObject);
 
                 // Instantiate the selected character on the server
-                GameObject newCharacter = Instantiate(networkCharacters[characterIndex], emptyPlayerObject.transform.position, emptyPlayerObject.transform.rotation);
+                GameObject newCharacter = Instantiate(characterPrefabSets[characterIndex].characterPrefab, emptyPlayerObject.transform.position, emptyPlayerObject.transform.rotation);
 
                 // Assign ownership of the new character to the client's connection
                 NetworkServer.ReplacePlayerForConnection(conn, newCharacter, true);
+    
             }
             else
             {

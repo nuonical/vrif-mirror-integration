@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 2411159637822908621}
   - component: {fileID: 2411159637822908620}
   - component: {fileID: 2411159637822908611}
+  - component: {fileID: 8964609809101635385}
   m_Layer: 10
   m_Name: NetworkShell
   m_TagString: Untagged
@@ -222,12 +223,26 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  objectIndex: 0
   grabbables: []
   ringCanvas: {fileID: 0}
   ringHelper: {fileID: 0}
   LeftHandPoseIndex: 1
   RightHandPoseIndex: 0
   holdingStatus: 0
+  flightStatus: 0
+--- !u!114 &8964609809101635385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 419275079032366575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51328566bbd01dd4e8681341199abe2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &419275079455297611
 GameObject:
   m_ObjectHideFlags: 0
@@ -439,7 +454,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   handPoseType: 1
-  SelectedHandPose: {fileID: 0}
+  SelectedHandPose: {fileID: 11400000, guid: 965c46e1afbab684385a4961e3d95f2c, type: 2}
   HandPose: 0
   LeftHandIsValid: 1
   RightHandIsValid: 1

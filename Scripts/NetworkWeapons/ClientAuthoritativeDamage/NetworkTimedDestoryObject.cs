@@ -9,12 +9,15 @@ namespace BNG
     {
         [SerializeField] float delayTime = 3f;
         
-        [Server]
+       // [Server]
         void Start()
         {
             if (!NetworkServer.active)
                 return;
-            StartCoroutine(DestoryObjectDelay());
+            if (isServer)
+            {
+                StartCoroutine(DestoryObjectDelay());
+            }
         }
 
         IEnumerator DestoryObjectDelay()
