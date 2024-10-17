@@ -455,6 +455,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GravityEnabled: 1
   Gravity: {x: 0, y: -7.81, z: 0}
+  LabelToUpdate: {fileID: 0}
 --- !u!114 &7951784224476583820
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -593,6 +594,7 @@ MonoBehaviour:
   VibrateAmplitude: 0.1
   VibrateDuration: 0.1
   GrippingClimbable: 0
+  ClimbingVelocity: 2000
 --- !u!114 &2226960964048931117
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -693,6 +695,9 @@ MonoBehaviour:
     leftHandName: hand_l
     rightHandName: hand_r
   avatar: {fileID: 3853466501486677844}
+  localCharacterIndex: 0
+  localBodyTextureIndex: 0
+  localPropTextureIndex: 0
   menuAvatarImage: {fileID: 0}
   menuUniformImage: {fileID: 0}
   menuPropImage: {fileID: 0}
@@ -981,8 +986,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HeldItem: {fileID: 0}
   StartingItem: {fileID: 0}
+  AutoSnapItem: 0
   CanDropItem: 1
-  CanSwapItem: 1
   CanRemoveItem: 1
   ScaleItem: 1
   DisableColliders: 1
@@ -990,6 +995,7 @@ MonoBehaviour:
   DuplicateItemOnGrab: 0
   MaxDropTime: 0.1
   LastSnapTime: 0
+  LastUnsnapTime: 0
   OnlyAllowNames: []
   ExcludeTransformNames: []
   SoundOnSnap: {fileID: 8300000, guid: 3ceadf14726b0864fb39bb646c0f9ba0, type: 3}
@@ -1014,9 +1020,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ClosestGrabbable: {fileID: 0}
+  UpdateGrabbableFrequency: 0
   ClosestRemoteGrabbable: {fileID: 0}
   FireGrabbableEvents: 0
+  CheckRemoteGrabbables: 0
   RaycastRemoteGrabbables: 0
+  RaycastRemoteFrequency: 0
   RemoteGrabbablesMustBeVisible: 0
   RemoteCollisionLayers:
     serializedVersion: 2
@@ -1042,6 +1051,7 @@ MonoBehaviour:
   RemoteGrabbable: 0
   RemoteGrabMechanic: 0
   RemoteGrabDistance: 2
+  CanDropMidGrab: 0
   ThrowForceMultiplier: 2
   ThrowForceMultiplierAngular: 1.5
   BreakDistance: 1
@@ -1079,6 +1089,7 @@ MonoBehaviour:
   MoveVelocityForce: 3000
   MoveAngularVelocityForce: 90
   LastGrabTime: 0
+  LastRemoteGrabTime: 0
   LastDropTime: 0
   AddControllerVelocityOnDrop: 1
   collisions: []
@@ -1839,8 +1850,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4cd6efc1c18329408933292eeeb037a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UseUpdate: 1
+  UseLateUpdate: 0
   FollowTarget: {fileID: 2226960963963261152}
   MatchRotation: 1
+  UnparentOnStart: 0
   YOffset: 0
 --- !u!1 &1159837149841880376
 GameObject:
@@ -1886,8 +1900,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4cd6efc1c18329408933292eeeb037a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UseUpdate: 1
+  UseLateUpdate: 0
   FollowTarget: {fileID: 7550344387654742245}
   MatchRotation: 1
+  UnparentOnStart: 0
   YOffset: 0
 --- !u!1 &1244948979911259508
 GameObject:
@@ -2067,6 +2084,7 @@ MonoBehaviour:
   InputAction: {fileID: 4860515764186564299, guid: e39f4b35a6db18348b41eb0262520e69,
     type: 3}
   ToggleObject: {fileID: 7058321565687939733}
+  controllerBinding: 0
 --- !u!1 &1482229528647807166
 GameObject:
   m_ObjectHideFlags: 0
@@ -2432,6 +2450,7 @@ MonoBehaviour:
   HideRightHand: 0
   HideLegs: 0
   HipsJoint: {fileID: 4449347219790505887}
+  FollowPlayer: {fileID: 0}
   ApplyVelocityToAnimator: 0
   hideBoneScale: {x: 0.0001, y: 0.0001, z: 0.0001}
   LeftGrabber: {fileID: 0}
@@ -2644,8 +2663,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4cd6efc1c18329408933292eeeb037a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UseUpdate: 1
+  UseLateUpdate: 0
   FollowTarget: {fileID: 7550344387654742245}
   MatchRotation: 1
+  UnparentOnStart: 0
   YOffset: 0
 --- !u!1 &2226960963422514096
 GameObject:
@@ -4948,8 +4970,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HeldItem: {fileID: 0}
   StartingItem: {fileID: 0}
+  AutoSnapItem: 0
   CanDropItem: 1
-  CanSwapItem: 1
   CanRemoveItem: 1
   ScaleItem: 1
   DisableColliders: 1
@@ -4957,6 +4979,7 @@ MonoBehaviour:
   DuplicateItemOnGrab: 0
   MaxDropTime: 0.1
   LastSnapTime: 0
+  LastUnsnapTime: 0
   OnlyAllowNames: []
   ExcludeTransformNames:
   - Hat
@@ -4986,9 +5009,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ClosestGrabbable: {fileID: 0}
+  UpdateGrabbableFrequency: 0
   ClosestRemoteGrabbable: {fileID: 0}
   FireGrabbableEvents: 0
+  CheckRemoteGrabbables: 0
   RaycastRemoteGrabbables: 0
+  RaycastRemoteFrequency: 0
   RemoteGrabbablesMustBeVisible: 0
   RemoteCollisionLayers:
     serializedVersion: 2
@@ -5014,6 +5040,7 @@ MonoBehaviour:
   RemoteGrabbable: 0
   RemoteGrabMechanic: 0
   RemoteGrabDistance: 2
+  CanDropMidGrab: 0
   ThrowForceMultiplier: 2
   ThrowForceMultiplierAngular: 1.5
   BreakDistance: 1
@@ -5051,6 +5078,7 @@ MonoBehaviour:
   MoveVelocityForce: 3000
   MoveAngularVelocityForce: 90
   LastGrabTime: 0
+  LastRemoteGrabTime: 0
   LastDropTime: 0
   AddControllerVelocityOnDrop: 1
   collisions: []
@@ -6190,8 +6218,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damage: 5
-  ColliderRigidbody: {fileID: 0}
   MinForce: 0.1
+  UseRelativeVelocity: 0
   LastRelativeVelocity: 0
   LastDamageForce: 0
   TakeCollisionDamage: 0
@@ -6273,6 +6301,7 @@ MonoBehaviour:
   - {fileID: 2543143967970239353}
   - {fileID: 2543143967970239303}
   OtherJoints: []
+  doSingleAnimation: 0
   ContinuousUpdate: 0
 --- !u!114 &3276470695983059033
 MonoBehaviour:
@@ -6417,8 +6446,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damage: 5
-  ColliderRigidbody: {fileID: 0}
   MinForce: 0.1
+  UseRelativeVelocity: 0
   LastRelativeVelocity: 0
   LastDamageForce: 0
   TakeCollisionDamage: 0
@@ -6500,6 +6529,7 @@ MonoBehaviour:
   - {fileID: 6324017363118008358}
   - {fileID: 6324017363118008344}
   OtherJoints: []
+  doSingleAnimation: 0
   ContinuousUpdate: 0
 --- !u!114 &3276470696896641005
 MonoBehaviour:
@@ -7416,6 +7446,7 @@ MonoBehaviour:
   SupportsIndexTouch: 0
   SupportsThumbTouch: 0
   ShowInputDebugger: 0
+  CheckFixedDeltaTime: 1
 --- !u!114 &7894841360383652590
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7428,6 +7459,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8ef3fb08709aab4cb6e18ac7630ea73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DebugFont: {fileID: 0}
   LogTextColor: {r: 0, g: 1, b: 1, a: 1}
   WarnTextColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   ErrTextColor: {r: 1, g: 0, b: 0, a: 1}
@@ -7478,6 +7510,8 @@ MonoBehaviour:
     type: 3}
   RightThumbNearAction: {fileID: -9043086599165714804, guid: 27bafa1c7d8a77b47985ab70c0511986,
     type: 3}
+  LeftRemoteGrabberPreviewObject: {fileID: 0}
+  RightRemoteGrabberPreviewObject: {fileID: 0}
   HMDIsActive: 0
   LeftControllerPosition: {x: -0.25, y: -0.25, z: 0.25}
   RightControllerPosition: {x: 0.25, y: -0.25, z: 0.25}
@@ -7799,7 +7833,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 1845
+    m_Bits: 3893
   m_RenderingPath: 1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -8537,8 +8571,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HeldItem: {fileID: 0}
   StartingItem: {fileID: 0}
+  AutoSnapItem: 0
   CanDropItem: 1
-  CanSwapItem: 1
   CanRemoveItem: 1
   ScaleItem: 1
   DisableColliders: 1
@@ -8546,6 +8580,7 @@ MonoBehaviour:
   DuplicateItemOnGrab: 0
   MaxDropTime: 0.1
   LastSnapTime: 0
+  LastUnsnapTime: 0
   OnlyAllowNames: []
   ExcludeTransformNames:
   - Hat
@@ -8575,9 +8610,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ClosestGrabbable: {fileID: 0}
+  UpdateGrabbableFrequency: 0
   ClosestRemoteGrabbable: {fileID: 0}
   FireGrabbableEvents: 0
+  CheckRemoteGrabbables: 0
   RaycastRemoteGrabbables: 0
+  RaycastRemoteFrequency: 0
   RemoteGrabbablesMustBeVisible: 0
   RemoteCollisionLayers:
     serializedVersion: 2
@@ -8603,6 +8641,7 @@ MonoBehaviour:
   RemoteGrabbable: 0
   RemoteGrabMechanic: 0
   RemoteGrabDistance: 2
+  CanDropMidGrab: 0
   ThrowForceMultiplier: 2
   ThrowForceMultiplierAngular: 1.5
   BreakDistance: 1
@@ -8640,6 +8679,7 @@ MonoBehaviour:
   MoveVelocityForce: 3000
   MoveAngularVelocityForce: 90
   LastGrabTime: 0
+  LastRemoteGrabTime: 0
   LastDropTime: 0
   AddControllerVelocityOnDrop: 1
   collisions: []
@@ -9405,8 +9445,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HeldItem: {fileID: 0}
   StartingItem: {fileID: 0}
+  AutoSnapItem: 0
   CanDropItem: 1
-  CanSwapItem: 1
   CanRemoveItem: 1
   ScaleItem: 1
   DisableColliders: 1
@@ -9414,6 +9454,7 @@ MonoBehaviour:
   DuplicateItemOnGrab: 0
   MaxDropTime: 0.1
   LastSnapTime: 0
+  LastUnsnapTime: 0
   OnlyAllowNames:
   - Hat
   ExcludeTransformNames: []
@@ -9439,9 +9480,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ClosestGrabbable: {fileID: 0}
+  UpdateGrabbableFrequency: 0
   ClosestRemoteGrabbable: {fileID: 0}
   FireGrabbableEvents: 0
+  CheckRemoteGrabbables: 0
   RaycastRemoteGrabbables: 0
+  RaycastRemoteFrequency: 0
   RemoteGrabbablesMustBeVisible: 0
   RemoteCollisionLayers:
     serializedVersion: 2
@@ -9467,6 +9511,7 @@ MonoBehaviour:
   RemoteGrabbable: 0
   RemoteGrabMechanic: 0
   RemoteGrabDistance: 2
+  CanDropMidGrab: 0
   ThrowForceMultiplier: 2
   ThrowForceMultiplierAngular: 1.5
   BreakDistance: 1
@@ -9504,6 +9549,7 @@ MonoBehaviour:
   MoveVelocityForce: 3000
   MoveAngularVelocityForce: 90
   LastGrabTime: 0
+  LastRemoteGrabTime: 0
   LastDropTime: 0
   AddControllerVelocityOnDrop: 1
   collisions: []
@@ -9655,9 +9701,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controllerHand: 0
-  DefaultGrabButton: 0
   grabbableLayer: 10
   grabber: {fileID: 9101965273887181047}
+  authorityOnInput: 1
 --- !u!1 &5834420467213051851
 GameObject:
   m_ObjectHideFlags: 0
@@ -9887,6 +9933,7 @@ MonoBehaviour:
   RemoteGrabbable: 0
   RemoteGrabMechanic: 0
   RemoteGrabDistance: 2
+  CanDropMidGrab: 0
   ThrowForceMultiplier: 2
   ThrowForceMultiplierAngular: 1.5
   BreakDistance: 1
@@ -9924,6 +9971,7 @@ MonoBehaviour:
   MoveVelocityForce: 3000
   MoveAngularVelocityForce: 90
   LastGrabTime: 0
+  LastRemoteGrabTime: 0
   LastDropTime: 0
   AddControllerVelocityOnDrop: 1
   collisions: []
@@ -12640,9 +12688,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controllerHand: 1
-  DefaultGrabButton: 0
   grabbableLayer: 10
   grabber: {fileID: 7550344389176349955}
+  authorityOnInput: 1
 --- !u!1 &7550344388551410961
 GameObject:
   m_ObjectHideFlags: 0
@@ -12959,9 +13007,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ClosestGrabbable: {fileID: 0}
+  UpdateGrabbableFrequency: 0
   ClosestRemoteGrabbable: {fileID: 0}
   FireGrabbableEvents: 1
+  CheckRemoteGrabbables: 0
   RaycastRemoteGrabbables: 0
+  RaycastRemoteFrequency: 0
   RemoteGrabbablesMustBeVisible: 1
   RemoteCollisionLayers:
     serializedVersion: 2
@@ -13219,15 +13270,19 @@ MonoBehaviour:
   handPoser: {fileID: 0}
   autoPoser: {fileID: 0}
   IdlePoseType: 0
+  DefaultOpenPose: {fileID: 0}
+  DefaultClosePose: {fileID: 0}
   UseIndexFingerTracking: 1
   HandAnimationSpeed: 20
   grabber: {fileID: 0}
   HandPoseOverride: {fileID: 0}
+  ReadControllerInputs: 1
   GripAmount: 0
   PointAmount: 0
   ThumbAmount: 0
   PoseId: 0
   PreviousHeldObject: {fileID: 0}
+  UseBlending: 0
   DoUpdateAnimationStates: 1
   DoUpdateHandPoser: 1
 --- !u!114 &6411259781385084195
@@ -13303,15 +13358,19 @@ MonoBehaviour:
   handPoser: {fileID: 0}
   autoPoser: {fileID: 0}
   IdlePoseType: 0
+  DefaultOpenPose: {fileID: 0}
+  DefaultClosePose: {fileID: 0}
   UseIndexFingerTracking: 1
   HandAnimationSpeed: 20
   grabber: {fileID: 0}
   HandPoseOverride: {fileID: 0}
+  ReadControllerInputs: 1
   GripAmount: 0
   PointAmount: 0
   ThumbAmount: 0
   PoseId: 0
   PreviousHeldObject: {fileID: 0}
+  UseBlending: 0
   DoUpdateAnimationStates: 1
   DoUpdateHandPoser: 1
 --- !u!114 &6411259783286510560
@@ -13580,8 +13639,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HeldItem: {fileID: 0}
   StartingItem: {fileID: 0}
+  AutoSnapItem: 0
   CanDropItem: 1
-  CanSwapItem: 1
   CanRemoveItem: 1
   ScaleItem: 1
   DisableColliders: 1
@@ -13589,6 +13648,7 @@ MonoBehaviour:
   DuplicateItemOnGrab: 0
   MaxDropTime: 0.1
   LastSnapTime: 0
+  LastUnsnapTime: 0
   OnlyAllowNames: []
   ExcludeTransformNames: []
   SoundOnSnap: {fileID: 8300000, guid: 3ceadf14726b0864fb39bb646c0f9ba0, type: 3}
@@ -13613,9 +13673,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ClosestGrabbable: {fileID: 0}
+  UpdateGrabbableFrequency: 0
   ClosestRemoteGrabbable: {fileID: 0}
   FireGrabbableEvents: 0
+  CheckRemoteGrabbables: 0
   RaycastRemoteGrabbables: 0
+  RaycastRemoteFrequency: 0
   RemoteGrabbablesMustBeVisible: 0
   RemoteCollisionLayers:
     serializedVersion: 2
@@ -13641,6 +13704,7 @@ MonoBehaviour:
   RemoteGrabbable: 0
   RemoteGrabMechanic: 0
   RemoteGrabDistance: 2
+  CanDropMidGrab: 0
   ThrowForceMultiplier: 2
   ThrowForceMultiplierAngular: 1.5
   BreakDistance: 1
@@ -13678,6 +13742,7 @@ MonoBehaviour:
   MoveVelocityForce: 3000
   MoveAngularVelocityForce: 90
   LastGrabTime: 0
+  LastRemoteGrabTime: 0
   LastDropTime: 0
   AddControllerVelocityOnDrop: 1
   collisions: []
@@ -14703,9 +14768,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ClosestGrabbable: {fileID: 0}
+  UpdateGrabbableFrequency: 0
   ClosestRemoteGrabbable: {fileID: 0}
   FireGrabbableEvents: 1
+  CheckRemoteGrabbables: 0
   RaycastRemoteGrabbables: 0
+  RaycastRemoteFrequency: 0
   RemoteGrabbablesMustBeVisible: 1
   RemoteCollisionLayers:
     serializedVersion: 2
@@ -14976,6 +15044,11 @@ PrefabInstance:
       propertyPath: FollowHead
       value: 
       objectReference: {fileID: 2860153502079632185}
+    - target: {fileID: 6457971901704967013, guid: cc97f912d3b982842a4704631107cda4,
+        type: 3}
+      propertyPath: FollowPlayer
+      value: 
+      objectReference: {fileID: 282409338992793352}
     - target: {fileID: 6457971901704967013, guid: cc97f912d3b982842a4704631107cda4,
         type: 3}
       propertyPath: FollowLeftController

@@ -5590,9 +5590,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9af453db49596604694197fe530765de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!143 &1975351007 stripped
-CharacterController:
-  m_CorrespondingSourceObject: {fileID: 282409338981007086, guid: 846b75224d5b017428f9a9f8187123e4,
+--- !u!4 &1975351008 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 282409338992793352, guid: 846b75224d5b017428f9a9f8187123e4,
     type: 3}
   m_PrefabInstance: {fileID: 6927795953320359198}
   m_PrefabAsset: {fileID: 0}
@@ -42076,7 +42076,7 @@ PrefabInstance:
         type: 3}
       propertyPath: FollowPlayer
       value: 
-      objectReference: {fileID: 1975351007}
+      objectReference: {fileID: 1975351008}
     - target: {fileID: 4313148249130439269, guid: 846b75224d5b017428f9a9f8187123e4,
         type: 3}
       propertyPath: m_Name

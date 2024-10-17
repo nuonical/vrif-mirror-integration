@@ -133,7 +133,7 @@ PrefabInstance:
     - target: {fileID: 419275079032366568, guid: e0633b401ceacc44bb2730fef48b35ee,
         type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 419275079032366568, guid: e0633b401ceacc44bb2730fef48b35ee,
         type: 3}
@@ -638,18 +638,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 1 / 12
---- !u!114 &1154411164 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 89460339008455444, guid: 0fc190f2fab2a6744ba2dbaf631b35b8,
-    type: 3}
-  m_PrefabInstance: {fileID: 8579960583951854510}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31c428201425bc44d8eb038a0fb424d8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1206252297
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -683,7 +671,7 @@ PrefabInstance:
     - target: {fileID: 419275079032366568, guid: e0633b401ceacc44bb2730fef48b35ee,
         type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 419275079032366568, guid: e0633b401ceacc44bb2730fef48b35ee,
         type: 3}
@@ -1037,7 +1025,7 @@ RectTransform:
   m_Children:
   - {fileID: 1739861810}
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: -45, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1075,7 +1063,7 @@ PrefabInstance:
     - target: {fileID: 1725541463306743941, guid: cf42233f335ff8c4083ef5ee4a742b22,
         type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1725541463306743941, guid: cf42233f335ff8c4083ef5ee4a742b22,
         type: 3}
@@ -1134,18 +1122,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cf42233f335ff8c4083ef5ee4a742b22, type: 3}
---- !u!114 &1670832199 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1703847965976764128, guid: 0fc190f2fab2a6744ba2dbaf631b35b8,
-    type: 3}
-  m_PrefabInstance: {fileID: 8579960583951854510}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31c428201425bc44d8eb038a0fb424d8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1739861809
 GameObject:
   m_ObjectHideFlags: 0
@@ -1275,28 +1251,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1975351006, guid: 846b75224d5b017428f9a9f8187123e4, type: 3}
-      propertyPath: menuPropImage
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1975351006, guid: 846b75224d5b017428f9a9f8187123e4, type: 3}
-      propertyPath: menuAvatarImage
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1975351006, guid: 846b75224d5b017428f9a9f8187123e4, type: 3}
-      propertyPath: menuUniformImage
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2685707787512235012, guid: 846b75224d5b017428f9a9f8187123e4,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.00019429326
-      objectReference: {fileID: 0}
-    - target: {fileID: 2685707787512235012, guid: 846b75224d5b017428f9a9f8187123e4,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0.0024938926
-      objectReference: {fileID: 0}
     - target: {fileID: 4313148249130439269, guid: 846b75224d5b017428f9a9f8187123e4,
         type: 3}
       propertyPath: m_Name
@@ -1305,7 +1259,7 @@ PrefabInstance:
     - target: {fileID: 4313148249130439271, guid: 846b75224d5b017428f9a9f8187123e4,
         type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 4313148249130439271, guid: 846b75224d5b017428f9a9f8187123e4,
         type: 3}
@@ -1573,7 +1527,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1823775376
 MonoBehaviour:
@@ -1609,6 +1563,13 @@ MonoBehaviour:
   HandPose: 0
   LeftHandIsValid: 0
   RightHandIsValid: 1
+  InvertLeftHand: 0
+  InvertLeftPositionX: 1
+  InvertLeftPositionY: 0
+  InvertLeftPositionZ: 0
+  InvertLeftEulerX: 0
+  InvertLeftEulerY: 1
+  InvertLeftEulerZ: 1
   HandPosition: {fileID: 0}
   MaxDegreeDifferenceAllowed: 360
   IndexBlendMin: 0
@@ -1616,6 +1577,8 @@ MonoBehaviour:
   ThumbBlendMin: 0
   ThumbBlendMax: 0
   ShowAngleGizmo: 1
+  LeftHandPreviewPrefab: {fileID: 0}
+  RightHandPreviewPrefab: {fileID: 0}
 --- !u!1 &2060585636
 GameObject:
   m_ObjectHideFlags: 0
@@ -1662,7 +1625,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2068755937
 GameObject:
@@ -1884,7 +1847,7 @@ PrefabInstance:
     - target: {fileID: 419275079032366568, guid: e0633b401ceacc44bb2730fef48b35ee,
         type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 419275079032366568, guid: e0633b401ceacc44bb2730fef48b35ee,
         type: 3}
@@ -2464,9 +2427,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ClosestGrabbable: {fileID: 0}
+  UpdateGrabbableFrequency: 0
   ClosestRemoteGrabbable: {fileID: 0}
   FireGrabbableEvents: 0
+  CheckRemoteGrabbables: 0
   RaycastRemoteGrabbables: 0
+  RaycastRemoteFrequency: 0
   RemoteGrabbablesMustBeVisible: 0
   RemoteCollisionLayers:
     serializedVersion: 2
@@ -2485,8 +2451,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HeldItem: {fileID: 0}
   StartingItem: {fileID: 0}
+  AutoSnapItem: 0
   CanDropItem: 1
-  CanSwapItem: 1
   CanRemoveItem: 1
   ScaleItem: 0.9
   DisableColliders: 1
@@ -2494,6 +2460,7 @@ MonoBehaviour:
   DuplicateItemOnGrab: 0
   MaxDropTime: 0.1
   LastSnapTime: 0
+  LastUnsnapTime: 0
   OnlyAllowNames:
   - Shell
   ExcludeTransformNames: []
@@ -2604,6 +2571,7 @@ MonoBehaviour:
   RemoteGrabbable: 0
   RemoteGrabMechanic: 0
   RemoteGrabDistance: 2
+  CanDropMidGrab: 0
   ThrowForceMultiplier: 2
   ThrowForceMultiplierAngular: 1.5
   BreakDistance: 1
@@ -2641,6 +2609,7 @@ MonoBehaviour:
   MoveVelocityForce: 3000
   MoveAngularVelocityForce: 90
   LastGrabTime: 0
+  LastRemoteGrabTime: 0
   LastDropTime: 0
   AddControllerVelocityOnDrop: 1
   collisions: []
@@ -5095,6 +5064,7 @@ MonoBehaviour:
   RemoteGrabbable: 0
   RemoteGrabMechanic: 0
   RemoteGrabDistance: 0.1
+  CanDropMidGrab: 0
   ThrowForceMultiplier: 1.25
   ThrowForceMultiplierAngular: 1.125
   BreakDistance: 0.5
@@ -5132,6 +5102,7 @@ MonoBehaviour:
   MoveVelocityForce: 3000
   MoveAngularVelocityForce: 90
   LastGrabTime: 0
+  LastRemoteGrabTime: 0
   LastDropTime: 0
   AddControllerVelocityOnDrop: 1
   collisions: []
@@ -9291,6 +9262,7 @@ MonoBehaviour:
   RemoteGrabbable: 0
   RemoteGrabMechanic: 0
   RemoteGrabDistance: 2
+  CanDropMidGrab: 0
   ThrowForceMultiplier: 2
   ThrowForceMultiplierAngular: 1.5
   BreakDistance: 0.75
@@ -9328,6 +9300,7 @@ MonoBehaviour:
   MoveVelocityForce: 3000
   MoveAngularVelocityForce: 90
   LastGrabTime: 0
+  LastRemoteGrabTime: 0
   LastDropTime: 0
   AddControllerVelocityOnDrop: 1
   collisions: []
@@ -9544,7 +9517,7 @@ Transform:
   - {fileID: 5238158811608203101}
   - {fileID: 2764958024131434653}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2028152983512861220
 GameObject:
@@ -9696,7 +9669,6 @@ MonoBehaviour:
   FiringMethod: 1
   ReloadMethod: 1
   FiringRate: 0.05
-  lastShotTime: 0
   BulletImpactForce: 1000
   InternalAmmo: 0
   MaxInternalAmmo: 32
@@ -9709,17 +9681,22 @@ MonoBehaviour:
   BulletCasingForce: 3
   LaserGuided: 0
   LaserPoint: {fileID: 0}
+  SafetyOn: 0
   RecoilForce: {x: 0, y: 0, z: 0}
+  RecoilForceTwoHanded: {x: 0, y: 0, z: 0}
   RecoilDuration: 0.3
   ValidLayers:
     serializedVersion: 2
     m_Bits: 1281
   TriggerTransform: {fileID: 2028152984728488239}
+  TriggerRotateSpeed: 15
   SlideTransform: {fileID: 2028152983607077608}
   MuzzlePointTransform: {fileID: 2028152984204080223}
+  MuzzlePointSilencedTransform: {fileID: 0}
   EjectPointTransform: {fileID: 2028152983878442158}
   ChamberedBullet: {fileID: 6555947450336108634}
   MuzzleFlashObject: {fileID: 2028152984660348577}
+  MuzzleFlashSilencedObject: {fileID: 0}
   BulletCasingPrefab: {fileID: 1282233564399203881, guid: e6d6d8266008ffe438ce58f774e874fa,
     type: 3}
   ProjectilePrefab: {fileID: 1449094533667961452, guid: 4af46545725f628459794cfc7c0f7d54,
@@ -9728,6 +9705,9 @@ MonoBehaviour:
     type: 3}
   GunShotSound: {fileID: 8300000, guid: 6b23ba5ed1da95140b52f6863122d72b, type: 3}
   GunShotVolume: 0.75
+  IsSilenced: 0
+  GunShotSilencedSound: {fileID: 0}
+  GunShotSilencedVolume: 0.75
   EmptySound: {fileID: 8300000, guid: 3ceadf14726b0864fb39bb646c0f9ba0, type: 3}
   EmptySoundVolume: 1
   SlideDistance: -0.028
@@ -9766,6 +9746,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   onRaycastHitEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  onPlayedEmptyShotEvent:
     m_PersistentCalls:
       m_Calls: []
 --- !u!82 &2028152983512861229
@@ -9885,6 +9868,7 @@ MonoBehaviour:
   RemoteGrabbable: 1
   RemoteGrabMechanic: 0
   RemoteGrabDistance: 2.5
+  CanDropMidGrab: 0
   ThrowForceMultiplier: 2.5
   ThrowForceMultiplierAngular: 1.5
   BreakDistance: 1
@@ -9922,6 +9906,7 @@ MonoBehaviour:
   MoveVelocityForce: 3000
   MoveAngularVelocityForce: 90
   LastGrabTime: 0
+  LastRemoteGrabTime: 0
   LastDropTime: 0
   AddControllerVelocityOnDrop: 1
   collisions: []
@@ -10000,11 +9985,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AcceptableMagazineName: RifleClip
   AttachedWeapon: {fileID: 2028152983512861230}
+  InsertSpeed: 10
   ClipSnapDistance: 0.04
   ClipUnsnapDistance: 0.05
   EjectForce: 1
+  EjectDirection: 0
+  OffsetMagOnEject: 1
+  MagEjectOffset: {x: 0, y: -0.1, z: 0}
+  ReattachInterval: 0.2
   HeldMagazine: {fileID: 0}
   MagazineDistance: 0
+  CanGrabMagazine: 1
   ClipAttachSound: {fileID: 8300000, guid: f6ba2c16c86180148906c2b6840404ae, type: 3}
   ClipDetachSound: {fileID: 8300000, guid: 3ceadf14726b0864fb39bb646c0f9ba0, type: 3}
 --- !u!65 &2028152983572263365
@@ -10086,6 +10077,7 @@ MonoBehaviour:
   RemoteGrabbable: 0
   RemoteGrabMechanic: 0
   RemoteGrabDistance: 0.5
+  CanDropMidGrab: 0
   ThrowForceMultiplier: 1.25
   ThrowForceMultiplierAngular: 1.125
   BreakDistance: 1
@@ -10123,6 +10115,7 @@ MonoBehaviour:
   MoveVelocityForce: 3000
   MoveAngularVelocityForce: 90
   LastGrabTime: 0
+  LastRemoteGrabTime: 0
   LastDropTime: 0
   AddControllerVelocityOnDrop: 1
   collisions: []
@@ -13663,7 +13656,6 @@ MonoBehaviour:
   FiringMethod: 0
   ReloadMethod: 1
   FiringRate: 0.05
-  lastShotTime: 0
   BulletImpactForce: 1000
   InternalAmmo: 0
   MaxInternalAmmo: 8
@@ -13676,17 +13668,22 @@ MonoBehaviour:
   BulletCasingForce: 3
   LaserGuided: 0
   LaserPoint: {fileID: 0}
+  SafetyOn: 0
   RecoilForce: {x: 0, y: 0, z: 0}
+  RecoilForceTwoHanded: {x: 0, y: 0, z: 0}
   RecoilDuration: 0.3
   ValidLayers:
     serializedVersion: 2
     m_Bits: 1281
   TriggerTransform: {fileID: 1699639748447820894}
+  TriggerRotateSpeed: 15
   SlideTransform: {fileID: 0}
   MuzzlePointTransform: {fileID: 5438212932347291340}
+  MuzzlePointSilencedTransform: {fileID: 0}
   EjectPointTransform: {fileID: 5438212932127033594}
   ChamberedBullet: {fileID: 918158434797924944}
   MuzzleFlashObject: {fileID: 5070713041894934636}
+  MuzzleFlashSilencedObject: {fileID: 0}
   BulletCasingPrefab: {fileID: 1957835912866165125, guid: 8e6416e07b49a3b408f1e28f76181c7e,
     type: 3}
   ProjectilePrefab: {fileID: 1449094533667961452, guid: 4af46545725f628459794cfc7c0f7d54,
@@ -13695,6 +13692,9 @@ MonoBehaviour:
     type: 3}
   GunShotSound: {fileID: 8300000, guid: 34b530c1e1e9915459e34ff783bd7434, type: 3}
   GunShotVolume: 0.75
+  IsSilenced: 0
+  GunShotSilencedSound: {fileID: 0}
+  GunShotSilencedVolume: 0.75
   EmptySound: {fileID: 8300000, guid: 3ceadf14726b0864fb39bb646c0f9ba0, type: 3}
   EmptySoundVolume: 1
   SlideDistance: 0
@@ -13723,6 +13723,9 @@ MonoBehaviour:
   onRaycastHitEvent:
     m_PersistentCalls:
       m_Calls: []
+  onPlayedEmptyShotEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &2858235543480188238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13740,6 +13743,13 @@ MonoBehaviour:
   HandPose: 0
   LeftHandIsValid: 1
   RightHandIsValid: 0
+  InvertLeftHand: 0
+  InvertLeftPositionX: 1
+  InvertLeftPositionY: 0
+  InvertLeftPositionZ: 0
+  InvertLeftEulerX: 0
+  InvertLeftEulerY: 1
+  InvertLeftEulerZ: 1
   HandPosition: {fileID: 0}
   MaxDegreeDifferenceAllowed: 360
   IndexBlendMin: 0
@@ -13747,6 +13757,8 @@ MonoBehaviour:
   ThumbBlendMin: 0
   ThumbBlendMax: 0
   ShowAngleGizmo: 1
+  LeftHandPreviewPrefab: {fileID: 0}
+  RightHandPreviewPrefab: {fileID: 0}
 --- !u!114 &2937459083868931528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14137,6 +14149,13 @@ MonoBehaviour:
   HandPose: 50
   LeftHandIsValid: 1
   RightHandIsValid: 0
+  InvertLeftHand: 0
+  InvertLeftPositionX: 1
+  InvertLeftPositionY: 0
+  InvertLeftPositionZ: 0
+  InvertLeftEulerX: 0
+  InvertLeftEulerY: 1
+  InvertLeftEulerZ: 1
   HandPosition: {fileID: 0}
   MaxDegreeDifferenceAllowed: 360
   IndexBlendMin: 0
@@ -14144,6 +14163,8 @@ MonoBehaviour:
   ThumbBlendMin: 0
   ThumbBlendMax: 0
   ShowAngleGizmo: 1
+  LeftHandPreviewPrefab: {fileID: 0}
+  RightHandPreviewPrefab: {fileID: 0}
 --- !u!65 &3828899347163815400
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14783,6 +14804,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1793
   LaserEnd: {fileID: 6420601149928861085}
+  UseLineRenderer: 1
   Active: 1
 --- !u!65 &5438212931663616593
 BoxCollider:
@@ -14870,7 +14892,7 @@ Transform:
   - {fileID: 6273651838356201566}
   - {fileID: 6273651839736652642}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5438212931663616597
 MonoBehaviour:
@@ -15023,6 +15045,7 @@ MonoBehaviour:
   RemoteGrabbable: 1
   RemoteGrabMechanic: 0
   RemoteGrabDistance: 2.5
+  CanDropMidGrab: 0
   ThrowForceMultiplier: 2.5
   ThrowForceMultiplierAngular: 1.5
   BreakDistance: 2
@@ -15060,6 +15083,7 @@ MonoBehaviour:
   MoveVelocityForce: 3000
   MoveAngularVelocityForce: 90
   LastGrabTime: 0
+  LastRemoteGrabTime: 0
   LastDropTime: 0
   AddControllerVelocityOnDrop: 1
   collisions: []
@@ -15211,6 +15235,13 @@ MonoBehaviour:
   HandPose: 50
   LeftHandIsValid: 0
   RightHandIsValid: 1
+  InvertLeftHand: 0
+  InvertLeftPositionX: 1
+  InvertLeftPositionY: 0
+  InvertLeftPositionZ: 0
+  InvertLeftEulerX: 0
+  InvertLeftEulerY: 1
+  InvertLeftEulerZ: 1
   HandPosition: {fileID: 0}
   MaxDegreeDifferenceAllowed: 360
   IndexBlendMin: 0
@@ -15218,6 +15249,8 @@ MonoBehaviour:
   ThumbBlendMin: 0
   ThumbBlendMax: 0
   ShowAngleGizmo: 1
+  LeftHandPreviewPrefab: {fileID: 0}
+  RightHandPreviewPrefab: {fileID: 0}
 --- !u!1 &5574818669351997789
 GameObject:
   m_ObjectHideFlags: 0
@@ -15306,6 +15339,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Weapon: {fileID: 0}
+  magazine: {fileID: 0}
   AcceptBulletName: Bullet
   InsertSound: {fileID: 0}
 --- !u!23 &5989098926265431470
@@ -15560,6 +15594,7 @@ MonoBehaviour:
   RemoteGrabbable: 0
   RemoteGrabMechanic: 0
   RemoteGrabDistance: 2
+  CanDropMidGrab: 0
   ThrowForceMultiplier: 2
   ThrowForceMultiplierAngular: 1.5
   BreakDistance: 1
@@ -15597,6 +15632,7 @@ MonoBehaviour:
   MoveVelocityForce: 3000
   MoveAngularVelocityForce: 90
   LastGrabTime: 0
+  LastRemoteGrabTime: 0
   LastDropTime: 0
   AddControllerVelocityOnDrop: 1
   collisions: []
@@ -15649,8 +15685,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HeldItem: {fileID: 0}
   StartingItem: {fileID: 0}
+  AutoSnapItem: 0
   CanDropItem: 1
-  CanSwapItem: 1
   CanRemoveItem: 1
   ScaleItem: 0.9
   DisableColliders: 1
@@ -15658,6 +15694,7 @@ MonoBehaviour:
   DuplicateItemOnGrab: 0
   MaxDropTime: 0.1
   LastSnapTime: 0
+  LastUnsnapTime: 0
   OnlyAllowNames:
   - Shell
   ExcludeTransformNames: []
@@ -15683,9 +15720,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ClosestGrabbable: {fileID: 0}
+  UpdateGrabbableFrequency: 0
   ClosestRemoteGrabbable: {fileID: 0}
   FireGrabbableEvents: 0
+  CheckRemoteGrabbables: 0
   RaycastRemoteGrabbables: 0
+  RaycastRemoteFrequency: 0
   RemoteGrabbablesMustBeVisible: 0
   RemoteCollisionLayers:
     serializedVersion: 2
@@ -15732,9 +15772,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ClosestGrabbable: {fileID: 0}
+  UpdateGrabbableFrequency: 0
   ClosestRemoteGrabbable: {fileID: 0}
   FireGrabbableEvents: 0
+  CheckRemoteGrabbables: 0
   RaycastRemoteGrabbables: 0
+  RaycastRemoteFrequency: 0
   RemoteGrabbablesMustBeVisible: 0
   RemoteCollisionLayers:
     serializedVersion: 2
@@ -15753,8 +15796,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HeldItem: {fileID: 0}
   StartingItem: {fileID: 0}
+  AutoSnapItem: 0
   CanDropItem: 1
-  CanSwapItem: 1
   CanRemoveItem: 1
   ScaleItem: 0.9
   DisableColliders: 1
@@ -15762,6 +15805,7 @@ MonoBehaviour:
   DuplicateItemOnGrab: 0
   MaxDropTime: 0.1
   LastSnapTime: 0
+  LastUnsnapTime: 0
   OnlyAllowNames:
   - Shell
   ExcludeTransformNames: []
@@ -15872,6 +15916,7 @@ MonoBehaviour:
   RemoteGrabbable: 0
   RemoteGrabMechanic: 0
   RemoteGrabDistance: 2
+  CanDropMidGrab: 0
   ThrowForceMultiplier: 2
   ThrowForceMultiplierAngular: 1.5
   BreakDistance: 1
@@ -15909,6 +15954,7 @@ MonoBehaviour:
   MoveVelocityForce: 3000
   MoveAngularVelocityForce: 90
   LastGrabTime: 0
+  LastRemoteGrabTime: 0
   LastDropTime: 0
   AddControllerVelocityOnDrop: 1
   collisions: []
@@ -16023,8 +16069,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HeldItem: {fileID: 0}
   StartingItem: {fileID: 0}
+  AutoSnapItem: 0
   CanDropItem: 1
-  CanSwapItem: 1
   CanRemoveItem: 1
   ScaleItem: 0.9
   DisableColliders: 1
@@ -16032,6 +16078,7 @@ MonoBehaviour:
   DuplicateItemOnGrab: 0
   MaxDropTime: 0.1
   LastSnapTime: 0
+  LastUnsnapTime: 0
   OnlyAllowNames:
   - Shell
   ExcludeTransformNames: []
@@ -16057,9 +16104,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ClosestGrabbable: {fileID: 0}
+  UpdateGrabbableFrequency: 0
   ClosestRemoteGrabbable: {fileID: 0}
   FireGrabbableEvents: 0
+  CheckRemoteGrabbables: 0
   RaycastRemoteGrabbables: 0
+  RaycastRemoteFrequency: 0
   RemoteGrabbablesMustBeVisible: 0
   RemoteCollisionLayers:
     serializedVersion: 2
@@ -16135,6 +16185,7 @@ MonoBehaviour:
   RemoteGrabbable: 0
   RemoteGrabMechanic: 0
   RemoteGrabDistance: 2
+  CanDropMidGrab: 0
   ThrowForceMultiplier: 2
   ThrowForceMultiplierAngular: 1.5
   BreakDistance: 1
@@ -16172,6 +16223,7 @@ MonoBehaviour:
   MoveVelocityForce: 3000
   MoveAngularVelocityForce: 90
   LastGrabTime: 0
+  LastRemoteGrabTime: 0
   LastDropTime: 0
   AddControllerVelocityOnDrop: 1
   collisions: []
@@ -17381,110 +17433,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1001 &8579960583951854510
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 89460338682775841, guid: 0fc190f2fab2a6744ba2dbaf631b35b8,
-        type: 3}
-      propertyPath: grabber
-      value: 
-      objectReference: {fileID: 1154411164}
-    - target: {fileID: 764249339353924499, guid: 0fc190f2fab2a6744ba2dbaf631b35b8,
-        type: 3}
-      propertyPath: ParentObjectToSnapZone
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2972095127188804089, guid: 0fc190f2fab2a6744ba2dbaf631b35b8,
-        type: 3}
-      propertyPath: ParentObjectToSnapZone
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4111191637589509832, guid: 0fc190f2fab2a6744ba2dbaf631b35b8,
-        type: 3}
-      propertyPath: grabber
-      value: 
-      objectReference: {fileID: 1670832199}
-    - target: {fileID: 5921816763504854128, guid: 0fc190f2fab2a6744ba2dbaf631b35b8,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 5921816763504854128, guid: 0fc190f2fab2a6744ba2dbaf631b35b8,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5921816763504854128, guid: 0fc190f2fab2a6744ba2dbaf631b35b8,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5921816763504854128, guid: 0fc190f2fab2a6744ba2dbaf631b35b8,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5921816763504854128, guid: 0fc190f2fab2a6744ba2dbaf631b35b8,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5921816763504854128, guid: 0fc190f2fab2a6744ba2dbaf631b35b8,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5921816763504854128, guid: 0fc190f2fab2a6744ba2dbaf631b35b8,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5921816763504854128, guid: 0fc190f2fab2a6744ba2dbaf631b35b8,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5921816763504854128, guid: 0fc190f2fab2a6744ba2dbaf631b35b8,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5921816763504854128, guid: 0fc190f2fab2a6744ba2dbaf631b35b8,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5921816763504854128, guid: 0fc190f2fab2a6744ba2dbaf631b35b8,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5921816763504854130, guid: 0fc190f2fab2a6744ba2dbaf631b35b8,
-        type: 3}
-      propertyPath: m_Name
-      value: XR Rig Networked
-      objectReference: {fileID: 0}
-    - target: {fileID: 5921816763504854130, guid: 0fc190f2fab2a6744ba2dbaf631b35b8,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6097662612627121325, guid: 0fc190f2fab2a6744ba2dbaf631b35b8,
-        type: 3}
-      propertyPath: ParentObjectToSnapZone
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6857931545373538372, guid: 0fc190f2fab2a6744ba2dbaf631b35b8,
-        type: 3}
-      propertyPath: ParentObjectToSnapZone
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 0fc190f2fab2a6744ba2dbaf631b35b8, type: 3}
 --- !u!4 &8662030015452602052
 Transform:
   m_ObjectHideFlags: 0
