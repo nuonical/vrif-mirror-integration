@@ -174,6 +174,7 @@ MonoBehaviour:
   HideRightHand: 0
   HideLegs: 0
   HipsJoint: {fileID: 2912348582262242894}
+  FollowPlayer: {fileID: 6748570664686025310}
   ApplyVelocityToAnimator: 1
   hideBoneScale: {x: 0.0001, y: 0.0001, z: 0.0001}
   LeftGrabber: {fileID: 0}
@@ -203,7 +204,6 @@ MonoBehaviour:
   RotationLerpSpeed: 5
   ChangeDegrees: 5
   UnparentOnStart: 0
-  angle: 0
 --- !u!1 &120687145254981138
 GameObject:
   m_ObjectHideFlags: 0
@@ -650,6 +650,7 @@ MonoBehaviour:
   - {fileID: 1288770348763957165}
   - {fileID: 1288770348763957139}
   OtherJoints: []
+  doSingleAnimation: 0
   ContinuousUpdate: 0
 --- !u!114 &5201706521181523243
 MonoBehaviour:
@@ -5198,6 +5199,7 @@ MonoBehaviour:
   - {fileID: 8246218516598794188}
   - {fileID: 1898070327299975337}
   OtherJoints: []
+  doSingleAnimation: 0
   ContinuousUpdate: 0
 --- !u!114 &528602758580458983
 MonoBehaviour:
@@ -5434,6 +5436,7 @@ MonoBehaviour:
   - {fileID: 7197111181344723863}
   - {fileID: 6098906363782745582}
   OtherJoints: []
+  doSingleAnimation: 0
   ContinuousUpdate: 0
 --- !u!114 &2463172065966197197
 MonoBehaviour:
@@ -8016,6 +8019,7 @@ MonoBehaviour:
   - {fileID: 677067098776046340}
   - {fileID: 677067098776046394}
   OtherJoints: []
+  doSingleAnimation: 0
   ContinuousUpdate: 0
 --- !u!114 &2615330414056188573
 MonoBehaviour:

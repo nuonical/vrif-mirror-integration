@@ -201,27 +201,27 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1871806756}
     m_Modifications:
     - target: {fileID: 419275079032366568, guid: e0633b401ceacc44bb2730fef48b35ee,
         type: 3}
       propertyPath: m_RootOrder
-      value: 16
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 419275079032366568, guid: e0633b401ceacc44bb2730fef48b35ee,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.088
+      value: 1.2178745
       objectReference: {fileID: 0}
     - target: {fileID: 419275079032366568, guid: e0633b401ceacc44bb2730fef48b35ee,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.157
+      value: -0.3368394
       objectReference: {fileID: 0}
     - target: {fileID: 419275079032366568, guid: e0633b401ceacc44bb2730fef48b35ee,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.26
+      value: -4.9386578
       objectReference: {fileID: 0}
     - target: {fileID: 419275079032366568, guid: e0633b401ceacc44bb2730fef48b35ee,
         type: 3}
@@ -231,17 +231,17 @@ PrefabInstance:
     - target: {fileID: 419275079032366568, guid: e0633b401ceacc44bb2730fef48b35ee,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 419275079032366568, guid: e0633b401ceacc44bb2730fef48b35ee,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 419275079032366568, guid: e0633b401ceacc44bb2730fef48b35ee,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 419275079032366568, guid: e0633b401ceacc44bb2730fef48b35ee,
         type: 3}
@@ -262,6 +262,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: NetworkShell (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 419275079032366575, guid: e0633b401ceacc44bb2730fef48b35ee,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2411159637822908621, guid: e0633b401ceacc44bb2730fef48b35ee,
         type: 3}
@@ -583,7 +588,7 @@ PrefabInstance:
     - target: {fileID: 9148596257437500471, guid: 45d3656d13f8ecb4c8fca3979e1a55a6,
         type: 3}
       propertyPath: m_RootOrder
-      value: 14
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 9148596257437500471, guid: 45d3656d13f8ecb4c8fca3979e1a55a6,
         type: 3}
@@ -677,6 +682,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CollidersToIgnore:
   - {fileID: 5438212931663616594}
+--- !u!4 &329023131 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 419275079032366568, guid: e0633b401ceacc44bb2730fef48b35ee,
+    type: 3}
+  m_PrefabInstance: {fileID: 238295597}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &472328749
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1051,6 +1062,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 529463093}
   m_CullTransparentMesh: 1
+--- !u!4 &580170738 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 419275079032366568, guid: e0633b401ceacc44bb2730fef48b35ee,
+    type: 3}
+  m_PrefabInstance: {fileID: 2125513139}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &598756033
 GameObject:
   m_ObjectHideFlags: 0
@@ -3260,27 +3277,27 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1871806756}
     m_Modifications:
     - target: {fileID: 419275079032366568, guid: e0633b401ceacc44bb2730fef48b35ee,
         type: 3}
       propertyPath: m_RootOrder
-      value: 17
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 419275079032366568, guid: e0633b401ceacc44bb2730fef48b35ee,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.02
+      value: 1.3258746
       objectReference: {fileID: 0}
     - target: {fileID: 419275079032366568, guid: e0633b401ceacc44bb2730fef48b35ee,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.157
+      value: -0.3368394
       objectReference: {fileID: 0}
     - target: {fileID: 419275079032366568, guid: e0633b401ceacc44bb2730fef48b35ee,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.26
+      value: -4.9386578
       objectReference: {fileID: 0}
     - target: {fileID: 419275079032366568, guid: e0633b401ceacc44bb2730fef48b35ee,
         type: 3}
@@ -3290,17 +3307,17 @@ PrefabInstance:
     - target: {fileID: 419275079032366568, guid: e0633b401ceacc44bb2730fef48b35ee,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 419275079032366568, guid: e0633b401ceacc44bb2730fef48b35ee,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 419275079032366568, guid: e0633b401ceacc44bb2730fef48b35ee,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 419275079032366568, guid: e0633b401ceacc44bb2730fef48b35ee,
         type: 3}
@@ -3321,6 +3338,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: NetworkShell (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 419275079032366575, guid: e0633b401ceacc44bb2730fef48b35ee,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2411159637822908621, guid: e0633b401ceacc44bb2730fef48b35ee,
         type: 3}
@@ -5063,6 +5085,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51328566bbd01dd4e8681341199abe2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1871806755
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1871806756}
+  m_Layer: 0
+  m_Name: UnusedOldLeaveForReference
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1871806756
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1871806755}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.3058746, y: 0.1798394, z: 6.1986575}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 5438212931663616596}
+  - {fileID: 2028152983512861201}
+  - {fileID: 3393538753128323718}
+  - {fileID: 580170738}
+  - {fileID: 329023131}
+  - {fileID: 2091591922}
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1910393465
 GameObject:
   m_ObjectHideFlags: 0
@@ -5531,6 +5590,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9af453db49596604694197fe530765de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!143 &1975351007 stripped
+CharacterController:
+  m_CorrespondingSourceObject: {fileID: 282409338981007086, guid: 846b75224d5b017428f9a9f8187123e4,
+    type: 3}
+  m_PrefabInstance: {fileID: 6927795953320359198}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1979835847
 GameObject:
   m_ObjectHideFlags: 0
@@ -5898,6 +5963,13 @@ MonoBehaviour:
   HandPose: 0
   LeftHandIsValid: 0
   RightHandIsValid: 1
+  InvertLeftHand: 0
+  InvertLeftPositionX: 1
+  InvertLeftPositionY: 0
+  InvertLeftPositionZ: 0
+  InvertLeftEulerX: 0
+  InvertLeftEulerY: 1
+  InvertLeftEulerZ: 1
   HandPosition: {fileID: 0}
   MaxDegreeDifferenceAllowed: 360
   IndexBlendMin: 0
@@ -5905,6 +5977,8 @@ MonoBehaviour:
   ThumbBlendMin: 0
   ThumbBlendMax: 0
   ShowAngleGizmo: 1
+  LeftHandPreviewPrefab: {fileID: 0}
+  RightHandPreviewPrefab: {fileID: 0}
 --- !u!1 &2060585636
 GameObject:
   m_ObjectHideFlags: 0
@@ -6028,6 +6102,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &2091591922 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 419275079032366568, guid: e0633b401ceacc44bb2730fef48b35ee,
+    type: 3}
+  m_PrefabInstance: {fileID: 1229061851}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2111800335
 GameObject:
   m_ObjectHideFlags: 0
@@ -6106,27 +6186,27 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1871806756}
     m_Modifications:
     - target: {fileID: 419275079032366568, guid: e0633b401ceacc44bb2730fef48b35ee,
         type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 419275079032366568, guid: e0633b401ceacc44bb2730fef48b35ee,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.198
+      value: 1.1078746
       objectReference: {fileID: 0}
     - target: {fileID: 419275079032366568, guid: e0633b401ceacc44bb2730fef48b35ee,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.157
+      value: -0.3368394
       objectReference: {fileID: 0}
     - target: {fileID: 419275079032366568, guid: e0633b401ceacc44bb2730fef48b35ee,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.26
+      value: -4.9386578
       objectReference: {fileID: 0}
     - target: {fileID: 419275079032366568, guid: e0633b401ceacc44bb2730fef48b35ee,
         type: 3}
@@ -6136,17 +6216,17 @@ PrefabInstance:
     - target: {fileID: 419275079032366568, guid: e0633b401ceacc44bb2730fef48b35ee,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 419275079032366568, guid: e0633b401ceacc44bb2730fef48b35ee,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 419275079032366568, guid: e0633b401ceacc44bb2730fef48b35ee,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 419275079032366568, guid: e0633b401ceacc44bb2730fef48b35ee,
         type: 3}
@@ -6167,6 +6247,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: NetworkShell
+      objectReference: {fileID: 0}
+    - target: {fileID: 419275079032366575, guid: e0633b401ceacc44bb2730fef48b35ee,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2411159637822908621, guid: e0633b401ceacc44bb2730fef48b35ee,
         type: 3}
@@ -15490,9 +15575,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ClosestGrabbable: {fileID: 0}
+  UpdateGrabbableFrequency: 0
   ClosestRemoteGrabbable: {fileID: 0}
   FireGrabbableEvents: 0
+  CheckRemoteGrabbables: 0
   RaycastRemoteGrabbables: 0
+  RaycastRemoteFrequency: 0
   RemoteGrabbablesMustBeVisible: 0
   RemoteCollisionLayers:
     serializedVersion: 2
@@ -15511,8 +15599,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HeldItem: {fileID: 0}
   StartingItem: {fileID: 0}
+  AutoSnapItem: 0
   CanDropItem: 1
-  CanSwapItem: 1
   CanRemoveItem: 1
   ScaleItem: 0.9
   DisableColliders: 1
@@ -15520,6 +15608,7 @@ MonoBehaviour:
   DuplicateItemOnGrab: 0
   MaxDropTime: 0.1
   LastSnapTime: 0
+  LastUnsnapTime: 0
   OnlyAllowNames:
   - Shell
   ExcludeTransformNames: []
@@ -15630,6 +15719,7 @@ MonoBehaviour:
   RemoteGrabbable: 0
   RemoteGrabMechanic: 0
   RemoteGrabDistance: 2
+  CanDropMidGrab: 0
   ThrowForceMultiplier: 2
   ThrowForceMultiplierAngular: 1.5
   BreakDistance: 1
@@ -15667,6 +15757,7 @@ MonoBehaviour:
   MoveVelocityForce: 3000
   MoveAngularVelocityForce: 90
   LastGrabTime: 0
+  LastRemoteGrabTime: 0
   LastDropTime: 0
   AddControllerVelocityOnDrop: 1
   collisions: []
@@ -18159,6 +18250,7 @@ MonoBehaviour:
   RemoteGrabbable: 0
   RemoteGrabMechanic: 0
   RemoteGrabDistance: 0.1
+  CanDropMidGrab: 0
   ThrowForceMultiplier: 1.25
   ThrowForceMultiplierAngular: 1.125
   BreakDistance: 0.5
@@ -18196,6 +18288,7 @@ MonoBehaviour:
   MoveVelocityForce: 3000
   MoveAngularVelocityForce: 90
   LastGrabTime: 0
+  LastRemoteGrabTime: 0
   LastDropTime: 0
   AddControllerVelocityOnDrop: 1
   collisions: []
@@ -22421,6 +22514,7 @@ MonoBehaviour:
   RemoteGrabbable: 0
   RemoteGrabMechanic: 0
   RemoteGrabDistance: 2
+  CanDropMidGrab: 0
   ThrowForceMultiplier: 2
   ThrowForceMultiplierAngular: 1.5
   BreakDistance: 0.75
@@ -22458,6 +22552,7 @@ MonoBehaviour:
   MoveVelocityForce: 3000
   MoveAngularVelocityForce: 90
   LastGrabTime: 0
+  LastRemoteGrabTime: 0
   LastDropTime: 0
   AddControllerVelocityOnDrop: 1
   collisions: []
@@ -22654,8 +22749,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2028152983512861220}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.41, y: -0.053, z: 1.5664409}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.8958746, y: -0.2328394, z: -4.6322165}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -22673,8 +22768,8 @@ Transform:
   - {fileID: 2028152983314822864}
   - {fileID: 5238158811608203101}
   - {fileID: 2764958024131434653}
-  m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_Father: {fileID: 1871806756}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2028152983512861220
 GameObject:
@@ -22709,7 +22804,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &2028152983512861221
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -22826,7 +22921,6 @@ MonoBehaviour:
   FiringMethod: 1
   ReloadMethod: 1
   FiringRate: 0.05
-  lastShotTime: 0
   BulletImpactForce: 1000
   InternalAmmo: 0
   MaxInternalAmmo: 32
@@ -22839,17 +22933,22 @@ MonoBehaviour:
   BulletCasingForce: 3
   LaserGuided: 0
   LaserPoint: {fileID: 0}
+  SafetyOn: 0
   RecoilForce: {x: 0, y: 0, z: 0}
+  RecoilForceTwoHanded: {x: 0, y: 0, z: 0}
   RecoilDuration: 0.3
   ValidLayers:
     serializedVersion: 2
     m_Bits: 3329
   TriggerTransform: {fileID: 2028152984728488239}
+  TriggerRotateSpeed: 15
   SlideTransform: {fileID: 2028152983607077608}
   MuzzlePointTransform: {fileID: 2028152984204080223}
+  MuzzlePointSilencedTransform: {fileID: 0}
   EjectPointTransform: {fileID: 2028152983878442158}
   ChamberedBullet: {fileID: 6555947450336108634}
   MuzzleFlashObject: {fileID: 2028152984660348577}
+  MuzzleFlashSilencedObject: {fileID: 0}
   BulletCasingPrefab: {fileID: 1282233564399203881, guid: e6d6d8266008ffe438ce58f774e874fa,
     type: 3}
   ProjectilePrefab: {fileID: 1449094533667961452, guid: 4af46545725f628459794cfc7c0f7d54,
@@ -22858,6 +22957,9 @@ MonoBehaviour:
     type: 3}
   GunShotSound: {fileID: 8300000, guid: 6b23ba5ed1da95140b52f6863122d72b, type: 3}
   GunShotVolume: 0.75
+  IsSilenced: 0
+  GunShotSilencedSound: {fileID: 0}
+  GunShotSilencedVolume: 0.75
   EmptySound: {fileID: 8300000, guid: 3ceadf14726b0864fb39bb646c0f9ba0, type: 3}
   EmptySoundVolume: 1
   SlideDistance: -0.028
@@ -22896,6 +22998,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   onRaycastHitEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  onPlayedEmptyShotEvent:
     m_PersistentCalls:
       m_Calls: []
 --- !u!82 &2028152983512861229
@@ -23015,6 +23120,7 @@ MonoBehaviour:
   RemoteGrabbable: 1
   RemoteGrabMechanic: 0
   RemoteGrabDistance: 2.5
+  CanDropMidGrab: 0
   ThrowForceMultiplier: 2.5
   ThrowForceMultiplierAngular: 1.5
   BreakDistance: 1
@@ -23052,6 +23158,7 @@ MonoBehaviour:
   MoveVelocityForce: 3000
   MoveAngularVelocityForce: 90
   LastGrabTime: 0
+  LastRemoteGrabTime: 0
   LastDropTime: 0
   AddControllerVelocityOnDrop: 1
   collisions: []
@@ -23130,11 +23237,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AcceptableMagazineName: RifleClip
   AttachedWeapon: {fileID: 2028152983512861230}
+  InsertSpeed: 10
   ClipSnapDistance: 0.04
   ClipUnsnapDistance: 0.05
   EjectForce: 1
+  EjectDirection: 0
+  OffsetMagOnEject: 1
+  MagEjectOffset: {x: 0, y: -0.1, z: 0}
+  ReattachInterval: 0.2
   HeldMagazine: {fileID: 0}
   MagazineDistance: 0
+  CanGrabMagazine: 1
   ClipAttachSound: {fileID: 8300000, guid: f6ba2c16c86180148906c2b6840404ae, type: 3}
   ClipDetachSound: {fileID: 8300000, guid: 3ceadf14726b0864fb39bb646c0f9ba0, type: 3}
 --- !u!65 &2028152983572263365
@@ -23216,6 +23329,7 @@ MonoBehaviour:
   RemoteGrabbable: 0
   RemoteGrabMechanic: 0
   RemoteGrabDistance: 0.5
+  CanDropMidGrab: 0
   ThrowForceMultiplier: 1.25
   ThrowForceMultiplierAngular: 1.125
   BreakDistance: 1
@@ -23253,6 +23367,7 @@ MonoBehaviour:
   MoveVelocityForce: 3000
   MoveAngularVelocityForce: 90
   LastGrabTime: 0
+  LastRemoteGrabTime: 0
   LastDropTime: 0
   AddControllerVelocityOnDrop: 1
   collisions: []
@@ -36718,7 +36833,6 @@ MonoBehaviour:
   FiringMethod: 0
   ReloadMethod: 1
   FiringRate: 0.05
-  lastShotTime: 0
   BulletImpactForce: 1000
   InternalAmmo: 0
   MaxInternalAmmo: 8
@@ -36731,17 +36845,22 @@ MonoBehaviour:
   BulletCasingForce: 3
   LaserGuided: 0
   LaserPoint: {fileID: 0}
+  SafetyOn: 0
   RecoilForce: {x: 0, y: 0, z: 0}
+  RecoilForceTwoHanded: {x: 0, y: 0, z: 0}
   RecoilDuration: 0.3
   ValidLayers:
     serializedVersion: 2
     m_Bits: 3329
   TriggerTransform: {fileID: 1699639748447820894}
+  TriggerRotateSpeed: 15
   SlideTransform: {fileID: 0}
   MuzzlePointTransform: {fileID: 5438212932347291340}
+  MuzzlePointSilencedTransform: {fileID: 0}
   EjectPointTransform: {fileID: 5438212932127033594}
   ChamberedBullet: {fileID: 918158434797924944}
   MuzzleFlashObject: {fileID: 5070713041894934636}
+  MuzzleFlashSilencedObject: {fileID: 0}
   BulletCasingPrefab: {fileID: 1957835912866165125, guid: 8e6416e07b49a3b408f1e28f76181c7e,
     type: 3}
   ProjectilePrefab: {fileID: 1449094533667961452, guid: 4af46545725f628459794cfc7c0f7d54,
@@ -36750,6 +36869,9 @@ MonoBehaviour:
     type: 3}
   GunShotSound: {fileID: 8300000, guid: 34b530c1e1e9915459e34ff783bd7434, type: 3}
   GunShotVolume: 0.75
+  IsSilenced: 0
+  GunShotSilencedSound: {fileID: 0}
+  GunShotSilencedVolume: 0.75
   EmptySound: {fileID: 8300000, guid: 3ceadf14726b0864fb39bb646c0f9ba0, type: 3}
   EmptySoundVolume: 1
   SlideDistance: 0
@@ -36778,6 +36900,9 @@ MonoBehaviour:
   onRaycastHitEvent:
     m_PersistentCalls:
       m_Calls: []
+  onPlayedEmptyShotEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &2858235543480188238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36795,6 +36920,13 @@ MonoBehaviour:
   HandPose: 0
   LeftHandIsValid: 1
   RightHandIsValid: 0
+  InvertLeftHand: 0
+  InvertLeftPositionX: 1
+  InvertLeftPositionY: 0
+  InvertLeftPositionZ: 0
+  InvertLeftEulerX: 0
+  InvertLeftEulerY: 1
+  InvertLeftEulerZ: 1
   HandPosition: {fileID: 0}
   MaxDegreeDifferenceAllowed: 360
   IndexBlendMin: 0
@@ -36802,6 +36934,8 @@ MonoBehaviour:
   ThumbBlendMin: 0
   ThumbBlendMax: 0
   ShowAngleGizmo: 1
+  LeftHandPreviewPrefab: {fileID: 0}
+  RightHandPreviewPrefab: {fileID: 0}
 --- !u!65 &2877549592942740698
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -37291,6 +37425,7 @@ MonoBehaviour:
   RemoteGrabbable: 1
   RemoteGrabMechanic: 0
   RemoteGrabDistance: 1.5
+  CanDropMidGrab: 0
   ThrowForceMultiplier: 3
   ThrowForceMultiplierAngular: 2
   BreakDistance: 1
@@ -37328,6 +37463,7 @@ MonoBehaviour:
   MoveVelocityForce: 3000
   MoveAngularVelocityForce: 90
   LastGrabTime: 0
+  LastRemoteGrabTime: 0
   LastDropTime: 0
   AddControllerVelocityOnDrop: 1
   collisions: []
@@ -37347,8 +37483,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3393538753128323719}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.65510774, y: -0.069, z: 1.4348538}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.65076685, y: -0.24883941, z: -4.7638035}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -37357,8 +37493,8 @@ Transform:
   - {fileID: 3393538754301843304}
   - {fileID: 6405863293551546123}
   - {fileID: 1105120489134831585}
-  m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_Father: {fileID: 1871806756}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3393538753128323719
 GameObject:
@@ -37383,7 +37519,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &3393538753128323737
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37825,6 +37961,13 @@ MonoBehaviour:
   HandPose: 50
   LeftHandIsValid: 1
   RightHandIsValid: 0
+  InvertLeftHand: 0
+  InvertLeftPositionX: 1
+  InvertLeftPositionY: 0
+  InvertLeftPositionZ: 0
+  InvertLeftEulerX: 0
+  InvertLeftEulerY: 1
+  InvertLeftEulerZ: 1
   HandPosition: {fileID: 0}
   MaxDegreeDifferenceAllowed: 360
   IndexBlendMin: 0
@@ -37832,6 +37975,8 @@ MonoBehaviour:
   ThumbBlendMin: 0
   ThumbBlendMax: 0
   ShowAngleGizmo: 1
+  LeftHandPreviewPrefab: {fileID: 0}
+  RightHandPreviewPrefab: {fileID: 0}
 --- !u!65 &3828899347163815400
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -38990,6 +39135,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1793
   LaserEnd: {fileID: 6420601149928861085}
+  UseLineRenderer: 1
   Active: 1
 --- !u!1 &5374350707263902614
 GameObject:
@@ -39105,7 +39251,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5438212931663616596
 Transform:
   m_ObjectHideFlags: 0
@@ -39113,8 +39259,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5438212931663616595}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.246, y: -0.053, z: 1.453}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.5518746, y: -0.2328394, z: -4.7456574}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -39133,8 +39279,8 @@ Transform:
   - {fileID: 6273651839272207707}
   - {fileID: 6273651838356201566}
   - {fileID: 6273651839736652642}
-  m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_Father: {fileID: 1871806756}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5438212931663616597
 MonoBehaviour:
@@ -39287,6 +39433,7 @@ MonoBehaviour:
   RemoteGrabbable: 1
   RemoteGrabMechanic: 0
   RemoteGrabDistance: 2.5
+  CanDropMidGrab: 0
   ThrowForceMultiplier: 2.5
   ThrowForceMultiplierAngular: 1.5
   BreakDistance: 2
@@ -39324,6 +39471,7 @@ MonoBehaviour:
   MoveVelocityForce: 3000
   MoveAngularVelocityForce: 90
   LastGrabTime: 0
+  LastRemoteGrabTime: 0
   LastDropTime: 0
   AddControllerVelocityOnDrop: 1
   collisions: []
@@ -39522,6 +39670,13 @@ MonoBehaviour:
   HandPose: 50
   LeftHandIsValid: 0
   RightHandIsValid: 1
+  InvertLeftHand: 0
+  InvertLeftPositionX: 1
+  InvertLeftPositionY: 0
+  InvertLeftPositionZ: 0
+  InvertLeftEulerX: 0
+  InvertLeftEulerY: 1
+  InvertLeftEulerZ: 1
   HandPosition: {fileID: 0}
   MaxDegreeDifferenceAllowed: 360
   IndexBlendMin: 0
@@ -39529,6 +39684,8 @@ MonoBehaviour:
   ThumbBlendMin: 0
   ThumbBlendMax: 0
   ShowAngleGizmo: 1
+  LeftHandPreviewPrefab: {fileID: 0}
+  RightHandPreviewPrefab: {fileID: 0}
 --- !u!1 &5574818669351997789
 GameObject:
   m_ObjectHideFlags: 0
@@ -39718,6 +39875,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Weapon: {fileID: 0}
+  magazine: {fileID: 0}
   AcceptBulletName: Bullet
   InsertSound: {fileID: 0}
 --- !u!23 &5989098926265431470
@@ -40132,6 +40290,7 @@ MonoBehaviour:
   RemoteGrabbable: 0
   RemoteGrabMechanic: 0
   RemoteGrabDistance: 2
+  CanDropMidGrab: 0
   ThrowForceMultiplier: 2
   ThrowForceMultiplierAngular: 1.5
   BreakDistance: 1
@@ -40169,6 +40328,7 @@ MonoBehaviour:
   MoveVelocityForce: 3000
   MoveAngularVelocityForce: 90
   LastGrabTime: 0
+  LastRemoteGrabTime: 0
   LastDropTime: 0
   AddControllerVelocityOnDrop: 1
   collisions: []
@@ -40221,8 +40381,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HeldItem: {fileID: 0}
   StartingItem: {fileID: 0}
+  AutoSnapItem: 0
   CanDropItem: 1
-  CanSwapItem: 1
   CanRemoveItem: 1
   ScaleItem: 0.9
   DisableColliders: 1
@@ -40230,6 +40390,7 @@ MonoBehaviour:
   DuplicateItemOnGrab: 0
   MaxDropTime: 0.1
   LastSnapTime: 0
+  LastUnsnapTime: 0
   OnlyAllowNames:
   - Shell
   ExcludeTransformNames: []
@@ -40255,9 +40416,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ClosestGrabbable: {fileID: 0}
+  UpdateGrabbableFrequency: 0
   ClosestRemoteGrabbable: {fileID: 0}
   FireGrabbableEvents: 0
+  CheckRemoteGrabbables: 0
   RaycastRemoteGrabbables: 0
+  RaycastRemoteFrequency: 0
   RemoteGrabbablesMustBeVisible: 0
   RemoteCollisionLayers:
     serializedVersion: 2
@@ -40304,9 +40468,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ClosestGrabbable: {fileID: 0}
+  UpdateGrabbableFrequency: 0
   ClosestRemoteGrabbable: {fileID: 0}
   FireGrabbableEvents: 0
+  CheckRemoteGrabbables: 0
   RaycastRemoteGrabbables: 0
+  RaycastRemoteFrequency: 0
   RemoteGrabbablesMustBeVisible: 0
   RemoteCollisionLayers:
     serializedVersion: 2
@@ -40325,8 +40492,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HeldItem: {fileID: 0}
   StartingItem: {fileID: 0}
+  AutoSnapItem: 0
   CanDropItem: 1
-  CanSwapItem: 1
   CanRemoveItem: 1
   ScaleItem: 0.9
   DisableColliders: 1
@@ -40334,6 +40501,7 @@ MonoBehaviour:
   DuplicateItemOnGrab: 0
   MaxDropTime: 0.1
   LastSnapTime: 0
+  LastUnsnapTime: 0
   OnlyAllowNames:
   - Shell
   ExcludeTransformNames: []
@@ -40444,6 +40612,7 @@ MonoBehaviour:
   RemoteGrabbable: 0
   RemoteGrabMechanic: 0
   RemoteGrabDistance: 2
+  CanDropMidGrab: 0
   ThrowForceMultiplier: 2
   ThrowForceMultiplierAngular: 1.5
   BreakDistance: 1
@@ -40481,6 +40650,7 @@ MonoBehaviour:
   MoveVelocityForce: 3000
   MoveAngularVelocityForce: 90
   LastGrabTime: 0
+  LastRemoteGrabTime: 0
   LastDropTime: 0
   AddControllerVelocityOnDrop: 1
   collisions: []
@@ -40595,8 +40765,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HeldItem: {fileID: 0}
   StartingItem: {fileID: 0}
+  AutoSnapItem: 0
   CanDropItem: 1
-  CanSwapItem: 1
   CanRemoveItem: 1
   ScaleItem: 0.9
   DisableColliders: 1
@@ -40604,6 +40774,7 @@ MonoBehaviour:
   DuplicateItemOnGrab: 0
   MaxDropTime: 0.1
   LastSnapTime: 0
+  LastUnsnapTime: 0
   OnlyAllowNames:
   - Shell
   ExcludeTransformNames: []
@@ -40629,9 +40800,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ClosestGrabbable: {fileID: 0}
+  UpdateGrabbableFrequency: 0
   ClosestRemoteGrabbable: {fileID: 0}
   FireGrabbableEvents: 0
+  CheckRemoteGrabbables: 0
   RaycastRemoteGrabbables: 0
+  RaycastRemoteFrequency: 0
   RemoteGrabbablesMustBeVisible: 0
   RemoteCollisionLayers:
     serializedVersion: 2
@@ -40707,6 +40881,7 @@ MonoBehaviour:
   RemoteGrabbable: 0
   RemoteGrabMechanic: 0
   RemoteGrabDistance: 2
+  CanDropMidGrab: 0
   ThrowForceMultiplier: 2
   ThrowForceMultiplierAngular: 1.5
   BreakDistance: 1
@@ -40744,6 +40919,7 @@ MonoBehaviour:
   MoveVelocityForce: 3000
   MoveAngularVelocityForce: 90
   LastGrabTime: 0
+  LastRemoteGrabTime: 0
   LastDropTime: 0
   AddControllerVelocityOnDrop: 1
   collisions: []
@@ -40886,7 +41062,7 @@ PrefabInstance:
     - target: {fileID: 6720606388314045378, guid: e6ad593124694b24fa2671abdc42a823,
         type: 3}
       propertyPath: m_RootOrder
-      value: 18
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 6720606388314045378, guid: e6ad593124694b24fa2671abdc42a823,
         type: 3}
@@ -41058,6 +41234,13 @@ MonoBehaviour:
   HandPose: 0
   LeftHandIsValid: 1
   RightHandIsValid: 1
+  InvertLeftHand: 0
+  InvertLeftPositionX: 1
+  InvertLeftPositionY: 0
+  InvertLeftPositionZ: 0
+  InvertLeftEulerX: 0
+  InvertLeftEulerY: 1
+  InvertLeftEulerZ: 1
   HandPosition: {fileID: 0}
   MaxDegreeDifferenceAllowed: 360
   IndexBlendMin: 0
@@ -41065,6 +41248,8 @@ MonoBehaviour:
   ThumbBlendMin: 0
   ThumbBlendMax: 0
   ShowAngleGizmo: 1
+  LeftHandPreviewPrefab: {fileID: 0}
+  RightHandPreviewPrefab: {fileID: 0}
 --- !u!4 &6420601149928861085
 Transform:
   m_ObjectHideFlags: 0
@@ -41632,7 +41817,7 @@ PrefabInstance:
     - target: {fileID: 9148596257437500471, guid: 45d3656d13f8ecb4c8fca3979e1a55a6,
         type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 9148596257437500471, guid: 45d3656d13f8ecb4c8fca3979e1a55a6,
         type: 3}
@@ -41855,12 +42040,17 @@ PrefabInstance:
     - target: {fileID: 2226960964634723372, guid: 846b75224d5b017428f9a9f8187123e4,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2226960964634723372, guid: 846b75224d5b017428f9a9f8187123e4,
         type: 3}
       propertyPath: EditorOnly
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2226960964634723372, guid: 846b75224d5b017428f9a9f8187123e4,
+        type: 3}
+      propertyPath: EmulatorEnabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2226960964634723372, guid: 846b75224d5b017428f9a9f8187123e4,
         type: 3}
@@ -41870,18 +42060,23 @@ PrefabInstance:
     - target: {fileID: 2685707787512235012, guid: 846b75224d5b017428f9a9f8187123e4,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.0001942934
+      value: 0.00019429326
       objectReference: {fileID: 0}
     - target: {fileID: 2685707787512235012, guid: 846b75224d5b017428f9a9f8187123e4,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.002493895
+      value: -0.0024938926
       objectReference: {fileID: 0}
     - target: {fileID: 4159965462445568512, guid: 846b75224d5b017428f9a9f8187123e4,
         type: 3}
       propertyPath: HideHead
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4159965462445568512, guid: 846b75224d5b017428f9a9f8187123e4,
+        type: 3}
+      propertyPath: FollowPlayer
+      value: 
+      objectReference: {fileID: 1975351007}
     - target: {fileID: 4313148249130439269, guid: 846b75224d5b017428f9a9f8187123e4,
         type: 3}
       propertyPath: m_Name
