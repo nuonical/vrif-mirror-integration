@@ -2,8 +2,6 @@ using System.Collections;
 using UnityEngine;
 using Mirror;
 using System.Collections.Generic;
-using Org.BouncyCastle.Asn1.X509;
-using System.Security.Principal;
 
 // script to handle authority switching of the grabbable so everyone can pickup items
 namespace BNG {
@@ -31,10 +29,15 @@ namespace BNG {
         [SyncVar(hook = (nameof(SetFlightStatus)))]
         public bool flightStatus = false;
 
-
         Rigidbody rb;
 
         NetworkGrabbableEvents networkGrabbableEvents;
+
+        public NetworkIdentity NetIdentity {
+            get {
+                return netIdentity;
+            }
+        }
 
         void Awake() {
             rb = GetComponent<Rigidbody>();
@@ -45,16 +48,15 @@ namespace BNG {
                 ringHelper = GetComponentInChildren<RingHelper>();
                 ringCanvas = ringHelper.GetComponent<Canvas>();
             }
-        }       
-       
+        }
+
         void Update() {
 
-            if (!NetworkServer.active)
-            {
+            if (!NetworkServer.active) {
                 return;
             }
-            CheckResetGrabbableVelocity();
 
+            CheckResetGrabbableVelocity();
         }
 
         public void UpdateGrabStatus(bool oldHoldStatus, bool newHoldStatus) {
@@ -64,6 +66,7 @@ namespace BNG {
                     grabbables[x].enabled = !newHoldStatus;
                 }
             }
+
             // Enable/ disable the helper ring on grab and release
             if (ringHelper != null) {
                 ringHelper.enabled = !newHoldStatus;
@@ -74,11 +77,10 @@ namespace BNG {
             }
         }
 
-        public void SetFlightStatus(bool oldFlightStatus, bool newFlightStatus)
-        {
+        public void SetFlightStatus(bool oldFlightStatus, bool newFlightStatus) {
             // just need the bool to be synced, no logic to run here
         }
-    
+
         // Called from the NetworkGrabber component on the RemoteGrabber of the Network Rig
         public void PickUpEvent() {
             // Check to see if the object is being held, if so, abort
@@ -89,7 +91,7 @@ namespace BNG {
             if (!isOwned) {
                 CmdPickup();
             }
-            
+
             StartCoroutine(WaitForOwnership());
         }
 
@@ -104,32 +106,26 @@ namespace BNG {
 
             // fix for not fully grabbing the grabbable so the ring and grabbable don't get disabled unless the object is fully grabbed
             // set with a timer to avoid leaving the coroutine in an endless loop waiting to be held
-            while (true) 
-            {
-                if (!grabbables[0].BeingHeld)
-                {
-                    timeNotHeld += UnityEngine.Time.deltaTime; 
+            while (true) {
+                if (!grabbables[0].BeingHeld) {
+                    timeNotHeld += UnityEngine.Time.deltaTime;
 
-                    if (timeNotHeld >= maxTime) 
-                    {
-                       
-                        yield break; 
+                    if (timeNotHeld >= maxTime) {
+                        yield break;
                     }
-                }
-                else
-                {                   
+                } 
+                else {
                     CmdSetHoldingStatus(true);
                     yield break;
                 }
 
-                yield return null; 
-            }    
+                yield return null;
+            }
         }
 
         public void DropEventHoldFalse() {
             // set the holding status to false when you let go so others can pick it up
             CmdSetHoldingStatus(false);
-            
         }
 
         // Request object authority if we don't already own it
@@ -152,9 +148,32 @@ namespace BNG {
             holdingStatus = status;
         }
 
+
+        public void DropItem() {
+
+            if(grabbables.Count > 0) {
+                grabbables[0].DropItem(false, true);
+            }
+            
+            CmdSetHoldingStatus(false);
+            // transform.parent = null;
+        }
+
+        public void DropAndDestroyItem() {
+            DropItem();
+
+            CmdDestroyGrabbable();
+        }
+
+
+        [Command]
+        void CmdDestroyGrabbable() {
+            NetworkServer.Destroy(this.gameObject);
+        }
+
+
         [Command(requiresAuthority = false)]
-        public void CmdSetFlightStatus(bool currentStatus)
-        {
+        public void CmdSetFlightStatus(bool currentStatus) {
             flightStatus = currentStatus;
         }
 
@@ -177,17 +196,15 @@ namespace BNG {
                 Debug.Log(string.Format("This object {0} is owned by the server. Resetting velocity.", transform.name));
                 ResetInteractableVelocity();
                 holdingStatus = false;
-            } 
+            }
         }
         [Server]
         public bool IsOwnedByServer() {
-            if(netIdentity != null && netIdentity.connectionToClient == null)
-            {
+            if (netIdentity != null && netIdentity.connectionToClient == null) {
                 return true;
             }
 
             return false;
         }
-
     }
 }

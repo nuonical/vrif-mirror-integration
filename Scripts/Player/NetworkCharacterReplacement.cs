@@ -1,15 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
-namespace BNG
-{
+namespace BNG {
     // this script is placed on the empty player object to hold all the possible player prefabs, when this spawns as the player it is
     // sent an index / int from the menu  for the index of the prefab the player wants
-    public class NetworkCharacterReplacement : NetworkBehaviour
-    {
+    public class NetworkCharacterReplacement : NetworkBehaviour {
         [System.Serializable]
-        public class CharacterPrefabSet
-        {
+        public class CharacterPrefabSet {
             public GameObject characterPrefab;
         }
 
@@ -18,8 +15,7 @@ namespace BNG
 
         [SerializeField] bool useOfflineCharacterSelect = true;
 
-        private void Start()
-        {
+        private void Start() {
             if (!useOfflineCharacterSelect || !isLocalPlayer)
                 return;
 
@@ -31,15 +27,12 @@ namespace BNG
         }
 
         [Command]
-        public void CmdReplaceCharacter(int characterIndex, NetworkConnectionToClient conn = null)
-        {
-            if (conn == null)
-            {
+        public void CmdReplaceCharacter(int characterIndex, NetworkConnectionToClient conn = null) {
+            if (conn == null) {
                 conn = connectionToClient;
             }
 
-            if (characterIndex >= 0 && characterIndex < characterPrefabSets.Count)
-            {
+            if (characterIndex >= 0 && characterIndex < characterPrefabSets.Count) {
                 // Get the current player object
                 GameObject emptyPlayerObject = gameObject;
 
@@ -50,11 +43,10 @@ namespace BNG
                 GameObject newCharacter = Instantiate(characterPrefabSets[characterIndex].characterPrefab, emptyPlayerObject.transform.position, emptyPlayerObject.transform.rotation);
 
                 // Assign ownership of the new character to the client's connection
-                NetworkServer.ReplacePlayerForConnection(conn, newCharacter, true);
-    
-            }
-            else
-            {
+                NetworkServer.ReplacePlayerForConnection(conn, newCharacter, ReplacePlayerOptions.KeepAuthority);
+
+            } 
+            else {
                 Debug.LogError("Invalid character index: " + characterIndex);
             }
         }

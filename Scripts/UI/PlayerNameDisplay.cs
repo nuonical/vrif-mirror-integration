@@ -74,7 +74,9 @@ namespace BNG {
             }
 
             if (PlayerInfoCanvas != null && camTransform != null) {
-                PlayerInfoCanvas.transform.LookAt(PlayerInfoCanvas.transform.position + camTransform.transform.rotation * Vector3.forward, camTransform.transform.rotation * Vector3.up);
+                PlayerInfoCanvas.transform.LookAt(PlayerInfoCanvas.transform.position + camTransform.transform.rotation * Vector3.forward, Vector3.up);
+                // Alternatively follow camera axis :
+                // PlayerInfoCanvas.transform.LookAt(PlayerInfoCanvas.transform.position + camTransform.transform.rotation * Vector3.forward, camTransform.transform.rotation * Vector3.up);
             }
         }
     }

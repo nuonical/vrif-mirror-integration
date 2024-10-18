@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Mirror;
+using UnityEngine.Events;
 
 namespace BNG
 {
@@ -11,6 +12,9 @@ namespace BNG
 
         [SyncVar(hook = nameof(OnHealthChanged))]
         public float _currentHealth;
+
+        [Tooltip("If true the object will be destroyed and removed from the scene. Set to false if you want to handle removal or resetting manuallyt via onDeathEvent")]
+        public bool DestroyOnDeath = true;
 
         [Tooltip("Instantiate these Network Objects on Death")]
         public List<GameObject> InstantiateNetworkObjectsOnDeath;
@@ -28,6 +32,8 @@ namespace BNG
        
         private bool spawnedFlag = false;
 
+        [Tooltip("Unity Event called by owner on death")]
+        public UnityEvent onDeathEvent;
 
         public override void OnStartServer()
         {
@@ -56,7 +62,7 @@ namespace BNG
         [Command(requiresAuthority = false)]
         public void CmdClientAuthorityTakeDamage(float damageAmount)
         {
-            if (destroyed)
+            if (destroyed || _currentHealth <= 0)
                 return;
 
             _currentHealth -= damageAmount;
@@ -72,15 +78,43 @@ namespace BNG
         public void AddHealth(float healthAmount)
         {
             _currentHealth = Mathf.Clamp(_currentHealth + healthAmount, 0, maxHealth);
+
+            if(destroyed && _currentHealth > 0) {
+                // Resurrected
+                destroyed = false;
+            }
         }
 
         private void OnHealthChanged(float oldHealth, float newHealth)
         {
             // Handle health changes on clients
             if (_currentHealth <= 0f && !destroyed)
-            {                
+            {
+                DoDeath();
+            }
+        }
+
+        public void Resurrect() {
+            AddHealth(maxHealth);
+            // _currentHealth = maxHealth;
+            
+        }
+
+        public void DoDeath() {
+
+            // Already dead
+            if(destroyed) {
+                return;
+            }
+
+            destroyed = true;
+
+            if (DestroyOnDeath) {
                 DestroyThis();
             }
+            
+            // Call any local events
+            onDeathEvent?.Invoke();
         }
 
         public void DestroyThis()

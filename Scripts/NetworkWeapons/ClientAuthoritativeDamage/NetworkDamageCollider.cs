@@ -49,8 +49,18 @@ namespace BNG
             // Get the NetworkIdentity of the local player (weapon holder)
             NetworkIdentity localPlayerIdentity = NetworkClient.connection.identity;
 
-            // Get the NetworkIdentity of the object we collided with
+
+            // First check for a hitbox to send the info up to
+            NetworkHitbox hb = collision.collider.GetComponent<NetworkHitbox>();
             NetworkIdentity collidedNetworkIdentity = collision.transform.root.gameObject.GetComponent<NetworkIdentity>();
+            float multiplier = 1f;
+
+            if (hb != null) {
+                collidedNetworkIdentity = hb.parentDamageable.GetComponent<NetworkIdentity>();
+                multiplier = hb.DamageMultiplier;
+            }
+
+            // Get the NetworkIdentity of the object we collided with
 
             // Check if the object we collided with has a NetworkIdentity and compare netId
             if (collidedNetworkIdentity != null && localPlayerIdentity != null)
@@ -70,14 +80,14 @@ namespace BNG
 
                 if (nD && nD._currentHealth > 0)
                 {
-                    nD.CmdClientAuthorityTakeDamage(Damage);
+                    nD.CmdClientAuthorityTakeDamage(Damage * multiplier);
                     hasDealtDamage = true; // Ensure that damage is only applied once per collision
                 }
 
                 // Otherwise, can we take damage ourselves from this collision?
                 if (TakeCollisionDamage && thisNetworkDamageable != null && nD)
                 {
-                    thisNetworkDamageable.CmdClientAuthorityTakeDamage(CollisionDamage);
+                    thisNetworkDamageable.CmdClientAuthorityTakeDamage(CollisionDamage * multiplier);
                     hasDealtDamage = true; // Ensure that damage is only applied once per collision
                 }
             }
@@ -90,4 +100,3 @@ namespace BNG
         }
     }
 }
-
