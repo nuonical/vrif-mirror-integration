@@ -28,60 +28,42 @@ namespace BNG {
             networkGrabbable = null;
         }
 
-        void OnTriggerStay(Collider other)
-        {
+        void OnTriggerStay(Collider other) {
             // if we are holding an object or the object is not a grabbable, do nothing
-            if (grabber.HeldGrabbable != null || other.gameObject.layer != grabbableLayer)
-            {
+            if (grabber.HeldGrabbable != null || other.gameObject.layer != grabbableLayer) {
                 return;
             }
             // Only check the Grabbable Layer
-            if (other.gameObject.layer == grabbableLayer)
-            {
+            if (other.gameObject.layer == grabbableLayer) {
                 networkGrabbable = other.GetComponent<NetworkGrabbable>();
             }
 
-            if (networkGrabbable != null)
-            {
-                if (!authorityOnInput)
-                {
-                    if (pickUpCoroutine == null)
-                    {
+            if (networkGrabbable != null) {
+                if (!authorityOnInput) {
+                    if (pickUpCoroutine == null) {
                         pickUpCoroutine = StartCoroutine(HandlePickUpEvent());
                     }
-                }
-
-
-
-                else if (authorityOnInput)
-                {
+                } else if (authorityOnInput) {
                     // Change this input to suit your needs 
-                    if (controllerHand == ControllerHand.Right && InputBridge.Instance.RightGripDown || controllerHand == ControllerHand.Left && InputBridge.Instance.LeftGripDown)
-                    {
-                        if (!networkGrabbable.flightStatus)
-                        {
+                    if (controllerHand == ControllerHand.Right && InputBridge.Instance.RightGripDown || controllerHand == ControllerHand.Left && InputBridge.Instance.LeftGripDown) {
+                        if (!networkGrabbable.flightStatus) {
                             networkGrabbable.CmdSetFlightStatus(true);
                             networkGrabbable.PickUpEvent();
                         }
-                    }
+                    } else if (controllerHand == ControllerHand.Right && !InputBridge.Instance.RightGripDown || controllerHand == ControllerHand.Left && !InputBridge.Instance.LeftGripDown) {
 
-                    else if (controllerHand == ControllerHand.Right && !InputBridge.Instance.RightGripDown || controllerHand == ControllerHand.Left && !InputBridge.Instance.LeftGripDown)
-                    {
-                        if (networkGrabbable.flightStatus)
-                        {
+                        if (networkGrabbable.flightStatus) {
                             networkGrabbable.CmdSetFlightStatus(false);
                         }
                     }
                 }
-            }           
+            }
         }
 
-        IEnumerator HandlePickUpEvent()
-        {
+        IEnumerator HandlePickUpEvent() {
             yield return new WaitForSeconds(0.05f);
 
-            while (networkGrabbable != null && !networkGrabbable.flightStatus)
-            {
+            while (networkGrabbable != null && !networkGrabbable.flightStatus) {
                 networkGrabbable.PickUpEvent();
                 yield return new WaitForSeconds(0.1f);
             }
@@ -91,12 +73,11 @@ namespace BNG {
 
         // Clear the current grabbable on exit
         void OnTriggerExit(Collider other) {
-            if (networkGrabbable != null && other.gameObject.layer == grabbableLayer) {               
-                 networkGrabbable = null;
+            if (networkGrabbable != null && other.gameObject.layer == grabbableLayer) {
+                networkGrabbable = null;
             }
 
-            if(pickUpCoroutine != null)
-            {
+            if (pickUpCoroutine != null) {
                 StopCoroutine(pickUpCoroutine);
                 pickUpCoroutine = null;
             }

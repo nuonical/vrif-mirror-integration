@@ -97,7 +97,7 @@ namespace BNG
         IEnumerator LoadLocalPlayerDataAvatar()
         {
             yield return null;
-            Debug.Log("Textures started to apply");
+            //Debug.Log("Textures started to apply");
             // get the prefab and texture index from the local player data
             if (localPlayerData)
             {

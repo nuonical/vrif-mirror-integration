@@ -19,7 +19,7 @@ namespace BNG
             if (localPlayerData != null)
             {
                 string pName = localPlayerData.PlayerName;
-                Debug.Log($"Local player name is: {pName}");
+                // Debug.Log($"Local player name is: {pName}");
 
                 // Call command on server to add this player
                 SendPlayerDataToServer(pName);
