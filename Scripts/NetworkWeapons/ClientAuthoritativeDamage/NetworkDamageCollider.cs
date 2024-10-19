@@ -52,15 +52,20 @@ namespace BNG
 
             // First check for a hitbox to send the info up to
             NetworkHitbox hb = collision.collider.GetComponent<NetworkHitbox>();
-            NetworkIdentity collidedNetworkIdentity = collision.transform.root.gameObject.GetComponent<NetworkIdentity>();
+           
+            NetworkIdentity collidedNetworkIdentity = GetClosestNetworkIdentity(collision.transform);
+            
             float multiplier = 1f;
 
-            if (hb != null) {
+            if (hb != null && collidedNetworkIdentity == null) {
                 collidedNetworkIdentity = hb.parentDamageable.GetComponent<NetworkIdentity>();
                 multiplier = hb.DamageMultiplier;
             }
 
-            // Get the NetworkIdentity of the object we collided with
+            if(collidedNetworkIdentity == null)
+            {
+                return;
+            }
 
             // Check if the object we collided with has a NetworkIdentity and compare netId
             if (collidedNetworkIdentity != null && localPlayerIdentity != null)
@@ -76,7 +81,7 @@ namespace BNG
             if (LastDamageForce >= MinForce)
             {
                 // Can we damage what we hit?
-                NetworkDamageable nD = collision.gameObject.transform.root.GetComponentInChildren<NetworkDamageable>();
+                NetworkDamageable nD = collidedNetworkIdentity.transform.GetComponentInChildren<NetworkDamageable>();
 
                 if (nD && nD._currentHealth > 0)
                 {
@@ -91,6 +96,27 @@ namespace BNG
                     hasDealtDamage = true; // Ensure that damage is only applied once per collision
                 }
             }
+        }
+
+        // function to traverse up the hierchy to find the first Network ID, this will allow for parenting all damagable objects to one item parent
+        public NetworkIdentity GetClosestNetworkIdentity(Transform currentTransform)
+        {
+            // Traverse upwards through the hierarchy
+            while (currentTransform != null)
+            {
+                // Check if the current object has a NetworkIdentity
+                NetworkIdentity networkIdentity = currentTransform.GetComponent<NetworkIdentity>();
+                if (networkIdentity != null)
+                {
+                    return networkIdentity; // Return the first NetworkIdentity found
+                }
+
+                // Move up to the parent
+                currentTransform = currentTransform.parent;
+            }
+
+            // Return null if no NetworkIdentity is found
+            return null;
         }
 
         // Reset the flag when the collision ends

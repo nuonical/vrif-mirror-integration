@@ -35,7 +35,7 @@ namespace BNG {
             }
             // Only check the Grabbable Layer
             if (other.gameObject.layer == grabbableLayer) {
-                networkGrabbable = other.GetComponent<NetworkGrabbable>();
+                networkGrabbable = other.transform.root.GetComponent<NetworkGrabbable>();
             }
 
             if (networkGrabbable != null) {
