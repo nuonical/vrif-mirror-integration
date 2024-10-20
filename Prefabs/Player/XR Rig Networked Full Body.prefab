@@ -284,12 +284,12 @@ MonoBehaviour:
     m_Bits: 1281
   DistanceFromGround: 0
   DistanceFromGroundOffset: 0
-  MinimumCapsuleHeight: 0.4
+  MinimumCapsuleHeight: 1
   MaximumCapsuleHeight: 3
   LastTeleportTime: 0
   CharacterControllerYOffset: -0.025
   CameraHeight: 0
-  ElevateCameraIfNoHMDPresent: 1
+  ElevateCameraIfNoHMDPresent: 0
   ElevateCameraHeight: 1.65
   MinElevation: -100
   MaxElevation: 5000
@@ -463,7 +463,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 282409338992888614}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 494e659c238ebc5428bdb4e8d43de9ca, type: 3}
   m_Name: 
@@ -475,7 +475,7 @@ MonoBehaviour:
   SlowTimeClip: {fileID: 8300000, guid: 3264b135b94635f42a09d672b19cae85, type: 3}
   SpeedupTimeClip: {fileID: 8300000, guid: 8a4a5bd0b5270024ca91ab9d88bce279, type: 3}
   SetFixedDelta: 0
-  CheckInput: 1
+  CheckInput: 0
   ForceTimeScale: 0
 --- !u!82 &8031795522108335598
 AudioSource:
@@ -2207,6 +2207,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -2435,7 +2436,6 @@ MonoBehaviour:
   FollowLeftFoot: {fileID: 6162285498283616296}
   FollowRightFoot: {fileID: 3800003141187728202}
   FollowHead: {fileID: 2860153502079632185}
-  PlayerTransform: {fileID: 0}
   RaycastFeetPosition: 1
   GroundedLayers:
     serializedVersion: 2
@@ -2454,6 +2454,7 @@ MonoBehaviour:
   FollowPlayer: {fileID: 282409338981007086}
   ApplyVelocityToAnimator: 1
   hideBoneScale: {x: 0.0001, y: 0.0001, z: 0.0001}
+  LeftGrabber: {fileID: 0}
 --- !u!114 &7973008369917643576
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5215,6 +5216,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -7425,7 +7427,7 @@ MonoBehaviour:
   InputSource: 0
   actionSet: {fileID: -944628639613478452, guid: e39f4b35a6db18348b41eb0262520e69,
     type: 3}
-  TrackingOrigin: 4
+  TrackingOrigin: 2
   ThumbstickDeadzoneX: 0.001
   ThumbstickDeadzoneY: 0.001
   LeftGrip: 0
@@ -7484,7 +7486,6 @@ MonoBehaviour:
   SupportsIndexTouch: 0
   SupportsThumbTouch: 0
   ShowInputDebugger: 0
-  ForceStartXRInEditor: 0
   CheckFixedDeltaTime: 1
 --- !u!114 &7894841360383652590
 MonoBehaviour:
@@ -7523,13 +7524,12 @@ MonoBehaviour:
     type: 3}
   ForceStraightTeleportRotation: 1
   AllowUpDownControls: 0
-  ElevatePlayerHeightOnDisconnect: 1
   PlayerUpAction: {fileID: -4870421553478864907, guid: 27bafa1c7d8a77b47985ab70c0511986,
     type: 3}
   PlayerDownAction: {fileID: -5448902572583850724, guid: 27bafa1c7d8a77b47985ab70c0511986,
     type: 3}
-  MinPlayerHeight: 0.2
-  MaxPlayerHeight: 5
+  MinPlayerHeight: 0.5
+  MaxPlayerHeight: 2
   LockCameraAction: {fileID: 7248157346319567513, guid: 27bafa1c7d8a77b47985ab70c0511986,
     type: 3}
   CameraLookAction: {fileID: 3400255892409606642, guid: 27bafa1c7d8a77b47985ab70c0511986,
@@ -9029,7 +9029,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6454832214670694739
 Transform:
   m_ObjectHideFlags: 0
@@ -9641,7 +9641,6 @@ GameObject:
   - component: {fileID: 5834420466411491548}
   - component: {fileID: 5834420466411491547}
   - component: {fileID: 5834420466411491549}
-  - component: {fileID: 5834420466411491551}
   m_Layer: 2
   m_Name: RemoteGrabber
   m_TagString: Untagged
@@ -9729,22 +9728,6 @@ CapsuleCollider:
   m_Height: 20
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 16.025}
---- !u!114 &5834420466411491551
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5834420467045697560}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 546c80e4471250c44bbd8bdc380dba18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  controllerHand: 0
-  grabbableLayer: 10
-  grabber: {fileID: 9101965273887181047}
-  authorityOnInput: 1
 --- !u!1 &5834420467213051851
 GameObject:
   m_ObjectHideFlags: 0
@@ -10438,6 +10421,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -12227,6 +12211,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -12659,7 +12644,6 @@ GameObject:
   - component: {fileID: 7550344387926886387}
   - component: {fileID: 7550344387926886388}
   - component: {fileID: 7550344387926886386}
-  - component: {fileID: 7550344387755106102}
   m_Layer: 2
   m_Name: RemoteGrabber
   m_TagString: Untagged
@@ -12747,22 +12731,6 @@ CapsuleCollider:
   m_Height: 20
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 16.025}
---- !u!114 &7550344387755106102
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7550344387755106103}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 546c80e4471250c44bbd8bdc380dba18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  controllerHand: 1
-  grabbableLayer: 10
-  grabber: {fileID: 7550344389176349955}
-  authorityOnInput: 1
 --- !u!1 &7550344388551410961
 GameObject:
   m_ObjectHideFlags: 0
@@ -12872,6 +12840,7 @@ GameObject:
   - component: {fileID: 7550344389176349983}
   - component: {fileID: 7550344389176349980}
   - component: {fileID: 7550344389176349953}
+  - component: {fileID: 889856223414874507}
   m_Layer: 2
   m_Name: Grabber
   m_TagString: Untagged
@@ -13089,6 +13058,20 @@ MonoBehaviour:
   RemoteCollisionLayers:
     serializedVersion: 2
     m_Bits: 1
+--- !u!114 &889856223414874507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7550344389176349957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 546c80e4471250c44bbd8bdc380dba18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controllerHand: 1
+  authorityOnInput: 1
 --- !u!1 &7675000671575672897
 GameObject:
   m_ObjectHideFlags: 0
@@ -14634,6 +14617,7 @@ GameObject:
   - component: {fileID: 9101965273887181035}
   - component: {fileID: 9101965273887181032}
   - component: {fileID: 9101965273887181006}
+  - component: {fileID: 2718177051186725732}
   m_Layer: 2
   m_Name: Grabber
   m_TagString: Untagged
@@ -14850,6 +14834,20 @@ MonoBehaviour:
   RemoteCollisionLayers:
     serializedVersion: 2
     m_Bits: 1
+--- !u!114 &2718177051186725732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9101965273887181041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 546c80e4471250c44bbd8bdc380dba18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controllerHand: 0
+  authorityOnInput: 1
 --- !u!1 &9115362084799969232
 GameObject:
   m_ObjectHideFlags: 0
@@ -14872,7 +14870,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7550344387600212957
 Transform:
   m_ObjectHideFlags: 0
@@ -15269,6 +15267,11 @@ PrefabInstance:
       propertyPath: FollowRightController
       value: 
       objectReference: {fileID: 1159837149841880377}
+    - target: {fileID: 6457971902901747961, guid: cc97f912d3b982842a4704631107cda4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6457971902950296964, guid: cc97f912d3b982842a4704631107cda4,
         type: 3}
       propertyPath: Pose1
@@ -15294,7 +15297,7 @@ PrefabInstance:
     - target: {fileID: 6779582408701867147, guid: cc97f912d3b982842a4704631107cda4,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 6779582408701867147, guid: cc97f912d3b982842a4704631107cda4,
         type: 3}

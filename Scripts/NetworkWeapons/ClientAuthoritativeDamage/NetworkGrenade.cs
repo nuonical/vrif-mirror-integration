@@ -71,7 +71,9 @@ namespace BNG
             }
             
             ExplodeDefault();
+            yield return null;
             
+
         }
 
         void ExplodeDefault()
@@ -96,8 +98,8 @@ namespace BNG
                     rb.AddExplosionForce(explosionForce, transform.position, explosionRadius);
                 }
 
-                NetworkDamageable networkD = collider.transform.root.GetComponent<NetworkDamageable>();
-               
+                NetworkDamageable networkD = GetClosestNetworkDamageable(collider.transform);
+
                 if (networkD != null && !damagedPlayers.Contains(networkD))
                 {
                     networkD.CmdClientAuthorityTakeDamage(damageAmount);
@@ -106,8 +108,26 @@ namespace BNG
                 }
             }
 
-            // Destroy the grenade after exploding
-            Destroy(this.gameObject);
+        }
+
+        public NetworkDamageable GetClosestNetworkDamageable(Transform currentTransform)
+        {
+            // Traverse upwards through the hierarchy
+            while (currentTransform != null)
+            {
+                // Check if the current object has a NetworkIdentity
+                NetworkDamageable networkDamageable = currentTransform.GetComponent<NetworkDamageable>();
+                if (networkDamageable != null)
+                {
+                    return networkDamageable; // Return the first NetworkIdentity found
+                }
+
+                // Move up to the parent
+                currentTransform = currentTransform.parent;
+            }
+
+            // Return null if no NetworkIdentity is found
+            return null;
         }
 
         [Command]
@@ -132,12 +152,14 @@ namespace BNG
             GameObject explosionEffect = Instantiate(explosionEffectPrefab, transform.position, Quaternion.identity);
             NetworkServer.Spawn(explosionEffect);
             RpcPlayExplosionSound();
+            
         }
 
         void RpcPlayExplosionSound()
         {
             // Play explosion sound on all clients
             AudioSource.PlayClipAtPoint(explosionSound, transform.position, explosionVolume);
+            Destroy(this.gameObject);
         }
     }
 }

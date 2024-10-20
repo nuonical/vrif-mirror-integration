@@ -9,14 +9,12 @@ namespace BNG {
         [SerializeField]
         ControllerHand controllerHand;
 
-        [Header("Defauld Grabbable Layer is 10; Change If needed")]
-        [SerializeField]
-        int grabbableLayer = 10; //  grabbale layer for VRIF is 10 by default, change if needed
-
-        NetworkGrabbable networkGrabbable;
-
         // fix for triggering pickup when hovering overitems whileholding and object causing rings to disappear
-        public Grabber grabber;
+        private Grabber grabber;
+
+        private GrabbablesInTrigger grabInTrigger;
+
+        private NetworkGrabbable netGrabInTrigger;
 
         private Coroutine pickUpCoroutine;
 
@@ -25,62 +23,81 @@ namespace BNG {
 
         public void Start() {
             // Ensure network grabbable is reset on start / scene load
-            networkGrabbable = null;
+            netGrabInTrigger = null;
+            grabber = GetComponent<Grabber>();
+            grabInTrigger = GetComponent<GrabbablesInTrigger>();
+
+            grabber.onGrabEvent.AddListener(RequestAuthority);
         }
 
-        void OnTriggerStay(Collider other) {
-            // if we are holding an object or the object is not a grabbable, do nothing
-            if (grabber.HeldGrabbable != null || other.gameObject.layer != grabbableLayer) {
+        private void Update()
+        {
+            if (grabber.HeldGrabbable != null)
+            {
                 return;
             }
-            // Only check the Grabbable Layer
-            if (other.gameObject.layer == grabbableLayer) {
-                networkGrabbable = other.GetComponent<NetworkGrabbable>();
+
+            if(grabInTrigger.ClosestRemoteGrabbable == null)
+            {
+                netGrabInTrigger = null;
+            }
+            else if (grabInTrigger.ClosestRemoteGrabbable != null)
+            {
+                netGrabInTrigger = grabInTrigger.ClosestRemoteGrabbable.GetComponent<NetworkGrabbable>();
             }
 
-            if (networkGrabbable != null) {
-                if (!authorityOnInput) {
-                    if (pickUpCoroutine == null) {
+            if (netGrabInTrigger != null)
+            {
+                if (!authorityOnInput)
+                {
+                    if (pickUpCoroutine == null)
+                    {
                         pickUpCoroutine = StartCoroutine(HandlePickUpEvent());
                     }
-                } else if (authorityOnInput) {
+                }
+                else if (authorityOnInput)
+                {
                     // Change this input to suit your needs 
-                    if (controllerHand == ControllerHand.Right && InputBridge.Instance.RightGripDown || controllerHand == ControllerHand.Left && InputBridge.Instance.LeftGripDown) {
-                        if (!networkGrabbable.flightStatus) {
-                            networkGrabbable.CmdSetFlightStatus(true);
-                            networkGrabbable.PickUpEvent();
+                    if (controllerHand == ControllerHand.Right && InputBridge.Instance.RightGripDown || controllerHand == ControllerHand.Left && InputBridge.Instance.LeftGripDown)
+                    {
+                        if (!netGrabInTrigger.flightStatus)
+                        {
+                            netGrabInTrigger.CmdSetFlightStatus(true);
+                            netGrabInTrigger.PickUpEvent();
                         }
-                    } else if (controllerHand == ControllerHand.Right && !InputBridge.Instance.RightGripDown || controllerHand == ControllerHand.Left && !InputBridge.Instance.LeftGripDown) {
+                    }
+                    else if (controllerHand == ControllerHand.Right && !InputBridge.Instance.RightGripDown || controllerHand == ControllerHand.Left && !InputBridge.Instance.LeftGripDown)
+                    {
 
-                        if (networkGrabbable.flightStatus) {
-                            networkGrabbable.CmdSetFlightStatus(false);
+                        if (netGrabInTrigger.flightStatus)
+                        {
+                            netGrabInTrigger.CmdSetFlightStatus(false);
                         }
                     }
                 }
             }
         }
 
+        public void RequestAuthority(Grabbable grab)
+        {
+            if(grab)
+            {
+                Debug.Log(grab.name);
+                // would like to move authority request here, but there isn't an event that fires for remote grab start, this would allow for removing the input needed to request.
+                // this only fires after the grabbale is grabbed, would need the event fired as soon as remote grab is started
+            }
+        }
+
         IEnumerator HandlePickUpEvent() {
             yield return new WaitForSeconds(0.05f);
 
-            while (networkGrabbable != null && !networkGrabbable.flightStatus) {
-                networkGrabbable.PickUpEvent();
+            while (netGrabInTrigger != null && !netGrabInTrigger.flightStatus) {
+                netGrabInTrigger.PickUpEvent();
                 yield return new WaitForSeconds(0.1f);
             }
 
             pickUpCoroutine = null;
         }
 
-        // Clear the current grabbable on exit
-        void OnTriggerExit(Collider other) {
-            if (networkGrabbable != null && other.gameObject.layer == grabbableLayer) {
-                networkGrabbable = null;
-            }
-
-            if (pickUpCoroutine != null) {
-                StopCoroutine(pickUpCoroutine);
-                pickUpCoroutine = null;
-            }
-        }
     }
 }
