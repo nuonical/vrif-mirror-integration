@@ -144,7 +144,7 @@ namespace BNG {
         }
 
         [Command(requiresAuthority = false)]
-        void CmdSetHoldingStatus(bool status) {
+        public void CmdSetHoldingStatus(bool status) {
             holdingStatus = status;
         }
 
