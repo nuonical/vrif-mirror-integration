@@ -18,6 +18,8 @@ namespace BNG {
 
         private Coroutine pickUpCoroutine;
 
+        public RemoteGrabber rGrabber;
+
         [Header("Set true to Request Authority on controller input, false to continuously request input")]
         public bool authorityOnInput = true;
 
@@ -28,6 +30,7 @@ namespace BNG {
             grabInTrigger = GetComponent<GrabbablesInTrigger>();
 
             grabber.onGrabEvent.AddListener(RequestAuthority);
+            
         }
 
         private void Update()
@@ -82,7 +85,7 @@ namespace BNG {
         {
             if(grab)
             {
-                Debug.Log(grab.name);
+               // Debug.Log(grab.name);
                 // would like to move authority request here, but there isn't an event that fires for remote grab start, this would allow for removing the input needed to request.
                 // this only fires after the grabbale is grabbed, would need the event fired as soon as remote grab is started
             }

@@ -20,7 +20,9 @@ namespace BNG {
         }
 
         public override void OnSnapZoneEnter() {
-            netGrabbable.SnapZoneSetHoldingStatus(true);
+            if (netGrabbable != null) { 
+                netGrabbable.SnapZoneSetHoldingStatus(true);
+            }
             
             Debug.Log("Set holding status");
 

@@ -19,6 +19,8 @@ namespace BNG
         // Keeps track of when damage was last applied to avoid repeated hits in the same collision
         private bool hasDealtDamage = false;
 
+        private NetworkGrabbable netGrab;
+
         private void Start()
         {
             if (ColliderRigidbody == null)
@@ -27,6 +29,7 @@ namespace BNG
             }
 
             thisNetworkDamageable = GetComponent<NetworkDamageable>();
+            netGrab = GetComponent<NetworkGrabbable>();
         }
 
         private void OnCollisionEnter(Collision collision)
@@ -35,8 +38,10 @@ namespace BNG
             {
                 return;
             }
-
-            OnCollisionEvent(collision);
+            if (ColliderRigidbody.velocity.magnitude > 0.1f)
+            {
+                OnCollisionEvent(collision);
+            }
         }
 
         public virtual void OnCollisionEvent(Collision collision)
