@@ -10,6 +10,8 @@ public class BNGNetworkManager : NetworkManager
     /// <param name="conn">Connection from client.</param>
     public override void OnServerDisconnect(NetworkConnectionToClient conn)
     {
+        base.OnServerDisconnect(conn);
+
         // this code is to reset any objects belonging to disconnected clients
         // make a copy because the original collection will change in the loop
         NetworkIdentity[] copyOfOwnedObjects = conn.owned.ToArray();
@@ -22,6 +24,6 @@ public class BNGNetworkManager : NetworkManager
                 identity.RemoveClientAuthority();
         }
 
-        base.OnServerDisconnect(conn);
+        
     }
 }
