@@ -12,11 +12,12 @@ namespace BNG
         private NetworkIdentity snapZoneId;
 
         [SyncVar(hook = nameof(SyncSnapZoneEvent))]
-        private NetworkIdentity snappedID;
+        public NetworkIdentity snappedID;
 
         private void Awake()
         {
             snapZone = GetComponent<SnapZone>();
+
             if (snapZone)
             {
                 snapZoneId = snapZone.GetComponent<NetworkIdentity>();
