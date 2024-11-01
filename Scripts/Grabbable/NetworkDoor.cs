@@ -17,20 +17,23 @@ namespace BNG
 
         // call this function from grabbable events on the door handle
         public void TakeDoorOwnership()
-        {   
-            CmdSetDoorOwner();
+        {
+            if (!isOwned)
+            {
+                CmdSetDoorOwner();
+            }
 
-            StartCoroutine(WaitForOwnerShip());
+                StartCoroutine(WaitForOwnerShip());
+            
         }
 
         // Request authority if we don't already own it
         [Command(requiresAuthority = false)]
         public void CmdSetDoorOwner(NetworkConnectionToClient sender = null)
         {
-            if (!isOwned)
-            {
+           
                 // Reset the velocity to zero
-                ResetInteractableVelocity();
+               // ResetInteractableVelocity();
 
                 // Check if the sender already has authority
                 if (sender != netIdentity.connectionToClient)
@@ -40,7 +43,7 @@ namespace BNG
                     netIdentity.AssignClientAuthority(sender);
 
                 }
-            }
+            
 
         }
         // wait till we own the door before setting the can grab status of the handle

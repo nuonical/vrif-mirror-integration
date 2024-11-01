@@ -29517,7 +29517,7 @@ GameObject:
   - component: {fileID: 934751615024811345}
   - component: {fileID: 934751615024811354}
   - component: {fileID: 934751615024811353}
-  - component: {fileID: 934751615024811352}
+  - component: {fileID: 934751615024811356}
   - component: {fileID: 934751615024811355}
   m_Layer: 0
   m_Name: DoorWithHandle
@@ -29526,39 +29526,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &934751615024811352
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 934751615024811351}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a553cb17010b2403e8523b558bffbc14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncDirection: 1
-  syncMode: 0
-  syncInterval: 0
-  target: {fileID: 934751616377625080}
-  syncPosition: 1
-  syncRotation: 1
-  syncScale: 0
-  onlySyncOnChange: 1
-  compressRotation: 1
-  interpolatePosition: 1
-  interpolateRotation: 1
-  interpolateScale: 1
-  coordinateSpace: 0
-  timelineOffset: 1
-  showGizmos: 0
-  showOverlay: 0
-  overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
-  bufferResetMultiplier: 3
-  positionSensitivity: 0.01
-  rotationSensitivity: 0.01
-  scaleSensitivity: 0.01
 --- !u!114 &934751615024811353
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29579,7 +29546,7 @@ MonoBehaviour:
   syncRotation: 1
   syncScale: 0
   onlySyncOnChange: 1
-  compressRotation: 1
+  compressRotation: 0
   interpolatePosition: 1
   interpolateRotation: 1
   interpolateScale: 1
@@ -29627,6 +29594,39 @@ MonoBehaviour:
   rb: {fileID: 934751615970039719}
   handleGrab: {fileID: 934751615497317024}
   canOpenDoor: 1
+--- !u!114 &934751615024811356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 934751615024811351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a553cb17010b2403e8523b558bffbc14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 1
+  syncMode: 0
+  syncInterval: 0
+  target: {fileID: 934751615069213700}
+  syncPosition: 1
+  syncRotation: 1
+  syncScale: 0
+  onlySyncOnChange: 1
+  compressRotation: 1
+  interpolatePosition: 1
+  interpolateRotation: 1
+  interpolateScale: 1
+  coordinateSpace: 0
+  timelineOffset: 1
+  showGizmos: 0
+  showOverlay: 0
+  overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+  bufferResetMultiplier: 3
+  positionSensitivity: 0.01
+  rotationSensitivity: 0.01
+  scaleSensitivity: 0.01
 --- !u!114 &934751615069213696
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30063,6 +30063,7 @@ GameObject:
   - component: {fileID: 934751615970039717}
   - component: {fileID: 934751615970039718}
   - component: {fileID: 5700461656952019148}
+  - component: {fileID: 5700461656952019149}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -44435,13 +44436,40 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 934751615970039723}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e50505fcf90a3c841b8e835665efb9eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DoorOpenSound: {fileID: 0}
-  DoorCloseSound: {fileID: 0}
+  DoorOpenSound: {fileID: 8300000, guid: 19363979333a0f740b2e9601b323dd00, type: 3}
+  DoorCloseSound: {fileID: 8300000, guid: 24b79582593d6b943ae5a57d8058d29a, type: 3}
+  RequireHandleTurnToOpen: 1
+  HandleFollower: {fileID: 934751616377625080}
+  DegreesTurned: 0
+  DegreesTurnToOpen: 15
+  DoorLockTransform: {fileID: 3218868151147734545}
+  AngularVelocitySnapDoor: 0.95
+  angle: 0
+  AngularVelocity: 0
+  DoorIsLocked: 0
+  lockPos: 0
+--- !u!114 &5700461656952019149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 934751615970039723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ec83eed512360247a2fda6359d78d95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  DoorOpenSound: {fileID: 8300000, guid: 19363979333a0f740b2e9601b323dd00, type: 3}
+  DoorCloseSound: {fileID: 8300000, guid: 24b79582593d6b943ae5a57d8058d29a, type: 3}
   RequireHandleTurnToOpen: 1
   HandleFollower: {fileID: 934751616377625080}
   DegreesTurned: 0
