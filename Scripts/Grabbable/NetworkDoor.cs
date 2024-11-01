@@ -31,19 +31,19 @@ namespace BNG
         [Command(requiresAuthority = false)]
         public void CmdSetDoorOwner(NetworkConnectionToClient sender = null)
         {
-           
-                // Reset the velocity to zero
-               // ResetInteractableVelocity();
 
-                // Check if the sender already has authority
-                if (sender != netIdentity.connectionToClient)
-                {
-                    // Remove the current authority and assign it to the sender
-                    netIdentity.RemoveClientAuthority();
-                    netIdentity.AssignClientAuthority(sender);
+            // Reset the velocity to zero
+            // ResetInteractableVelocity();
 
-                }
-            
+            // Check if the sender already has authority
+            if (sender != netIdentity.connectionToClient)
+            {
+                // Remove the current authority and assign it to the sender
+                netIdentity.RemoveClientAuthority();
+                netIdentity.AssignClientAuthority(sender);
+
+            }
+
 
         }
         // wait till we own the door before setting the can grab status of the handle
