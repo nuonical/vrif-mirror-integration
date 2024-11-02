@@ -44,7 +44,7 @@ namespace BNG
                 if (entry.imposterObject != null && !objectDictionary.ContainsKey(entry.nameReference))
                 {
                     objectDictionary[entry.nameReference] = entry.imposterObject;
-                    Debug.Log(entry.nameReference);
+                    //Debug.Log(entry.nameReference);
                 }
                 else
                 {

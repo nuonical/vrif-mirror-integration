@@ -9,39 +9,69 @@ namespace BNG
 {
     public class NetworkDoorKeypad : NetworkBehaviour
     {
-        [SerializeField] private string correctPasscode = "1234";
+        [Header("The code that unlocks the door")]
+        [SerializeField] string correctPasscode = "1234";
+
+        private int codeLength;
+
         private string inputCode = "";
+
+        [Header("The Network Door Helper Component on the Door")]
         public NetworkDoorHelper networkDoorHelper;
 
+        [Header("The Text UI to display the entered text")]
         public Text codeText;
 
+        [Header("The Text to show on start and when incorrect code is entered")]
+        [SerializeField] string startText = "Locked";
+
+        // synk the locked status
         [SyncVar(hook = nameof(SyncUnlockDoor))]
         private bool doorLocked = true;
 
         private void Start()
-        {            
-            UpdateDoorLockState(doorLocked); 
+        {    
+            // make sure the starting state is locked
+            UpdateDoorLockState(doorLocked);
+
+            if (doorLocked)
+            {
+                codeText.text = startText;
+            }
+            else
+            {
+                codeText.text = "Unlocked";
+            }
+
+            // set the code length referencing the correctPassCode length
+            codeLength = correctPasscode.Length;
+            
         }
 
+        // function called from buttons to enter characters for the code, doesn't have to be numbers
         public void EnterNumber(string number)
         {
-            if (inputCode.Length < 4)
+            // if the door is unlocked do not recieve key input
+            if (!doorLocked)
+                return;
+            // if the current enterd code length is less than the needed characters, this runs to add the character and update the text field
+            if (inputCode.Length < codeLength)
             {
                 inputCode += number;
                 codeText.text = inputCode;
             }
 
-            if (inputCode.Length == 4)
+            // if the current entered code length is equal to the number of characters, unlock the door if its the correct passcode, if not, reset to locked
+            if (inputCode.Length == codeLength)
             {
                 if (inputCode == correctPasscode)
                 {
                     CmdUnlockDoor();
                 }
                 else
-                {
-                    Debug.Log("Incorrect Passcode");
-                    inputCode = ""; // Reset code on incorrect input
-                    codeText.text = inputCode;
+                {                   
+                    inputCode = ""; // Reset code 
+                    codeText.text = startText; // show start text on incorrect entry
                 }
             }
         }
@@ -55,20 +85,25 @@ namespace BNG
             }
         }
 
+        // optional clear function
         public void ResetCode()
         {
             inputCode = "";
-            codeText.text = inputCode;
+            codeText.text = startText;
         }
 
+        // called from syncvar hook to sync the locked status 
         void SyncUnlockDoor(bool oldLock, bool newLock)
         {
-            UpdateDoorLockState(newLock);
+            UpdateDoorLockState(newLock);           
         }
 
+        // set the locked status
         private void UpdateDoorLockState(bool isLocked)
         {
             networkDoorHelper.DoorIsLocked = isLocked;
+            // codeText.text = isLocked ? startText : "Unlocked";
+            codeText.text = "Unlocked";
         }
     }
 }

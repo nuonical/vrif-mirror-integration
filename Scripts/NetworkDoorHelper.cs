@@ -167,13 +167,13 @@ namespace BNG
 
         void DoorAudio(float angle)
         {
-            Debug.Log(angle);
+           // Debug.Log(angle);
             // Play Open Sound
             if (angle > 10)
             {
                 if (!playedOpenSound)
                 {
-                    Debug.Log("OpenSoundPlayed");
+                   // Debug.Log("OpenSoundPlayed");
                     VRUtils.Instance.PlaySpatialClipAt(DoorOpenSound, transform.position, 1f, 1f);
                     playedOpenSound = true;
                 }
@@ -193,7 +193,7 @@ namespace BNG
             // Play Close Sound
             if (readyToPlayCloseSound && angle < 2)
             {
-                Debug.Log("Closed sound played");
+               // Debug.Log("Closed sound played");
                 VRUtils.Instance.PlaySpatialClipAt(DoorCloseSound, transform.position, 1f, 1f);
                 readyToPlayCloseSound = false;
             }

@@ -5015,7 +5015,7 @@ MonoBehaviour:
   CanRemoveItem: 1
   ScaleItem: 1
   DisableColliders: 1
-  ParentObjectToSnapZone: 1
+  ParentObjectToSnapZone: 0
   DuplicateItemOnGrab: 0
   MaxDropTime: 0.1
   LastSnapTime: 0
@@ -7111,7 +7111,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8516433004925549718
 Transform:
   m_ObjectHideFlags: 0
@@ -7518,12 +7518,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EmulatorEnabled: 1
-  EditorOnly: 1
+  EditorOnly: 0
   RequireGameFocus: 1
   EmulatorActionSet: {fileID: -944628639613478452, guid: 27bafa1c7d8a77b47985ab70c0511986,
     type: 3}
   ForceStraightTeleportRotation: 1
-  AllowUpDownControls: 0
+  AllowUpDownControls: 1
   PlayerUpAction: {fileID: -4870421553478864907, guid: 27bafa1c7d8a77b47985ab70c0511986,
     type: 3}
   PlayerDownAction: {fileID: -5448902572583850724, guid: 27bafa1c7d8a77b47985ab70c0511986,
@@ -8616,7 +8616,7 @@ MonoBehaviour:
   CanRemoveItem: 1
   ScaleItem: 1
   DisableColliders: 1
-  ParentObjectToSnapZone: 1
+  ParentObjectToSnapZone: 0
   DuplicateItemOnGrab: 0
   MaxDropTime: 0.1
   LastSnapTime: 0
@@ -9029,7 +9029,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6454832214670694739
 Transform:
   m_ObjectHideFlags: 0
@@ -13071,6 +13071,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controllerHand: 1
+  rGrabber: {fileID: 0}
   authorityOnInput: 1
 --- !u!1 &7675000671575672897
 GameObject:
@@ -13219,7 +13220,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7894841358502665547
 Transform:
   m_ObjectHideFlags: 0
@@ -14847,6 +14848,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controllerHand: 0
+  rGrabber: {fileID: 0}
   authorityOnInput: 1
 --- !u!1 &9115362084799969232
 GameObject:
