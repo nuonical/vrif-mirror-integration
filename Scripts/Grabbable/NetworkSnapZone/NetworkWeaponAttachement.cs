@@ -19,9 +19,15 @@ namespace BNG
         // hook to sync the network identity of the snapped object to all clients
         [SyncVar(hook = nameof(AssignSnapped))]
         public NetworkIdentity snappedId;
-        
-        // want to change this to a list that checks agaist the snapped object so we can have multiple sights etc... 
-        public GameObject snapImposterObject;
+
+        [SerializeField]
+        private List<ImposterGameObject> imposterGameObjects = new();
+
+        // Dictionary to quickly access Imposter GameObjects by name
+        public Dictionary<string, GameObject> objectDictionary = new Dictionary<string, GameObject>();
+
+        // cache the snapped object Name so it can be used to disable the object after unsnapping the object
+        public string snappedObjectName;
 
         public List<MeshRenderer> meshRenderers = new();
 
@@ -31,7 +37,22 @@ namespace BNG
             snapZone = GetComponent<SnapZone>();
             // get the Network Identity of root weapon, so we can use it to assign ownership of the snapped object
             rootNetId = rootGrabbable.GetComponent<NetworkIdentity>();
+
+            // Populate the dictionary with entries from the imposterGameObjects list
+            foreach (ImposterGameObject entry in imposterGameObjects)
+            {
+                if (entry.imposterObject != null && !objectDictionary.ContainsKey(entry.nameReference))
+                {
+                    objectDictionary[entry.nameReference] = entry.imposterObject;
+                    //Debug.Log(entry.nameReference);
+                }
+                else
+                {
+                    Debug.LogWarning($"Duplicate or missing GameObject entry for {entry.nameReference}");
+                }
+            }
         }
+
 
         public void OnEnable()
         {
@@ -118,9 +139,9 @@ namespace BNG
         {
             if (snappedId == null)
             {
-                // set the imposter game object, this is the one that is visible for one to one movement to false making it invisible, this is a child object of the weapon
-                snapImposterObject.SetActive(false);     
-
+                // set the imposter game object, this is the one that is visible for one to one movement to false making it invisible, this is a child object of the weapon       
+                DisableObjectImposter(snappedObjectName);
+                snappedObjectName = "";
                 // enable the meshrenders on the snapped object 
                 for (int i = meshRenderers.Count - 1; i >= 0; i--)
                 {
@@ -143,7 +164,9 @@ namespace BNG
             if (snappedId != null)
             {
                 // enable the imposter object for visuals, this is a child of the weapon
-                snapImposterObject.SetActive(true);
+                //snapImposterObject.SetActive(true);
+                snappedObjectName = CleanName(snappedId.name);
+                EnableObjectImposter(snappedObjectName);
 
                 // disable the mesh renders of the snapped object
                 meshRenderers.AddRange(snapZone.HeldItem.GetComponentsInChildren<MeshRenderer>());
@@ -165,5 +188,54 @@ namespace BNG
                 CmdSetHeldItem(null);
             }
         }
+
+        // Method to enable a GameObject by its custom name
+        public void EnableObjectImposter(string objectName)
+        {
+
+            if (objectDictionary.TryGetValue(objectName, out GameObject obj))
+            {
+                obj.SetActive(true);
+                Debug.Log($"Enabled {objectName}");
+            }
+            else
+            {
+                Debug.LogWarning($"No GameObject found with the name {objectName}");
+            }
+        }
+
+        // Method to disable a GameObject by its custom name
+        public void DisableObjectImposter(string objectName)
+        {
+            if (objectDictionary.TryGetValue(objectName, out GameObject obj))
+            {
+                obj.SetActive(false);
+                Debug.Log($"Disabled {objectName}");
+            }
+            else
+            {
+                Debug.LogWarning($"No GameObject found with the name {objectName}");
+            }
+        }
+
+        // Method to clean up duplicate names that end with (1) etc
+        private string CleanName(string name)
+        {
+            // Find the index of '(' and remove everything after it
+            int index = name.IndexOf('(');
+            if (index != -1)
+            {
+                return name.Substring(0, index).Trim(); // Trim to remove any extra spaces
+            }
+
+            return name;
+        }
+    }
+
+    [System.Serializable]
+    public class ImposterGameObject
+    {
+        public string nameReference; // Custom name to use as the key
+        public GameObject imposterObject; // Reference to the GameObject
     }
 }

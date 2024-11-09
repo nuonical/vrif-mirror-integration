@@ -1511,7 +1511,6 @@ GameObject:
   - component: {fileID: 8216736267275558267}
   - component: {fileID: 7136809921476016913}
   - component: {fileID: 6444381611387507707}
-  - component: {fileID: 6571602720409424147}
   m_Layer: 0
   m_Name: Hammer
   m_TagString: NetworkGrabbable
@@ -1585,7 +1584,7 @@ MonoBehaviour:
   Grabtype: 2
   GrabPhysics: 4
   GrabMechanic: 0
-  GrabSpeed: 15
+  GrabSpeed: 4
   RemoteGrabbable: 1
   RemoteGrabMechanic: 0
   RemoteGrabDistance: 100
@@ -1908,21 +1907,6 @@ MonoBehaviour:
   LastDamageForce: 0
   TakeCollisionDamage: 1
   CollisionDamage: 5
---- !u!114 &6571602720409424147
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9148596257437500617}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e52f76491b506224ea3c1ddaad0463cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncDirection: 0
-  syncMode: 0
-  syncInterval: 0
 --- !u!1 &9148596258606635929
 GameObject:
   m_ObjectHideFlags: 0
@@ -1935,7 +1919,7 @@ GameObject:
   - component: {fileID: 9148596258606635909}
   - component: {fileID: 9148596258606635908}
   - component: {fileID: 9148596258606635911}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Heel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2152,6 +2136,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: RingHelper
+      objectReference: {fileID: 0}
+    - target: {fileID: 4213795611944346747, guid: 9e3b0bca4dce07c4cac56011bea1487d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6799183511233398105, guid: 9e3b0bca4dce07c4cac56011bea1487d,
         type: 3}
