@@ -83,10 +83,6 @@ namespace BNG
         void SetCanOpenDoor(bool oldAble, bool newAble)
         {
             Debug.Log("SetGrabRab" + newAble);
-            // the following problem is only in host/client, may be because the host looses focus in testing? Otherwise, works fine when running one build as server only and connecting clients to it//
-            // need to figure out here, how to make the handle not grabbable while someone else is holding it.. I've tried disableing the grabbable, disabling the gameobject of the grabbable, and the collider of the grabbable as well as ..
-            // making the collider a trigger, all lock up the handle after reenable like there is something else going on in other code that is loosing the connection when this happens, if I don't disable anything, then all works, but...
-            // there is the possibility of someone else grabbing the handle at the same time
 
             if(!isOwned)
             {

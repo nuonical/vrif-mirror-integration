@@ -161,8 +161,6 @@ namespace BNG
 
             }
 
-            
-
         }
 
         void DoorAudio(float angle)
