@@ -20,6 +20,11 @@ namespace BNG
         public Color backGroundColor;
         [Range(0, 1)]
         public float markerAlpha = 0.7f;
+
+        [Header("Collider Type")]
+        [Tooltip("Set false to use a MeshCollider for 3d objects")]
+        public bool useBoxCollider = true;
+
         // Define a Brush class to hold properties for each brush
         [System.Serializable]
         public class BrushSettings
@@ -70,8 +75,7 @@ namespace BNG
         }
 
         public void Update()
-        {
-           
+        {           
             // Ensure the Render Texture is active for drawing
            // RenderTexture.active = renderTexture;
 
@@ -105,9 +109,35 @@ namespace BNG
                 // if the raycast from the brush is hitting this game object whick is the board
                 if (hit.collider.gameObject == gameObject)
                 {
-                    // Calculate the brush position in texture space
-                    int x = (int)(hit.textureCoord.x * renderTexture.width);
-                    int y = (int)((1.0f - hit.textureCoord.y) * renderTexture.height);
+                    Vector2 uv;
+
+                    if (useBoxCollider)
+                    {
+                        // Using BoxCollider
+                        BoxCollider boxCollider = GetComponent<BoxCollider>();
+                        if (boxCollider == null)
+                        {
+                            Debug.LogError("No BoxCollider found on this GameObject!");
+                            return;
+                        }
+
+                        // Calculate the local hit point and normalize to UV
+                        Vector3 localHitPoint = transform.InverseTransformPoint(hit.point); // Convert hit point to local space
+                        uv = new Vector2(
+                            (localHitPoint.x / boxCollider.size.x) + 0.5f,       // Normalize X position
+                            1.0f - ((localHitPoint.y / boxCollider.size.y) + 0.5f) // Normalize and flip Y position
+                        );
+                    }
+                    else
+                    {
+                        // Using MeshCollider
+                        uv = hit.textureCoord;
+                        uv.y = 1.0f - uv.y; // Flip Y-axis
+                    }
+
+                    // Convert UV coordinates to texture space
+                    int x = (int)(uv.x * renderTexture.width);
+                    int y = (int)(uv.y * renderTexture.height);
                     Vector2 currentPosition = new Vector2(x, y);
 
                     // only draw when we need to by comparing current position to the last

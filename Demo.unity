@@ -29740,6 +29740,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1426129646}
     m_Modifications:
+    - target: {fileID: 1775270344, guid: 72b8f736e9ae388458cf9bd5bd65e72c, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: fe2fa158a8edeb34ab169c4d3b82b4db,
+        type: 2}
     - target: {fileID: 783009591410910464, guid: 72b8f736e9ae388458cf9bd5bd65e72c,
         type: 3}
       propertyPath: m_Name
@@ -29807,9 +29812,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 783009592580070333, guid: 72b8f736e9ae388458cf9bd5bd65e72c,
         type: 3}
+      propertyPath: markerAlpha
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 783009592580070333, guid: 72b8f736e9ae388458cf9bd5bd65e72c,
+        type: 3}
       propertyPath: brushes.Array.data[0].netID
       value: 
       objectReference: {fileID: 750892042}
+    - target: {fileID: 783009592580070333, guid: 72b8f736e9ae388458cf9bd5bd65e72c,
+        type: 3}
+      propertyPath: brushes.Array.data[0].sizeX
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 783009592580070333, guid: 72b8f736e9ae388458cf9bd5bd65e72c,
+        type: 3}
+      propertyPath: brushes.Array.data[0].sizeY
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 783009592580070333, guid: 72b8f736e9ae388458cf9bd5bd65e72c,
         type: 3}
       propertyPath: brushes.Array.data[1].netID
@@ -29820,6 +29840,16 @@ PrefabInstance:
       propertyPath: brushes.Array.data[2].netID
       value: 
       objectReference: {fileID: 400372651}
+    - target: {fileID: 783009592580070333, guid: 72b8f736e9ae388458cf9bd5bd65e72c,
+        type: 3}
+      propertyPath: brushes.Array.data[2].sizeX
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 783009592580070333, guid: 72b8f736e9ae388458cf9bd5bd65e72c,
+        type: 3}
+      propertyPath: brushes.Array.data[2].sizeY
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 783009592580070333, guid: 72b8f736e9ae388458cf9bd5bd65e72c,
         type: 3}
       propertyPath: brushes.Array.data[0].brushGrabbable
