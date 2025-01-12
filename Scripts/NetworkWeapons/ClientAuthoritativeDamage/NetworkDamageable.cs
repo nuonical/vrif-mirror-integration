@@ -28,8 +28,9 @@ namespace BNG
         [Tooltip("Deactivate these Colliders on Death")]
         public List<Collider> DeactivateCollidersOnDeath;
 
-        private bool destroyed = false;
-       
+        [SyncVar]
+        public bool destroyed = false;
+
         private bool spawnedFlag = false;
 
         [Tooltip("Unity Event called by owner on death")]
@@ -74,7 +75,7 @@ namespace BNG
         }
 
         // Function to add health like from a pickup
-        [Command]
+        [Command(requiresAuthority = false)]
         public void AddHealth(float healthAmount)
         {
             _currentHealth = Mathf.Clamp(_currentHealth + healthAmount, 0, maxHealth);
@@ -107,7 +108,7 @@ namespace BNG
                 return;
             }
 
-            destroyed = true;
+          //  destroyed = true;
 
             if (DestroyOnDeath) {
                 DestroyThis();
@@ -119,7 +120,8 @@ namespace BNG
 
         public void DestroyThis()
         {
-            destroyed = true;
+            //destroyed = true;
+            CmdSetDestroyed();
 
             // Spawn networked objects if needed
             CmdSpawnNetworkObject();
@@ -179,7 +181,13 @@ namespace BNG
 
             spawnedFlag = true;
         }
-       
+
+        [Command]
+        public void CmdSetDestroyed()
+        {
+            destroyed = true;
+        }
+
     }
 }
 
